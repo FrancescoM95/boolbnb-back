@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\ApartmentController;
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\Guest\HomeController as GuestHomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,13 +17,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+//# ROTTE GUEST
+Route::get('/', GuestHomeController::class)->name('guest.home');
+
+//# ROTTE ADMIN
+Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
+
+    //* Rotta Admin Home
+    Route::get('', AdminHomeController::class)->name('home');
+
+    //* Rotte Admin Soft Delete
+    Route::get('/apartments/trash', [ApartmentController::class, 'trash'])->name('apartments.trash');
+    Route::patch('/apartments/{apartment}/restore', [ApartmentController::class, 'restore'])->name('apartments.restore')->withTrashed();
+    Route::delete('/apartments/{apartment}/drop', [ApartmentController::class, 'drop'])->name('apartments.drop')->withTrashed();
+
+    //* Rotte admin apartment CRUD
+    Route::resource('apartments', ApartmentController::class)->withTrashed(['show', 'edit', 'update']);
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+//* Rotte profilo
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -28,4 +44,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
