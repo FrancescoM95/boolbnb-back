@@ -26,7 +26,7 @@ class ApartmentSeeder extends Seeder
                 "address" => "Via Garibaldi 10, Milano",
                 "latitude" => 45.4654219,
                 "longitude" => 9.1859243,
-                "cover_image" => "apartment1.jpg",
+                "cover_image" => "https://a0.muscache.com/im/pictures/prohost-api/Hosting-957819679097220222/original/53afb9d5-777e-46bf-b657-36cd979bddc8.jpeg?im_w=720",
                 "is_visible" => true
             ],
             [
@@ -40,7 +40,7 @@ class ApartmentSeeder extends Seeder
                 "address" => "Corso Magenta 15, Milano",
                 "latitude" => 45.465421,
                 "longitude" => 9.174911,
-                "cover_image" => "apartment2.jpg",
+                "cover_image" => "https://a0.muscache.com/im/pictures/prohost-api/Hosting-957819679097220222/original/53afb9d5-777e-46bf-b657-36cd979bddc8.jpeg?im_w=720",
                 "is_visible" => true
             ],
             [
@@ -68,7 +68,7 @@ class ApartmentSeeder extends Seeder
                 "address" => "Piazza Cavour 8, Como",
                 "latitude" => 45.8101,
                 "longitude" => 9.0852,
-                "cover_image" => "apartment4.jpg",
+                "cover_image" => "https://a0.muscache.com/im/pictures/prohost-api/Hosting-957819679097220222/original/53afb9d5-777e-46bf-b657-36cd979bddc8.jpeg?im_w=720",
                 "is_visible" => true
             ],
             [
@@ -82,7 +82,7 @@ class ApartmentSeeder extends Seeder
                 "address" => "Via XX Settembre 20, Bergamo",
                 "latitude" => 45.697,
                 "longitude" => 9.6703,
-                "cover_image" => "apartment5.jpg",
+                "cover_image" => "https://a0.muscache.com/im/pictures/prohost-api/Hosting-957819679097220222/original/53afb9d5-777e-46bf-b657-36cd979bddc8.jpeg?im_w=720",
                 "is_visible" => true
             ],
             [
@@ -96,7 +96,7 @@ class ApartmentSeeder extends Seeder
                 "address" => "Via Torino 5, Lecco",
                 "latitude" => 45.8566,
                 "longitude" => 9.3882,
-                "cover_image" => "apartment6.jpg",
+                "cover_image" => "https://a0.muscache.com/im/pictures/prohost-api/Hosting-957819679097220222/original/53afb9d5-777e-46bf-b657-36cd979bddc8.jpeg?im_w=720",
                 "is_visible" => true
             ],
             [
@@ -110,7 +110,7 @@ class ApartmentSeeder extends Seeder
                 "address" => "Piazza Vittoria 3, Varese",
                 "latitude" => 45.818,
                 "longitude" => 8.8232,
-                "cover_image" => "apartment7.jpg",
+                "cover_image" => "https://a0.muscache.com/im/pictures/prohost-api/Hosting-957819679097220222/original/53afb9d5-777e-46bf-b657-36cd979bddc8.jpeg?im_w=720",
                 "is_visible" => true
             ],
             [
@@ -124,7 +124,7 @@ class ApartmentSeeder extends Seeder
                 "address" => "Via Monte Rosa 7, Sondrio",
                 "latitude" => 46.1692,
                 "longitude" => 9.8717,
-                "cover_image" => "apartment8.jpg",
+                "cover_image" => "https://a0.muscache.com/im/pictures/prohost-api/Hosting-957819679097220222/original/53afb9d5-777e-46bf-b657-36cd979bddc8.jpeg?im_w=720",
                 "is_visible" => true
             ],
             [
@@ -138,7 +138,7 @@ class ApartmentSeeder extends Seeder
                 "address" => "Corso Italia 12, Cremona",
                 "latitude" => 45.1342,
                 "longitude" => 10.0186,
-                "cover_image" => "apartment9.jpg",
+                "cover_image" => "https://a0.muscache.com/im/pictures/prohost-api/Hosting-957819679097220222/original/53afb9d5-777e-46bf-b657-36cd979bddc8.jpeg?im_w=720",
                 "is_visible" => true
             ],
             [
@@ -152,7 +152,7 @@ class ApartmentSeeder extends Seeder
                 "address" => "Via Po 20, Pavia",
                 "latitude" => 45.1865,
                 "longitude" => 9.1562,
-                "cover_image" => "apartment10.jpg",
+                "cover_image" => "https://a0.muscache.com/im/pictures/prohost-api/Hosting-957819679097220222/original/53afb9d5-777e-46bf-b657-36cd979bddc8.jpeg?im_w=720",
                 "is_visible" => true
             ]
         ];
