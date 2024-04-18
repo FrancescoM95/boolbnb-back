@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 {{-- @section('title', 'Alloggio') --}}
-
+{{-- @dd($apartment) --}}
 @section('content')
     <div class="container">
         <header>
@@ -15,18 +15,24 @@
                     <p class="m-0">{{ $apartment->address }}</p>
                     <p class="m-0"><a href="https://www.google.it/maps/preview" target="blank">Trova su mappa!</a></p>
                 </div>
-                {{-- bottone modifica / elimina vs bottone messaggio --}}
-                <div class="d-flex justify-content-evenly align-items-center">
-                    <a href="{{ route('admin.apartments.edit', $apartment) }}" class="btn btn-secondary"><i
-                            class="fas fa-pencil me-2"></i>Modifica</a>
-                    <form action="{{ route('admin.apartments.destroy', $apartment->id) }}" method="POST"
-                        class="delete-form">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash me-2"></i>Elimina</button>
-                    </form>
-                    {{-- <a href="#" class="btn btn-primary">Contatta l'host</a> --}}
-                </div>
+                {{-- bottone modifica / elimina --}}
+                @if ($apartment->user_id == Auth::user()->id)
+                    <div class="d-flex justify-content-evenly align-items-center">
+                        <a href="{{ route('admin.apartments.edit', $apartment) }}" class="btn btn-secondary"><i
+                                class="fas fa-pencil me-2"></i>Modifica</a>
+                        <form action="{{ route('admin.apartments.destroy', $apartment->id) }}" method="POST"
+                            class="delete-form">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash me-2"></i>Elimina</button>
+                        </form>
+                    </div>
+                    {{-- bottone invia messaggio --}}
+                @else
+                    <div class="d-flex justify-content-evenly align-items-center">
+                        <a href="#" class="btn btn-primary">Contatta l'host</a>
+                    </div>
+                @endif
             </div>
         </section>
         {{-- servizi --}}
