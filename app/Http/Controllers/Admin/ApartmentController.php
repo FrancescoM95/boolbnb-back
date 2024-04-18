@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Apartment\StoreApartmentRequest;
 use App\Http\Requests\Apartment\UpdateApartmentRequest;
 use App\Models\Apartment;
+use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ApartmentController extends Controller
 {
@@ -25,7 +27,10 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        //
+        $apartment = new Apartment();
+        $services = Service::select('label', 'id', 'icon')->get();
+
+        return view('admin.apartments.create', compact('apartment', 'services', 'user_id'));
     }
 
     /**
@@ -34,6 +39,7 @@ class ApartmentController extends Controller
     public function store(StoreApartmentRequest $request)
     {
 
+        // Auth::user()->name
         $data = $request->validated();
         //
     }
