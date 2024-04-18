@@ -7,7 +7,7 @@
         <header>
             <h1 class="text-center py-3 m-0">{{ $apartment->title }}</h1>
         </header>
-        {{-- immagine + location & message button --}}
+        {{-- immagine + location --}}
         <section id="eye-catcher" class="pb-3">
             <img src="{{ $apartment->cover_image }}" alt="{{ $apartment->title }}" class="img-fluid rounded pb-3">
             <div class="row row-cols-2 text-center">
@@ -15,8 +15,17 @@
                     <p class="m-0">{{ $apartment->address }}</p>
                     <p class="m-0"><a href="https://www.google.it/maps/preview" target="blank">Trova su mappa!</a></p>
                 </div>
-                <div class="d-flex justify-content-center align-items-center">
-                    <a href="#" class="btn btn-primary">Contatta l'host</a>
+                {{-- bottone modifica / elimina vs bottone messaggio --}}
+                <div class="d-flex justify-content-evenly align-items-center">
+                    <a href="{{ route('admin.apartments.edit', $apartment) }}" class="btn btn-secondary"><i
+                            class="fas fa-pencil me-2"></i>Modifica</a>
+                    <form action="{{ route('admin.apartments.destroy', $apartment->id) }}" method="POST"
+                        class="delete-form">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash me-2"></i>Elimina</button>
+                    </form>
+                    {{-- <a href="#" class="btn btn-primary">Contatta l'host</a> --}}
                 </div>
             </div>
         </section>
