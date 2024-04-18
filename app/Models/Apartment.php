@@ -12,6 +12,8 @@ class Apartment extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = ['title', 'baths', 'rooms', 'square_meters', 'beds', 'address'];
+
     public function getCreatedAt()
     {
         return Carbon::create($this->created_at)->format('d-m-Y');
