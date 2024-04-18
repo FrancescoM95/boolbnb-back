@@ -9,6 +9,8 @@ use App\Models\Apartment;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 
 class ApartmentController extends Controller
 {
@@ -39,9 +41,21 @@ class ApartmentController extends Controller
     public function store(StoreApartmentRequest $request)
     {
 
-        // Auth::user()->name
+        //Auth::user()->name
         $data = $request->validated();
-        //
+        $apartment = new Apartment();
+        $apartment->fill($data);
+        $apartment->slug = Str::slug($apartment->title);
+        $apartment->is_visible = Arr::exists($data, 'is_visible');
+        $apartment->user_id = Auth::user()->id;
+        $apartment->save();
+
+        if (Arr::exists($data, 'services')) {
+            $apartment->services()->attach($data['services']);
+        }
+
+        return to_route('admin.apartments.show', $apartment);
+        
     }
 
     /**
