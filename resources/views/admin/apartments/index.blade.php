@@ -38,10 +38,10 @@
                             <form action="{{ route('admin.apartments.update', $apartment->id) }}" method="POST">
                                 @csrf
                                 @method('PATCH')
-                                <label class="switch">
-                                    <input type="checkbox" name="is_visible" {{ $apartment->is_visible ? 'checked' : '' }}>>
-                                    <span class="slider"></span>
-                                </label>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="is_visible"
+                                        name="is_visible" @if (old('is_visible', $apartment->is_visible)) checked @endif>
+                                </div>
                             </form>
                         </th>
                         <td>{{ $apartment->title }}</td>

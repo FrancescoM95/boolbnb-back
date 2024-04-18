@@ -116,7 +116,7 @@
                     </div>
                 @endforeach
             </div>
-            @error('technologies')
+            @error('services')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
