@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Apartment;
 use App\Models\Service;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,6 +14,8 @@ class ServiceSeeder extends Seeder
      */
     public function run(): void
     {
+        $apartment_ids = Apartment::pluck('id')->toArray();
+
         $services = [
             ['label' => 'wi-fi', 'icon' => 'fa-solid fa-wifi'],
             ['label' => 'cucina', 'icon' => 'fa-solid fa-kitchen-set'],
@@ -32,9 +35,11 @@ class ServiceSeeder extends Seeder
         ];
 
         foreach ($services as $service) {
-            $new_spons = new Service();
-            $new_spons->fill($service);
-            $new_spons->save();
+            $new_service = new Service();
+            $new_service->fill($service);
+            $new_service->save();
+            $service_apartments = array_filter($apartment_ids, fn ()=> rand(0,1));
+            $new_service->apartments()->attach($service_apartments);
         }
     }
 }
