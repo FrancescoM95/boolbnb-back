@@ -31,7 +31,7 @@ class StoreApartmentRequest extends FormRequest
             'latitude' => 'nullable',
             'longitude' => 'nullable',
             'cover_image' => 'nullable|mimes:jpeg,png,jpg',
-            'is_visible' => 'nullable|boolean',
+            'is_visible' => 'nullable',
             'user_id' => 'nullable',
         ];
     }
