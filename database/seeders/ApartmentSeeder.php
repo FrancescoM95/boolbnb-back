@@ -157,6 +157,8 @@ class ApartmentSeeder extends Seeder
             ]
         ];
 
+        
+
         foreach ($apartments as $apartment) {
             $new_apartment = new Apartment();
             $new_apartment->fill($apartment);
