@@ -25,7 +25,7 @@
                 </li>
                 @auth
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/index') }}">{{ __('My Apartaments') }}</a>
+                        <a class="nav-link" href="{{ url('admin/apartments') }}">{{ __('My Apartaments') }}</a>
                     </li>
                 @endauth
             </ul>
@@ -51,7 +51,7 @@
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ url('admin') }}">{{ __('Admin Home') }}</a>
-                            <a class="dropdown-item" href="{{ url('admin/index') }}">{{ __('I miei appartamenti') }}</a>
+                            <a class="dropdown-item" href="{{ url('admin/apartments') }}">{{ __('I miei appartamenti') }}</a>
                             <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profile') }}</a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
