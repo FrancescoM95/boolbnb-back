@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('email');
             $table->text('text');
-            $table->varchar('name', 30)->nullable();
-            $table->varchar('surname', 30)->nullable();
+            $table->string('name', 30)->nullable();
+            $table->string('surname', 30)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
