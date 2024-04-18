@@ -30,7 +30,7 @@ class ApartmentController extends Controller
         $apartment = new Apartment();
         $services = Service::select('label', 'id', 'icon')->get();
 
-        return view('admin.apartments.create', compact('apartment', 'services', 'user_id'));
+        return view('admin.apartments.create', compact('apartment', 'services'));
     }
 
     /**
@@ -57,7 +57,11 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        //
+        $services = Service::select('label', 'id', 'icon')->get();
+
+        $prev_services = $apartment->services->pluck('id')->toArray();
+
+        return view('admin.apartments.edit', compact('apartment', 'services', 'prev_services'));
     }
 
     /**
