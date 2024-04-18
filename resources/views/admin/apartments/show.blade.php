@@ -24,7 +24,9 @@
                             class="delete-form">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash me-2"></i>Elimina</button>
+                            <button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal">
+                                <i class="fas fa-trash me-2" data-bs-toggle="modal"
+                                    data-bs-target="#modal"></i>Elimina</button>
                         </form>
                     </div>
                     {{-- bottone invia messaggio --}}
@@ -53,4 +55,8 @@
                 dignissimos deleniti?</p>
         </section>
     </div>
+@endsection
+
+@section('scripts')
+    @vite('resources/js/delete_confirmation.js')
 @endsection
