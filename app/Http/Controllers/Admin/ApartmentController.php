@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Apartment\StoreApartmentRequest;
+use App\Http\Requests\Apartment\UpdateApartmentRequest;
 use Illuminate\Http\Request;
 
 class ApartmentController extends Controller
@@ -26,8 +28,10 @@ class ApartmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreApartmentRequest $request)
     {
+
+        $data = $request->validated();
         //
     }
 
@@ -50,9 +54,9 @@ class ApartmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateApartmentRequest $request, string $id)
     {
-        //
+        $data = $request->validated();
     }
 
     /**
