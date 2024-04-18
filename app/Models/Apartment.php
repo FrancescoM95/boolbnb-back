@@ -42,4 +42,9 @@ class Apartment extends Model
     {
         return $this->hasMany(View::class);
     }
+
+    public function printImage()
+    {
+        return asset('storage/' . $this->cover_image);
+    }
 }
