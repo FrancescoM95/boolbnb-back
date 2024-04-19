@@ -1,19 +1,19 @@
 const placeholder = 'https://marcolanci.it/boolean/assets/placeholder.png'
-const imageFiels = document.getElementById('cover_image')
+const imageField = document.getElementById('cover_image')
 const previewField = document.getElementById('preview')
 
 let blobUrl;
 
-const changeImageButton = document.getElementById('change-image-button')
-const previousImageFiled = document.getElementById('previous-image-field')
+const changeImageButton = document.getElementById('change-cover_image-button')
+const previousImageFiled = document.getElementById('previous-cover_image-field')
 
 // # Gestione preview immagine
 
-imageFiels.addEventListener('change', () => {
+imageField.addEventListener('change', () => {
     //controllo se ho file (se hai files e hai il primo)
-    if (imageFiels.files && imageFiels.files[0]) {
+    if (imageField.files && imageField.files[0]) {
         //prendo il file
-        const file = imageFiels.files[0];
+        const file = imageField.files[0];
         //preparo un url temporaneo
         blobUrl = URL.createObjectURL(file);
         //Lo inserisco nelll'src
@@ -34,8 +34,8 @@ window.addEventListener('beforeunload', ()=>{
 
 changeImageButton.addEventListener('click', ()=>{
     previousImageFiled.classList.add('d-none');
-    imageFiels.classList.remove('d-none');
+    imageField.classList.remove('d-none');
     previewField.src = placeholder ;
-    imageFiels.click();
+    imageField.click();
 })
 
