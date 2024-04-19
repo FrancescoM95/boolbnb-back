@@ -12,15 +12,15 @@
             <div class="pb-3 col-12 col-md-10 col-lg-9 col-xl-8 col-xxl-7">
                 <img src="{{ $apartment->cover_image }}" alt="{{ $apartment->title }}" class="img-fluid rounded">
             </div>
-            <div class="row row-cols-2 row-cols-md-3 row-cols-xxl-4 text-center justify-content-center">
+            <div class="row row-cols-2 row-cols-md-3 row-cols-xxl-4 text-center justify-content-center pb-3">
                 <div>
-                    <p class="m-0">{{ $apartment->address }}</p>
-                    <p class="m-0"><a href="https://www.google.it/maps/preview" target="blank">Trova su mappa!</a></p>
+                    <a href="{{ url()->previous() }}" class="btn btn-secondary"><i
+                            class="fas fa-arrow-left me-2 d-none d-sm-inline"></i>Indietro</a>
                 </div>
                 {{-- bottone modifica / elimina --}}
                 @if ($apartment->user_id == Auth::user()->id)
-                    <div class="d-flex justify-content-evenly align-items-center">
-                        <a href="{{ route('admin.apartments.edit', $apartment) }}" class="btn btn-secondary"><i
+                    <div class="d-flex justify-content-between align-items-center gap-3">
+                        <a href="{{ route('admin.apartments.edit', $apartment) }}" class="btn btn-warning"><i
                                 class="fas fa-pencil me-2 d-none d-sm-inline"></i>Modifica</a>
                         <form action="{{ route('admin.apartments.destroy', $apartment->id) }}" method="POST"
                             class="delete-form">
@@ -38,6 +38,10 @@
                                 class="fas fa-comments me-2 d-none d-sm-inline"></i>Contatta l'host</a>
                     </div>
                 @endif
+            </div>
+            <div class="d-flex justify-content-evenly">
+                <p class="m-0">{{ $apartment->address }}</p>
+                <p class="m-0"><a href="https://www.google.it/maps/preview" target="blank">Trova su mappa!</a></p>
             </div>
         </section>
         {{-- servizi --}}
