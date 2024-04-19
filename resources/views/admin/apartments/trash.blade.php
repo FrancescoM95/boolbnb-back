@@ -133,11 +133,13 @@
 
                                         {{-- Pulsante elimina --}}
                                         <form action="{{ route('admin.apartments.drop', $apartment->id) }}" method="POST"
-                                            id="delete-form">
+                                            class="delete-form">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-sm btn-danger mb-2"><i
-                                                    class="far fa-trash-can"></i></button>
+
+                                            <button class="btn btn-sm btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#modal">
+                                                <i class="far fa-trash-can"></i>
+                                            </button>                                            
                                         </form>
 
                                         {{-- Pulsante restore --}}
@@ -145,8 +147,7 @@
                                             method="POST" class="restore-form">
                                             @csrf
                                             @method('PATCH')
-                                            <button type="submit" class="btn btn-sm btn-success" data-bs-toggle="modal"
-                                                data-bs-target="#modal">
+                                            <button type="submit" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modal">
                                                 <i class="fas fa-arrows-rotate"></i>
                                             </button>
                                         </form>
@@ -159,4 +160,8 @@
             </div>
         @endif
     </div>
+@endsection
+
+@section('scripts')
+    @vite('resources/js/delete_confirmation.js')
 @endsection
