@@ -48,32 +48,41 @@
                     <thead>
                         <tr>
                             <th scope="col">
-                                <span class="d-none d-md-inline">Pubblico</span><span class="d-md-none"><i class="fa-regular fa-eye"></i>
+                                <span class="d-none d-md-inline">Pubblico</span><span class="d-md-none"><i
+                                        class="fa-regular fa-eye"></i>
                             </th>
                             <th scope="col">
-                                <span class="d-none d-md-inline">Titolo</span><span class="d-md-none"><i class="fas fa-arrows-rotate "></i></span>
+                                <span class="d-none d-md-inline">Titolo</span><span class="d-md-none"><i
+                                        class="fas fa-arrows-rotate "></i></span>
                             </th>
                             <th scope="col">
-                                <span class="d-none d-md-inline">Indirizzo</span><span class="d-md-none"><i class="fa-solid fa-map-location-dot"></i></span>
+                                <span class="d-none d-md-inline">Indirizzo</span><span class="d-md-none"><i
+                                        class="fa-solid fa-map-location-dot"></i></span>
                             </th>
                             <th scope="col" class="text-center">
-                                <span class="d-none d-md-inline">m²</span><span class="d-md-none"><i class="fa-solid fa-ruler-combined"></i></span>
+                                <span class="d-none d-md-inline">m²</span><span class="d-md-none"><i
+                                        class="fa-solid fa-ruler-combined"></i></span>
                             </th>
                             <th scope="col" class="text-center">
-                                <span class="d-none d-md-inline">Stanze</span><span class="d-md-none"><i class="fas fa-door-closed"></i></span>
+                                <span class="d-none d-md-inline">Stanze</span><span class="d-md-none"><i
+                                        class="fas fa-door-closed"></i></span>
                             </th>
                             <th scope="col" class="text-center">
-                                <span class="d-none d-md-inline">Bagni</span><span class="d-md-none"><i class="fa-solid fa-bath"></i></span>
+                                <span class="d-none d-md-inline">Bagni</span><span class="d-md-none"><i
+                                        class="fa-solid fa-bath"></i></span>
                             </th>
                             <th scope="col" class="text-center">
-                                <span class="d-none d-md-inline">Letti</span><span class="d-md-none"><i class="fa-solid fa-bed"></i></span>
+                                <span class="d-none d-md-inline">Letti</span><span class="d-md-none"><i
+                                        class="fa-solid fa-bed"></i></span>
                             </th>
                             <th scope="col">
-                                <span class="d-none d-md-inline">Servizi</span><span class="d-md-none"><i class="fas fa-tools"></i></span>
+                                <span class="d-none d-md-inline">Servizi</span><span class="d-md-none"><i
+                                        class="fas fa-tools"></i></span>
                             </th>
                             <th scope="col" class="d-none d-lg-table-cell">Ultima modifica</th>
                             <th scope="col">
-                                <span class="d-none d-md-inline">Azioni</span><span class="d-md-none"><i class="fa-solid fa-gear"></i></span>
+                                <span class="d-none d-md-inline">Azioni</span><span class="d-md-none"><i
+                                        class="fa-solid fa-gear"></i></span>
                             </th>
                         </tr>
                     </thead>
@@ -96,7 +105,7 @@
                                 <td class="text-center px-0">{{ $apartment->rooms }}</td>
                                 <td class="text-center px-0">{{ $apartment->baths }}</td>
                                 <td class="text-center px-0">{{ $apartment->beds }}</td>
-                                <td class="px-0"> 
+                                <td class="px-0">
                                     @forelse ($apartment->services as $service)
                                         <span class="badge rounded-pill text-bg-primary p-2 mb-1">
                                             <i class="{{ $service->icon }} fa-xl"></i>
@@ -111,7 +120,7 @@
 
                                     {{-- Icona visualizza appartamento --}}
                                     <div class="d-flex flex-column flex-lg-row gap-1">
-                                        <a href="{{ route('admin.apartments.show', $apartment->id) }}"
+                                        <a href="{{ route('admin.apartments.show', $apartment->slug) }}"
                                             class="btn btn-sm btn-primary mb-2" style="width: 30px">
                                             <i class="far fa-eye"></i>
                                         </a>
@@ -127,14 +136,15 @@
                                             class="delete-form">
                                             @csrf
                                             @method('DELETE')
+
                                             <button class="btn btn-sm btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#modal">
                                                 <i class="far fa-trash-can"></i>
-                                            </button>
+                                            </button>                                            
                                         </form>
 
                                         {{-- Pulsante restore --}}
-                                        <form action="{{ route('admin.apartments.restore', $apartment->id) }}" method="POST"
-                                            class="restore-form">
+                                        <form action="{{ route('admin.apartments.restore', $apartment->id) }}"
+                                            method="POST" class="restore-form">
                                             @csrf
                                             @method('PATCH')
                                             <button type="submit" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modal">

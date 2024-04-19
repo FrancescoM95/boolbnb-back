@@ -35,11 +35,14 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
     Route::patch('/apartments/{apartment}/restore', [ApartmentController::class, 'restore'])->name('apartments.restore')->withTrashed();
     Route::delete('/apartments/{apartment}/drop', [ApartmentController::class, 'drop'])->name('apartments.drop')->withTrashed();
 
-    // Rotta toggle pubblicazione
+    //* Rotta toggle pubblicazione
     Route::patch('/apartments/{apartment}/publish', [ApartmentController::class, 'togglePublication'])->name('apartments.publish');
 
     //* Rotte admin apartment CRUD
-    Route::resource('apartments', ApartmentController::class)->withTrashed(['show', 'edit', 'update']);
+    Route::resource('apartments', ApartmentController::class)->except('show')->withTrashed(['edit', 'update']);
+
+    //* Rotta show con slug
+    Route::get('/apartments/{slug}', [ApartmentController::class, 'show'])->name('apartments.show');
 });
 
 
