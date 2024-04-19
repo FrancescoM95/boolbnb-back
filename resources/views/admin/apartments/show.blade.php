@@ -9,9 +9,10 @@
         </header>
         {{-- immagine + location --}}
         <section id="eye-catcher" class="pb-3 row justify-content-center">
-            <img src="{{ $apartment->cover_image }}" alt="{{ $apartment->title }}"
-                class="img-fluid rounded pb-3 col-12 col-md-10 col-lg-9 col-xl-8 col-xxl-7">
-            <div class="row row-cols-2 text-center">
+            <div class="pb-3 col-12 col-md-10 col-lg-9 col-xl-8 col-xxl-7">
+                <img src="{{ $apartment->cover_image }}" alt="{{ $apartment->title }}" class="img-fluid rounded">
+            </div>
+            <div class="row row-cols-2 row-cols-md-3 row-cols-xxl-4 text-center justify-content-center">
                 <div>
                     <p class="m-0">{{ $apartment->address }}</p>
                     <p class="m-0"><a href="https://www.google.it/maps/preview" target="blank">Trova su mappa!</a></p>
