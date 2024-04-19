@@ -98,9 +98,51 @@ class ApartmentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Apartment $apartment)
     {
-        //
+        $apartment->delete();
+        return to_route('admin.apartments.index');
+    }
+
+    // * Rotte Soft Delete
+
+    public function trash()
+    {
+        $apartments = Apartment::onlyTrashed()->get();
+        return view('admin.apartments.trash', compact('apartments'));
+    }
+
+    public function restore(Apartment $apartment)
+    {
+        $apartment->restore();
+        return to_route('admin.apartments.index')->with('type', 'success')->with('message', 'Appartamento ripristinato con successo');
+    }
+
+    public function drop(Apartment $apartment)
+    {
+        if ($apartment->has('services')) $apartment->services()->detach();
+        // if ($apartment->has('sponsorships')) $apartment->sponsorships()->detach();
+        $apartment->forceDelete();
+        return to_route('admin.apartments.trash')->with('type', 'warning')->with('message', 'Appartamento eliminato definitivamente');
+    }
+
+    // Rotte Delete All e Restore all
+    public function massiveDrop()
+    {
+        $apartments = Apartment::onlyTrashed()->get();
+        foreach ($apartments as $apartment) {
+            $apartment->forceDelete();
+        }
+        return to_route('admin.apartments.trash')->with('type', 'warning')->with('message', 'Tutti gli appartamenti sono stati eliminati definitivamente');
+    }
+
+    public function massiveRestore()
+    {
+        $apartments = Apartment::onlyTrashed()->get();
+        foreach ($apartments as $apartment) {
+            $apartment->restore();
+        }
+        return to_route('admin.apartments.index')->with('type', 'success')->with('message', 'Tutti gli appartamenti sono stati ripristinati con successo');
     }
 
 

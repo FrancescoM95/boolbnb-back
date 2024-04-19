@@ -28,6 +28,10 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
 
     //* Rotte Admin Soft Delete
     Route::get('/apartments/trash', [ApartmentController::class, 'trash'])->name('apartments.trash');
+    // Route x eliminazione MASSIVA definitiva
+    Route::delete('/apartments/massivedrop', [ApartmentController::class, 'massivedrop'])->name('apartments.massivedrop');
+    // Route x restore MASSIVO
+    Route::patch('/apartments/massiverestore', [ApartmentController::class, 'massiverestore'])->name('apartments.massiverestore');
     Route::patch('/apartments/{apartment}/restore', [ApartmentController::class, 'restore'])->name('apartments.restore')->withTrashed();
     Route::delete('/apartments/{apartment}/drop', [ApartmentController::class, 'drop'])->name('apartments.drop')->withTrashed();
 
@@ -37,6 +41,7 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
     //* Rotte admin apartment CRUD
     Route::resource('apartments', ApartmentController::class)->withTrashed(['show', 'edit', 'update']);
 });
+
 
 
 //* Rotte profilo
