@@ -10,7 +10,7 @@
         {{-- immagine + location --}}
         <section id="eye-catcher" class="pb-3 row justify-content-center">
             <div class="pb-3 col-12 col-md-10 col-lg-9 col-xl-8 col-xxl-7">
-                <img src="{{ $apartment->cover_image }}" alt="{{ $apartment->title }}" class="img-fluid rounded">
+                <img src="{{ $apartment->printImage() }}" alt="{{ $apartment->title }}" class="img-fluid rounded">
             </div>
             <div class="row row-cols-2 row-cols-md-3 row-cols-xxl-4 text-center justify-content-center pb-3">
                 <div>
