@@ -65,7 +65,7 @@
                         <td>{{ $apartment->getUpdatedAt() }}</td>
                         <td>
                             <div class="d-flex gap-2">
-                                <a href="{{ route('admin.apartments.show', $apartment->id) }}"
+                                <a href="{{ route('admin.apartments.show', $apartment->slug) }}"
                                     class="btn btn-sm btn-primary">
                                     <i class="far fa-eye"></i>
                                 </a>

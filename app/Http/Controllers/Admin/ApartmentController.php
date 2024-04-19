@@ -70,8 +70,10 @@ class ApartmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Apartment $apartment)
+    public function show(string $slug)
     {
+        $apartment = Apartment::whereSlug($slug)->withTrashed()->first();
+        if (!$apartment) abort(404);
         return view('admin.apartments.show', compact('apartment'));
     }
 
