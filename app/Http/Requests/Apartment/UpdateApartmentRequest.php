@@ -33,6 +33,7 @@ class UpdateApartmentRequest extends FormRequest
             'cover_image' => 'nullable|image|mimes:jpeg,png,jpg',
             'is_visible' => 'nullable|boolean',
             'user_id' => 'nullable',
+            'services' => 'nullable'
         ];
 
         return [
