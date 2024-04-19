@@ -19,7 +19,7 @@
                 </div>
                 {{-- bottone modifica / elimina --}}
                 @if ($apartment->user_id == Auth::user()->id)
-                    <div class="d-flex justify-content-between align-items-center gap-3">
+                    <div class="d-flex justify-content-center align-items-center gap-3">
                         <a href="{{ route('admin.apartments.edit', $apartment) }}" class="btn btn-warning"><i
                                 class="fas fa-pencil me-2 d-none d-sm-inline"></i>Modifica</a>
                         <form action="{{ route('admin.apartments.destroy', $apartment->id) }}" method="POST"
@@ -39,10 +39,26 @@
                     </div>
                 @endif
             </div>
-            <div class="d-flex justify-content-evenly">
+            <div class="row row-cols-2 row-cols-md-3 row-cols-xxl-4 text-center justify-content-center">
                 <p class="m-0">{{ $apartment->address }}</p>
                 <p class="m-0"><a href="https://www.google.it/maps/preview" target="blank">Trova su mappa!</a></p>
             </div>
+        </section>
+        {{-- proprietà --}}
+        <section id="details" class="pb-3">
+            <h3 class="text-center pb-3 m-0">Dettagli</h3>
+            <ul class="row m-0 px-5">
+                <li class="list-unstyled col-6 col-md-4 col-lg-3 mb-2"><i class="fa-solid fa-ruler-combined me-2"></i> Metri
+                    quadri:
+                    {{ $apartment->square_meters }}</li>
+                <li class="list-unstyled col-6 col-md-4 col-lg-3 mb-2"><i class="fa-solid fa-door-closed me-2"></i> Numero
+                    stanze:
+                    {{ $apartment->rooms }}</li>
+                <li class="list-unstyled col-6 col-md-4 col-lg-3 mb-2"><i class="fa-solid fa-bed me-2"></i> Camere da letto:
+                    {{ $apartment->beds }}</li>
+                <li class="list-unstyled col-6 col-md-4 col-lg-3 mb-2"><i class="fa-solid fa-bath me-2"></i> Numero bagni:
+                    {{ $apartment->baths }}</li>
+            </ul>
         </section>
         {{-- servizi --}}
         <section id="services" class="pb-3">
@@ -59,7 +75,11 @@
             <h3 class="text-center pb-3 m-0">Descrizione</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque quisquam illum at odit, harum iusto
                 repudiandae ex in quaerat vitae aliquid. Incidunt labore ipsa similique asperiores. Perferendis quibusdam
-                dignissimos deleniti?</p>
+                dignissimos deleniti? Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit magni, assumenda
+                veniam nemo totam nulla esse ea quam labore, animi accusamus ut sed aspernatur fugiat voluptatum reiciendis
+                necessitatibus mollitia! Alias.Omnis quisquam laudantium dicta, ab molestiae quis modi perspiciatis veniam
+                laboriosam? Numquam itaque eligendi, modi doloribus deleniti necessitatibus ullam deserunt ipsam omnis totam
+                sit, veniam, enim voluptate quasi tempore corrupti!</p>
         </section>
     </div>
 @endsection
