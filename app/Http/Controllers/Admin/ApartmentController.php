@@ -20,7 +20,7 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::all();
+        $apartments = Apartment::whereUserId(Auth::user()->id)->get();
 
         return view('admin.apartments.index', compact('apartments'));
     }
@@ -65,7 +65,6 @@ class ApartmentController extends Controller
         }
 
         return to_route('admin.apartments.show', $apartment);
-        
     }
 
     /**
@@ -96,6 +95,7 @@ class ApartmentController extends Controller
         $data = $request->validated();
         $data['slug']=Str::slug($data['title']);
         $data['is_visible'] = Arr::exists($data, 'is_visible');
+        $data['user_id'] = Auth::user()->id;
 
         if(Arr::exists($data, 'image')){ 
             $extension = $data['cover_image']->extension();
@@ -105,15 +105,77 @@ class ApartmentController extends Controller
         }
 
         $apartment->update();
+        // $apartment->fill($data);
+        // $apartment->slug = Str::slug($apartment->title);
+        // $apartment->is_visible = Arr::exists($data, 'is_visible');
+        
+        // $apartment->save();
+
+        if (Arr::exists($data, 'services')) {
+            $apartment->services()->sync($data['services']);
+        
         return to_route('admin.apartments.show', $apartment);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Apartment $apartment)
     {
-        //
+        $apartment->delete();
+        return to_route('admin.apartments.index');
+    }
+
+    // * Rotte Soft Delete
+
+    public function trash()
+    {
+        $apartments = Apartment::onlyTrashed()->get();
+        return view('admin.apartments.trash', compact('apartments'));
+    }
+
+    public function restore(Apartment $apartment)
+    {
+        $apartment->restore();
+        return to_route('admin.apartments.index')->with('type', 'success')->with('message', 'Appartamento ripristinato con successo');
+    }
+
+    public function drop(Apartment $apartment)
+    {
+        if ($apartment->has('services')) $apartment->services()->detach();
+        // if ($apartment->has('sponsorships')) $apartment->sponsorships()->detach();
+        $apartment->forceDelete();
+        return to_route('admin.apartments.trash')->with('type', 'warning')->with('message', 'Appartamento eliminato definitivamente');
+    }
+
+    // Rotte Delete All e Restore all
+    public function massiveDrop()
+    {
+        $apartments = Apartment::onlyTrashed()->get();
+        foreach ($apartments as $apartment) {
+            $apartment->forceDelete();
+        }
+        return to_route('admin.apartments.trash')->with('type', 'warning')->with('message', 'Tutti gli appartamenti sono stati eliminati definitivamente');
+    }
+
+    public function massiveRestore()
+    {
+        $apartments = Apartment::onlyTrashed()->get();
+        foreach ($apartments as $apartment) {
+            $apartment->restore();
+        }
+        return to_route('admin.apartments.index')->with('type', 'success')->with('message', 'Tutti gli appartamenti sono stati ripristinati con successo');
+    }
+
+
+    //# ROTTA PUBBLICAZIONE
+
+    public function togglePublication(Apartment $apartment)
+    {
+        $apartment->is_visible = !$apartment->is_visible;
+        $apartment->save();
+
+        return back();
     }
 
     public function drop(Apartment $apartment)

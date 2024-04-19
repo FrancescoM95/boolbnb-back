@@ -3,28 +3,30 @@
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
-            <h1 class="py-3">Appartamenti</h1>
+            <h1 class="py-3">I tuoi Appartamenti</h1>
             <div>
                 <a href="{{ route('admin.apartments.create') }}" class="btn btn-success"><i class="fa-solid fa-plus"></i>
-                    Aggiungi
-                    appartamento</a>
+                    Aggiungi appartamento
+                </a>
                 <a href="{{ route('admin.apartments.trash') }}" class="btn btn-danger"><i class="fa-solid fa-trash"></i>
-                    Cestino</a>
+                    Cestino
+                </a>
             </div>
         </div>
 
         <table class="table table-striped table-hover mb-5">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">
+                        Pubblico
+                    </th>
                     <th scope="col">Titolo</th>
                     <th scope="col">Indirizzo</th>
-                    <th scope="col">m²</th>
-                    <th scope="col">Stanze</th>
-                    <th scope="col">Bagni</th>
-                    <th scope="col">Letti</th>
+                    <th scope="col" class="text-center">m²</th>
+                    <th scope="col" class="text-center">Stanze</th>
+                    <th scope="col" class="text-center">Bagni</th>
+                    <th scope="col" class="text-center">Letti</th>
                     <th scope="col">Servizi</th>
-                    <th scope="col">Data creazione</th>
                     <th scope="col">Ultima modifica</th>
                     <th scope="col"></th>
                 </tr>
@@ -32,13 +34,24 @@
             <tbody>
                 @forelse ($apartments as $apartment)
                     <tr>
-                        <th scope="row">{{ $apartment->id }}</th>
+                        <th scope="row">
+                            <form action="{{ route('admin.apartments.publish', $apartment->id) }}" method="POST"
+                                class="publication-form">
+                                @csrf
+                                @method('PATCH')
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" role="button"
+                                        id="{{ 'is_visible-' . $apartment->id }}" name="is_visible"
+                                        @if ($apartment->is_visible) checked @endif>
+                                </div>
+                            </form>
+                        </th>
                         <td>{{ $apartment->title }}</td>
                         <td>{{ $apartment->address }}</td>
-                        <td>{{ $apartment->square_meters }}</td>
-                        <td>{{ $apartment->rooms }}</td>
-                        <td>{{ $apartment->baths }}</td>
-                        <td>{{ $apartment->beds }}</td>
+                        <td class="text-center">{{ $apartment->square_meters }}</td>
+                        <td class="text-center">{{ $apartment->rooms }}</td>
+                        <td class="text-center">{{ $apartment->baths }}</td>
+                        <td class="text-center">{{ $apartment->beds }}</td>
                         <td>
                             @forelse ($apartment->services as $service)
                                 <span class="badge rounded-pill text-bg-primary p-2 mb-1">
@@ -49,7 +62,6 @@
                                 N.D.
                             @endforelse
                         </td>
-                        <td>{{ $apartment->getCreatedAt() }}</td>
                         <td>{{ $apartment->getUpdatedAt() }}</td>
                         <td>
                             <div class="d-flex gap-2">
@@ -85,6 +97,14 @@
 
 @section('scripts')
     <script>
+        const togglePublicationForms = document.querySelectorAll('.publication-form');
+        togglePublicationForms.forEach(form => {
+            form.addEventListener('click', () => {
+                form.submit();
+            })
+        });
+
+
         const deleteForm = document.getElementById('delete-form');
 
         deleteForm.addEventListener('submit', e => {
