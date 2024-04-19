@@ -116,6 +116,7 @@ class ApartmentController extends Controller
         
         return to_route('admin.apartments.show', $apartment);
     }
+}
 
     /**
      * Remove the specified resource from storage.
@@ -140,8 +141,9 @@ class ApartmentController extends Controller
         return to_route('admin.apartments.index')->with('type', 'success')->with('message', 'Appartamento ripristinato con successo');
     }
 
-    public function drop(Apartment $apartment)
+    public function drop (Apartment $apartment)
     {
+        if($apartment->cover_image) Storage::delete($apartment->cover_image);
         if ($apartment->has('services')) $apartment->services()->detach();
         // if ($apartment->has('sponsorships')) $apartment->sponsorships()->detach();
         $apartment->forceDelete();
@@ -178,8 +180,4 @@ class ApartmentController extends Controller
         return back();
     }
 
-    public function drop(Apartment $apartment)
-    {
-        if($apartment->cover_image) Storage::delete($apartment->cover_image);
-    }
 }
