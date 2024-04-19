@@ -5,12 +5,13 @@
 @section('content')
     <div class="container">
         <header class="d-flex align-items-center justify-content-between flex-column py-3">
-            <h1 class="m-0">Appartamenti eliminati</h1>
+            <h1 class="m-0 mb-4">Appartamenti eliminati</h1>
             <div class="d-flex justify-content-between w-100">
 
                 {{-- Back to home --}}
                 <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary d-block">
-                    <i class="far fa-hand-point-left me-2"></i>Torna agli appartamenti
+                    <i class="far fa-hand-point-left"></i>
+                    <span class="d-none d-md-inline ms-2">Torna agli appartamenti</span>
                 </a>
                 <div class="d-flex justify-content-between gap-2">
 
@@ -19,7 +20,8 @@
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal">
-                            <i class="fas fa-trash me-2"></i>Svuota cestino</a>
+                            <i class="fas fa-trash"></i>
+                            <span class="d-none d-md-inline ms-2">Svuota cestino</span>
                         </button>
                     </form>
 
@@ -28,111 +30,123 @@
                         @csrf
                         @method('PATCH')
                         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal">
-                            <i class="fas fa-arrows-rotate me-2"></i>Ripristina tutto</a>
+                            <i class="fas fa-arrows-rotate "></i>
+                            <span class="d-none d-md-inline ms-2">Ripristina tutto</span>
                         </button>
                     </form>
                 </div>
             </div>
         </header>
 
-        <table class="table table-striped table-hover mb-5">
-            
-            <thead>
-                <tr>
-                    <th scope="col">
-                        Pubblico
-                    </th>
-                    <th scope="col">Titolo</th>
-                    <th scope="col">Indirizzo</th>
-                    <th scope="col" class="text-center">m²</th>
-                    <th scope="col" class="text-center">Stanze</th>
-                    <th scope="col" class="text-center">Bagni</th>
-                    <th scope="col" class="text-center">Letti</th>
-                    <th scope="col">Servizi</th>
-                    <th scope="col">Ultima modifica</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($apartments as $apartment)
-                    <tr>
-                        <th scope="row">
-                            <form action="{{ route('admin.apartments.update', $apartment->id) }}" method="POST">
-                                @csrf
-                                @method('PATCH')
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="is_visible"
-                                        name="is_visible" @if (old('is_visible', $apartment->is_visible)) checked @endif>
-                                </div>
-                            </form>
-                        </th>
-                        <td>{{ $apartment->title }}</td>
-                        <td>{{ $apartment->address }}</td>
-                        <td class="text-center">{{ $apartment->square_meters }}</td>
-                        <td class="text-center">{{ $apartment->rooms }}</td>
-                        <td class="text-center">{{ $apartment->baths }}</td>
-                        <td class="text-center">{{ $apartment->beds }}</td>
-                        <td>
-                            @forelse ($apartment->services as $service)
-                                <span class="badge rounded-pill text-bg-primary p-2 mb-1">
-                                    <i class="{{ $service->icon }} fa-xl"></i>
-                                    <span>{{ $service->label }}</span>
-                                </span>
-                            @empty
-                                N.D.
-                            @endforelse
-                        </td>
-                        <td>{{ $apartment->getUpdatedAt() }}</td>
-                        <td>
+        @if ($apartments->count() === 0)
+            <div class="text-center">
+                <h3>Non ci sono appartamenti.</h3>
+            </div>
+        @else
+            <div class="table-responsive">
+                <table class="table table-striped table-hover mb-5">
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                <span class="d-none d-md-inline">Pubblico</span><span class="d-md-none"><i class="fa-regular fa-eye"></i>
+                            </th>
+                            <th scope="col">
+                                <span class="d-none d-md-inline">Titolo</span><span class="d-md-none"><i class="fas fa-arrows-rotate "></i></span>
+                            </th>
+                            <th scope="col">
+                                <span class="d-none d-md-inline">Indirizzo</span><span class="d-md-none"><i class="fa-solid fa-map-location-dot"></i></span>
+                            </th>
+                            <th scope="col" class="text-center">
+                                <span class="d-none d-md-inline">m²</span><span class="d-md-none"><i class="fa-solid fa-ruler-combined"></i></span>
+                            </th>
+                            <th scope="col" class="text-center">
+                                <span class="d-none d-md-inline">Stanze</span><span class="d-md-none"><i class="fas fa-door-closed"></i></span>
+                            </th>
+                            <th scope="col" class="text-center">
+                                <span class="d-none d-md-inline">Bagni</span><span class="d-md-none"><i class="fa-solid fa-bath"></i></span>
+                            </th>
+                            <th scope="col" class="text-center">
+                                <span class="d-none d-md-inline">Letti</span><span class="d-md-none"><i class="fa-solid fa-bed"></i></span>
+                            </th>
+                            <th scope="col">
+                                <span class="d-none d-md-inline">Servizi</span><span class="d-md-none"><i class="fas fa-tools"></i></span>
+                            </th>
+                            <th scope="col" class="d-none d-lg-table-cell">Ultima modifica</th>
+                            <th scope="col">
+                                <span class="d-none d-md-inline">Azioni</span><span class="d-md-none"><i class="fa-solid fa-gear"></i></span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($apartments as $apartment)
+                            <tr>
+                                <th scope="row">
+                                    <form action="{{ route('admin.apartments.update', $apartment->id) }}" method="POST">
+                                        @csrf
+                                        @method('PATCH')
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" role="switch" id="is_visible"
+                                                name="is_visible" @if (old('is_visible', $apartment->is_visible)) checked @endif>
+                                        </div>
+                                    </form>
+                                </th>
+                                <td class="">{{ $apartment->title }}</td>
+                                <td class="px-0">{{ $apartment->address }}</td>
+                                <td class="text-center px-0">{{ $apartment->square_meters }}</td>
+                                <td class="text-center px-0">{{ $apartment->rooms }}</td>
+                                <td class="text-center px-0">{{ $apartment->baths }}</td>
+                                <td class="text-center px-0">{{ $apartment->beds }}</td>
+                                <td class="px-0"> 
+                                    @forelse ($apartment->services as $service)
+                                        <span class="badge rounded-pill text-bg-primary p-2 mb-1">
+                                            <i class="{{ $service->icon }} fa-xl"></i>
+                                            <span>{{ $service->label }}</span>
+                                        </span>
+                                    @empty
+                                        N.D.
+                                    @endforelse
+                                </td>
+                                <td class="d-none d-lg-table-cell">{{ $apartment->getUpdatedAt() }}</td>
+                                <td>
 
-                             {{-- Icona visualizza appartamento --}}
-                            <div class="d-flex gap-2">
-                                <a href="{{ route('admin.apartments.show', $apartment->id) }}"
-                                    class="btn btn-sm btn-primary">
-                                    <i class="far fa-eye"></i>
-                                </a>
+                                    {{-- Icona visualizza appartamento --}}
+                                    <div class="d-flex flex-column flex-lg-row gap-1">
+                                        <a href="{{ route('admin.apartments.show', $apartment->id) }}"
+                                            class="btn btn-sm btn-primary mb-2" style="width: 30px">
+                                            <i class="far fa-eye"></i>
+                                        </a>
 
-                                {{-- Icona modifica appartamento --}}
-                                <a href="{{ route('admin.apartments.edit', $apartment->id) }}"
-                                    class="btn btn-sm btn-secondary">
-                                    <i class="fas fa-pencil"></i>
-                                </a>
+                                        {{-- Icona modifica appartamento --}}
+                                        <a href="{{ route('admin.apartments.edit', $apartment->id) }}"
+                                            class="btn btn-sm btn-secondary mb-2" style="width: 30px">
+                                            <i class="fas fa-pencil"></i>
+                                        </a>
 
-                                {{-- Pulsante elimina --}}
-                                <form action="{{ route('admin.apartments.drop', $apartment->id) }}" method="POST"
-                                    id="delete-form">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-sm btn-danger"><i class="far fa-trash-can"></i></button>
-                                </form>
+                                        {{-- Pulsante elimina --}}
+                                        <form action="{{ route('admin.apartments.drop', $apartment->id) }}" method="POST"
+                                            id="delete-form">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-sm btn-danger mb-2"><i class="far fa-trash-can"></i></button>
+                                        </form>
 
-                                {{-- Pulsante restore --}}
-                                <form action="{{ route('admin.apartments.restore', $apartment->id) }}" method="POST"
-                                    class="restore-form">
-                                    @csrf
-                                    @method('PATCH')
-                                    <button type="submit" class="btn btn-sm btn-success" data-bs-toggle="modal"
-                                        data-bs-target="#modal">
-                                        <i class="fas fa-arrows-rotate"></i>
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="11">
-                            <h3 class="text-center">Non hai inserito nessun appartamento.</h3>
-                        </td>
-                    </tr>
-                @endforelse
-
-            </tbody>
-        </table>
+                                        {{-- Pulsante restore --}}
+                                        <form action="{{ route('admin.apartments.restore', $apartment->id) }}" method="POST"
+                                            class="restore-form">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit" class="btn btn-sm btn-success" data-bs-toggle="modal"
+                                                data-bs-target="#modal">
+                                                <i class="fas fa-arrows-rotate"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @endif
     </div>
-    </div>
-@endsection
-
-@section('scripts')
-    @vite('resources/js/delete_confirmation.js')
 @endsection
