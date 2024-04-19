@@ -1,5 +1,5 @@
 const placeholder = 'https://marcolanci.it/boolean/assets/placeholder.png'
-const imageFiels = document.getElementById('image')
+const imageFiels = document.getElementById('cover_image')
 const previewField = document.getElementById('preview')
 
 let blobUrl;
