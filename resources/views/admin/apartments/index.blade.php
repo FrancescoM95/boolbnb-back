@@ -35,12 +35,14 @@
                 @forelse ($apartments as $apartment)
                     <tr>
                         <th scope="row">
-                            <form action="{{ route('admin.apartments.update', $apartment->id) }}" method="POST">
+                            <form action="{{ route('admin.apartments.publish', $apartment->id) }}" method="POST"
+                                class="publication-form">
                                 @csrf
                                 @method('PATCH')
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="is_visible"
-                                        name="is_visible" @if (old('is_visible', $apartment->is_visible)) checked @endif>
+                                    <input class="form-check-input" type="checkbox" role="button"
+                                        id="{{ 'is_visible-' . $apartment->id }}" name="is_visible"
+                                        @if ($apartment->is_visible) checked @endif>
                                 </div>
                             </form>
                         </th>
@@ -95,6 +97,14 @@
 
 @section('scripts')
     <script>
+        const togglePublicationForms = document.querySelectorAll('.publication-form');
+        togglePublicationForms.forEach(form => {
+            form.addEventListener('click', () => {
+                form.submit();
+            })
+        });
+
+
         const deleteForm = document.getElementById('delete-form');
 
         deleteForm.addEventListener('submit', e => {

@@ -102,4 +102,15 @@ class ApartmentController extends Controller
     {
         //
     }
+
+
+    //# ROTTA PUBBLICAZIONE
+
+    public function togglePublication(Apartment $apartment)
+    {
+        $apartment->is_visible = !$apartment->is_visible;
+        $apartment->save();
+
+        return back();
+    }
 }
