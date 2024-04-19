@@ -31,9 +31,9 @@ class UpdateApartmentRequest extends FormRequest
             'latitude' => 'nullable',
             'longitude' => 'nullable',
             'cover_image' => 'nullable|image|mimes:jpeg,png,jpg',
-            'is_visible' => 'nullable|boolean',
-            'user_id' => 'nullable',
-            'services' => 'nullable'
+            'is_visible' => 'nullable',
+            'user_id' => 'nullable|exists:users,id',
+            'services' => 'nullable|exists:services,id'
         ];
 
         return [

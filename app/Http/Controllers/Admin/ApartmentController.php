@@ -41,7 +41,6 @@ class ApartmentController extends Controller
      */
     public function store(StoreApartmentRequest $request)
     {
-
         //Auth::user()->name
         $data = $request->validated();
         $apartment = new Apartment();
@@ -49,24 +48,23 @@ class ApartmentController extends Controller
         $apartment->slug = Str::slug($apartment->title);
         $apartment->is_visible = Arr::exists($data, 'is_visible');
         $apartment->user_id = Auth::user()->id;
-
-
         //controllo se mi arriva un file
 
-        if (Arr::exists($data, 'cover_image')) {
+        if(Arr::exists($data, 'cover_image')){ 
             $extension = $data['cover_image']->extension();
-            //lo salvo e prendo l'url
+             //lo salvo e prendo l'url
             $img_url = Storage::putFileAs('apartment_images', $data['cover_image'], "$apartment->slug.$extension");
             $apartment->cover_image = $img_url;
         }
-
         $apartment->save();
 
         if (Arr::exists($data, 'services')) {
             $apartment->services()->attach($data['services']);
         }
 
-        return to_route('admin.apartments.show', $apartment->slug);
+        
+
+        return to_route('admin.apartments.show', $apartment);
     }
 
     /**
@@ -74,8 +72,7 @@ class ApartmentController extends Controller
      */
     public function show(string $slug)
     {
-        $apartment = Apartment::whereSlug($slug)->withTrashed()->first();
-        if (!$apartment) abort(404);
+        $apartment = Apartment::whereSlug($slug)->first();
         return view('admin.apartments.show', compact('apartment'));
     }
 
@@ -96,31 +93,33 @@ class ApartmentController extends Controller
      */
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
+        
         $data = $request->validated();
-        $data['slug'] = Str::slug($data['title']);
+        $data['slug']=Str::slug($data['title']);
         $data['is_visible'] = Arr::exists($data, 'is_visible');
         $data['user_id'] = Auth::user()->id;
 
-        if (Arr::exists($data, 'image')) {
+        if(Arr::exists($data, 'image')){ 
             $extension = $data['cover_image']->extension();
-            if ($apartment->cover_image) Storage::delete($apartment->cover_image); //Cancello la vecchia immagine associata al file
+            if($apartment->cover_image) Storage::delete($apartment->cover_image); //Cancello la vecchia immagine associata al file
             $img_url = Storage::putFileAs('apartment_images', $data['cover_image'], "{$data['slug']}.$extension");
             $apartment->cover_image = $img_url;
         }
+        
 
-        $apartment->update();
-        // $apartment->fill($data);
-        // $apartment->slug = Str::slug($apartment->title);
-        // $apartment->is_visible = Arr::exists($data, 'is_visible');
-
-        // $apartment->save();
+        $apartment->update($data);
 
         if (Arr::exists($data, 'services')) {
             $apartment->services()->sync($data['services']);
-
-            return to_route('admin.apartments.show', $apartment);
-        }
+        // $apartment->fill($data);
+        // $apartment->slug = Str::slug($apartment->title);
+        // $apartment->is_visible = Arr::exists($data, 'is_visible');
+        
+        
+        
+        return to_route('admin.apartments.show', $apartment->slug);
     }
+}
 
     /**
      * Remove the specified resource from storage.
@@ -145,9 +144,9 @@ class ApartmentController extends Controller
         return to_route('admin.apartments.index')->with('type', 'success')->with('message', 'Appartamento ripristinato con successo');
     }
 
-    public function drop(Apartment $apartment)
+    public function drop (Apartment $apartment)
     {
-        if ($apartment->cover_image) Storage::delete($apartment->cover_image);
+        if($apartment->cover_image) Storage::delete($apartment->cover_image);
         if ($apartment->has('services')) $apartment->services()->detach();
         // if ($apartment->has('sponsorships')) $apartment->sponsorships()->detach();
         $apartment->forceDelete();
@@ -183,4 +182,5 @@ class ApartmentController extends Controller
 
         return back();
     }
+
 }

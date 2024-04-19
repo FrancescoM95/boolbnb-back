@@ -184,16 +184,16 @@
 </form>
 
 <script>
-    const addressField = document.getElementById('address');
-    const endpoint = 'https://api.tomtom.com/search/2/search/Via%20Giacinto%20De%20Vecchi%2030%20Milano.json?key=xQCe5CK1jGngIh9Op6Bcj0KFERbewfsD';
+    // const addressField = document.getElementById('address');
+    // const endpoint = 'https://api.tomtom.com/search/2/search/Via%20Giacinto%20De%20Vecchi%2030%20Milano.json?key=xQCe5CK1jGngIh9Op6Bcj0KFERbewfsD';
 
-    addressField.addEventListener('keyup', () =>{
-        const address = addressField.value.trim();
-        axios.get(endpoint)
-        .then(res => {
-            console.log(res.data.result)
-        }).catch(err => {
-            console.error(err);
-        })
-    })
+    // addressField.addEventListener('keyup', () =>{
+    //     const address = addressField.value.trim();
+    //     axios.get(endpoint)
+    //     .then(res => {
+    //         console.log(res.data.result)
+    //     }).catch(err => {
+    //         console.error(err);
+    //     })
+    // })
 </script>
