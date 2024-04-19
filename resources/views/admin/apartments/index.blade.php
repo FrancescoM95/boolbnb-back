@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
-            <h1 class="py-3">I tuoi Appartamenti</h1>
+            <h1 class="py-3">Lista Appartamenti</h1>
             <div>
                 <a href="{{ route('admin.apartments.create') }}" class="btn btn-success"><i class="fa-solid fa-plus"></i>
                     Aggiungi appartamento
@@ -54,12 +54,14 @@
                         <td class="text-center">{{ $apartment->beds }}</td>
                         <td>
                             @forelse ($apartment->services as $service)
-                                <span class="badge rounded-pill text-bg-primary p-2 mb-1">
+                                <span class="badge rounded-pill text-bg-secondary p-2 mb-1">
                                     <i class="{{ $service->icon }} fa-xl"></i>
                                     <span>{{ $service->label }}</span>
                                 </span>
                             @empty
-                                N.D.
+                                <span class="badge rounded-pill text-bg-danger p-2 mb-1">
+                                    <i class="fa-solid fa-ban fa-xl"></i>
+                                </span>
                             @endforelse
                         </td>
                         <td>{{ $apartment->getUpdatedAt() }}</td>
