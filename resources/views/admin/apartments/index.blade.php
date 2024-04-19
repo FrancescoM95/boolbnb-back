@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
-            <h1 class="py-3">Appartamenti</h1>
+            <h1 class="py-3">I tuoi Appartamenti</h1>
             <div>
                 <a href="{{ route('admin.apartments.create') }}" class="btn btn-success"><i class="fa-solid fa-plus"></i>
                     Aggiungi appartamento
