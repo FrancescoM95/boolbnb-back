@@ -89,13 +89,15 @@
                 @enderror
             </div>
         </div>
+
+
+        {{-- Address --}}
         <div class="col-6">
             <div class="mb-3">
                 <label for="address" class="form-label">Indirizzo</label>
                 <input type="text"
                     class="form-control @error('address') is-invalid
-              @elseif (old('address', '')) is-valid 
-            @enderror"
+              @elseif (old('address', '')) is-valid @enderror"
                     id="address" name="address" value="{{ old('address', $apartment->address) }}">
                 @error('title')
                     <div class="invalid-feedback">
@@ -165,8 +167,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
     <div class="d-flex align-items-center justify-content-between">
         <a href="{{ route('admin.apartments.index') }}" class="btn btn-primary"><i
@@ -182,3 +182,18 @@
     </div>
 </section>
 </form>
+
+<script>
+    const addressField = document.getElementById('address');
+    const endpoint = 'https://api.tomtom.com/search/2/search/Via%20Giacinto%20De%20Vecchi%2030%20Milano.json?key=HSR09zFiF4jz6GK6FfrL7kKwLJWYYxVA';
+
+    addressField.addEventListener('keyup', () =>{
+        const address = addressField.value.trim();
+        axios.get(endpoint)
+        .then(res => {
+            console.log(res.data.result)
+        }).catch(err => {
+            console.error(err);
+        })
+    })
+</script>
