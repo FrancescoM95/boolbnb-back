@@ -1,11 +1,11 @@
 <section>
     <header>
         <h2 class="text-secondary">
-            {{ __('Profile Information') }}
+            {{ __('Informazioni Profilo') }}
         </h2>
 
         <p class="mt-1 text-muted">
-            {{ __("Update your account's profile information and email address.") }}
+            {{ __("Aggiorna le informazioni del tuo profilo e il tuo indirizzo email.") }}
         </p>
     </header>
 
@@ -18,11 +18,21 @@
         @method('patch')
 
         <div class="mb-2">
-            <label for="name">{{__('Name')}}</label>
+            <label for="name">{{__('Nome')}}</label>
             <input class="form-control" type="text" name="name" id="name" autocomplete="name" value="{{old('name', $user->name)}}" required autofocus>
             @error('name')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $errors->get('name')}}</strong>
+            </span>
+            @enderror
+        </div>
+
+        <div class="mb-2">
+            <label for="surname">{{__('Cognome')}}</label>
+            <input class="form-control" type="text" surname="surname" id="surname" autocomplete="family-name" value="{{old('surname', $user->surname)}}" required autofocus>
+            @error('surname')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $errors->get('surname')}}</strong>
             </span>
             @enderror
         </div>
@@ -43,16 +53,16 @@
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
             <div>
                 <p class="text-sm mt-2 text-muted">
-                    {{ __('Your email address is unverified.') }}
+                    {{ __('Il tuo indirizzo email non è verificato.') }}
 
                     <button form="send-verification" class="btn btn-outline-dark">
-                        {{ __('Click here to re-send the verification email.') }}
+                        {{ __('Clicca qui per inviare nuovamente l\'email di verifica.') }}
                     </button>
                 </p>
 
                 @if (session('status') === 'verification-link-sent')
                 <p class="mt-2 text-success">
-                    {{ __('A new verification link has been sent to your email address.') }}
+                    {{ __('Un nuovo link di verifica è stato inviato al tuo indirizzo email.') }}
                 </p>
                 @endif
             </div>
@@ -71,7 +81,7 @@
                     el.style.display = 'block';
                 }
             </script>
-            <p id='profile-status' class="fs-5 text-muted">{{ __('Saved.') }}</p>
+            <p id='profile-status' class="fs-5 text-muted">{{ __('Informazioni salvate.') }}</p>
             @endif
         </div>
     </form>
