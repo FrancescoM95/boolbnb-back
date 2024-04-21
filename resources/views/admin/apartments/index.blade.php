@@ -28,15 +28,13 @@
         <table class="table table-striped table-hover mb-5">
             <thead>
                 <tr>
-                    <th scope="col">
-                        Pubblico
-                    </th>
-                    <th scope="col">Cover</th>
-                    <th scope="col">Titolo</th>
-                    <th scope="col">Indirizzo</th>
-                    <th scope="col">Info</th>
-                    <th scope="col">Servizi</th>
-                    <th scope="col"></th>
+                    <th scope="col" class="col-1">Pubblico</th>
+                    <th scope="col" class="col-auto">Cover</th>
+                    <th scope="col" class="col-3">Titolo</th>
+                    <th scope="col" class="col-2">Indirizzo</th>
+                    <th scope="col" class="col-1">Info</th>
+                    <th scope="col" class="col-2">Servizi</th>
+                    <th scope="col" class="col-auto"></th>
                 </tr>
             </thead>
             <tbody>
@@ -79,7 +77,7 @@
                                 <li><i class="fa-solid fa-ruler-combined me-2"></i> {{ $apartment->square_meters }}</li>
                                 <li><i class="fa-solid fa-door-closed me-2"></i> {{ $apartment->rooms }}</li>
                                 <li><i class="fa-solid fa-bed me-2"></i> {{ $apartment->baths }}</li>
-                                <li><i class="fa-solid fa-bath me-2"></i> {{ $apartment->beds }}</li>
+                                <li><i class="fa-solid fa-toilet me-2"></i> {{ $apartment->beds }}</li>
                             </ul>
                         </td>
                         <td>
@@ -88,7 +86,7 @@
                                     aria-expanded="false" id="services_button">
                                     <i class="fa-solid fa-angle-down"></i>
                                 </button>
-                                <div class="dropdown-menu">
+                                <div class="dropdown-menu p-2">
                                     @forelse ($apartment->services as $service)
                                         <span class="badge rounded-pill text-bg-secondary p-2 mb-1">
                                             <i class="{{ $service->icon }} fa-xl"></i>
@@ -104,12 +102,12 @@
 
                         </td>
                         <td>
-                            <div class="dropdown">
+                            <div class="dropdown-center">
                                 <button class="btn btn-sm btn-info m-0" type="button" data-bs-toggle="dropdown"
                                     aria-expanded="false" id="services_button">
                                     <i class="fa-solid fa-gear"></i>
                                 </button>
-                                <div class="dropdown-menu w-100">
+                                <div class="dropdown-menu w-100 p-2">
                                     <div class="d-flex flex-column gap-2">
                                         <a href="{{ route('admin.apartments.show', $apartment->slug) }}"
                                             class="btn btn-sm btn-primary">
