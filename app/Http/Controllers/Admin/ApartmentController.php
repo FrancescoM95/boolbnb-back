@@ -43,11 +43,17 @@ class ApartmentController extends Controller
 
         //Auth::user()->name
         $data = $request->validated();
+
+        $data['latitude'] = floatval($data['latitude']);
+        $data['longitude'] = floatval($data['longitude']);
+
         $apartment = new Apartment();
         $apartment->fill($data);
+
         $apartment->slug = Str::slug($apartment->title);
         $apartment->is_visible = Arr::exists($data, 'is_visible');
         $apartment->user_id = Auth::user()->id;
+
         $apartment->save();
 
         if (Arr::exists($data, 'services')) {
