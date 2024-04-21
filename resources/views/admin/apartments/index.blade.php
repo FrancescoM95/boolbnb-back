@@ -29,11 +29,9 @@
             <thead>
                 <tr>
                     <th scope="col" class="col-1">Pubblico</th>
-                    <th scope="col" class="col-auto">Cover</th>
-                    <th scope="col" class="col-3">Titolo</th>
-                    <th scope="col" class="col-2">Indirizzo</th>
-                    <th scope="col" class="col-1">Info</th>
-                    <th scope="col" class="col-2">Servizi</th>
+                    <th scope="col" class="col-2">Cover</th>
+                    <th scope="col" class="col-4">Info</th>
+                    <th scope="col" class="col-5">Servizi</th>
                     <th scope="col" class="col-auto"></th>
                 </tr>
             </thead>
@@ -70,36 +68,46 @@
                                 @endif
                             </div>
                         </td>
-                        <td>{{ $apartment->title }}</td>
-                        <td>{{ $apartment->address }}</td>
                         <td>
-                            <ul>
-                                <li><i class="fa-solid fa-ruler-combined me-2"></i> {{ $apartment->square_meters }}</li>
-                                <li><i class="fa-solid fa-door-closed me-2"></i> {{ $apartment->rooms }}</li>
-                                <li><i class="fa-solid fa-bed me-2"></i> {{ $apartment->baths }}</li>
-                                <li><i class="fa-solid fa-toilet me-2"></i> {{ $apartment->beds }}</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <div class="dropdown">
-                                <button class="btn btn-sm btn-info m-0" type="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false" id="services_button">
-                                    <i class="fa-solid fa-angle-down"></i>
-                                </button>
-                                <div class="dropdown-menu p-2">
-                                    @forelse ($apartment->services as $service)
-                                        <span class="badge rounded-pill text-bg-secondary p-2 mb-1">
-                                            <i class="{{ $service->icon }} fa-xl"></i>
-                                            <span>{{ $service->label }}</span>
-                                        </span>
-                                    @empty
-                                        <span class="badge rounded-pill text-bg-danger p-2 mb-1">
-                                            <i class="fa-solid fa-ban fa-xl"></i>
-                                        </span>
-                                    @endforelse
+                            <div>
+                                <i class="fa-solid fa-house-chimney"></i>
+                                {{ $apartment->title }}
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-location-dot"></i>
+                                {{ $apartment->address }}
+                                <hr>
+                            </div>
+                            <div class="d-flex gap-3">
+                                <div>
+                                    <i class="fa-solid fa-door-closed"></i> Stanze:
+                                    {{ $apartment->rooms }}
+                                </div>
+                                <div>
+                                    <i class="fa-solid fa-bed"></i> Letti:
+                                    {{ $apartment->baths }}
+                                </div>
+                                <div>
+                                    <i class="fa-solid fa-toilet"></i> Bagni:
+                                    {{ $apartment->beds }}
                                 </div>
                             </div>
+                            <div>
+                                <i class="fa-solid fa-ruler-combined"></i> m²: {{ $apartment->square_meters }}
+                            </div>
+                        </td>
 
+                        <td>
+                            @forelse ($apartment->services as $service)
+                                <span class="badge rounded-pill text-bg-secondary p-2 mb-1">
+                                    <i class="{{ $service->icon }} fa-xl"></i>
+                                    <span>{{ $service->label }}</span>
+                                </span>
+                            @empty
+                                <span class="badge rounded-pill text-bg-danger p-2 mb-1">
+                                    <i class="fa-solid fa-ban fa-xl"></i>
+                                </span>
+                            @endforelse
                         </td>
                         <td>
                             <div class="dropdown-center">
