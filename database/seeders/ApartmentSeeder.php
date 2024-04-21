@@ -26,7 +26,7 @@ class ApartmentSeeder extends Seeder
                 "address" => "Via Garibaldi 10, Milano",
                 "latitude" => 45.4654219,
                 "longitude" => 9.1859243,
-                "cover_image" => "https://a0.muscache.com/im/pictures/prohost-api/Hosting-957819679097220222/original/53afb9d5-777e-46bf-b657-36cd979bddc8.jpeg?im_w=720",
+                "cover_image" => "https://a0.muscache.com/im/pictures/miso/Hosting-882755229618149063/original/c03bcb9b-50a8-4d35-8605-d3777374dbf8.jpeg?im_w=720",
                 "is_visible" => true
             ],
             [
@@ -40,7 +40,7 @@ class ApartmentSeeder extends Seeder
                 "address" => "Corso Magenta 15, Milano",
                 "latitude" => 45.465421,
                 "longitude" => 9.174911,
-                "cover_image" => "https://a0.muscache.com/im/pictures/prohost-api/Hosting-957819679097220222/original/53afb9d5-777e-46bf-b657-36cd979bddc8.jpeg?im_w=720",
+                "cover_image" => "https://a0.muscache.com/im/pictures/miso/Hosting-725302995823852226/original/bbb16708-7735-426c-bd4c-664d325764b8.jpeg?im_w=720",
                 "is_visible" => true
             ],
             [
@@ -68,7 +68,7 @@ class ApartmentSeeder extends Seeder
                 "address" => "Piazza Cavour 8, Como",
                 "latitude" => 45.8101,
                 "longitude" => 9.0852,
-                "cover_image" => "https://a0.muscache.com/im/pictures/prohost-api/Hosting-957819679097220222/original/53afb9d5-777e-46bf-b657-36cd979bddc8.jpeg?im_w=720",
+                "cover_image" => "https://a0.muscache.com/im/pictures/8f960b01-d6cd-46c7-80e0-341c8c04489e.jpg?im_w=720",
                 "is_visible" => true
             ],
             [
@@ -82,7 +82,7 @@ class ApartmentSeeder extends Seeder
                 "address" => "Via XX Settembre 20, Bergamo",
                 "latitude" => 45.697,
                 "longitude" => 9.6703,
-                "cover_image" => "https://a0.muscache.com/im/pictures/prohost-api/Hosting-957819679097220222/original/53afb9d5-777e-46bf-b657-36cd979bddc8.jpeg?im_w=720",
+                "cover_image" => "https://a0.muscache.com/im/pictures/miso/Hosting-891961128789448188/original/2c289ef3-b7f0-4be9-8726-62c9d0d862e1.jpeg?im_w=720",
                 "is_visible" => true
             ],
             [
@@ -96,7 +96,7 @@ class ApartmentSeeder extends Seeder
                 "address" => "Via Torino 5, Lecco",
                 "latitude" => 45.8566,
                 "longitude" => 9.3882,
-                "cover_image" => "https://a0.muscache.com/im/pictures/prohost-api/Hosting-957819679097220222/original/53afb9d5-777e-46bf-b657-36cd979bddc8.jpeg?im_w=720",
+                "cover_image" => "https://a0.muscache.com/im/pictures/miso/Hosting-721540609203378406/original/9dfaf7d6-40f2-4673-b468-7c5ab3147f86.jpeg?im_w=720",
                 "is_visible" => true
             ],
             [
@@ -110,7 +110,7 @@ class ApartmentSeeder extends Seeder
                 "address" => "Piazza Vittoria 3, Varese",
                 "latitude" => 45.818,
                 "longitude" => 8.8232,
-                "cover_image" => "https://a0.muscache.com/im/pictures/prohost-api/Hosting-957819679097220222/original/53afb9d5-777e-46bf-b657-36cd979bddc8.jpeg?im_w=720",
+                "cover_image" => "https://a0.muscache.com/im/pictures/51c5973c-0021-4b75-884c-537313bf20be.jpg?im_w=720",
                 "is_visible" => true
             ],
             [
@@ -124,7 +124,7 @@ class ApartmentSeeder extends Seeder
                 "address" => "Via Monte Rosa 7, Sondrio",
                 "latitude" => 46.1692,
                 "longitude" => 9.8717,
-                "cover_image" => "https://a0.muscache.com/im/pictures/prohost-api/Hosting-957819679097220222/original/53afb9d5-777e-46bf-b657-36cd979bddc8.jpeg?im_w=720",
+                "cover_image" => "https://a0.muscache.com/im/pictures/7a6541b1-2f44-4287-ae6f-4d06ee3f3978.jpg?im_w=720",
                 "is_visible" => true
             ],
             [
@@ -138,7 +138,7 @@ class ApartmentSeeder extends Seeder
                 "address" => "Corso Italia 12, Cremona",
                 "latitude" => 45.1342,
                 "longitude" => 10.0186,
-                "cover_image" => "https://a0.muscache.com/im/pictures/prohost-api/Hosting-957819679097220222/original/53afb9d5-777e-46bf-b657-36cd979bddc8.jpeg?im_w=720",
+                "cover_image" => "https://a0.muscache.com/im/pictures/2b0b9566-af73-4640-adff-30601aae97a1.jpg?im_w=720",
                 "is_visible" => true
             ],
             [
@@ -152,12 +152,12 @@ class ApartmentSeeder extends Seeder
                 "address" => "Via Po 20, Pavia",
                 "latitude" => 45.1865,
                 "longitude" => 9.1562,
-                "cover_image" => "https://a0.muscache.com/im/pictures/prohost-api/Hosting-957819679097220222/original/53afb9d5-777e-46bf-b657-36cd979bddc8.jpeg?im_w=720",
+                "cover_image" => "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6NjgyNDc0NzIxNDE2NTI5NTIy/original/c329a04a-51b7-477d-9fc7-7aa4a3a998e7.jpeg?im_w=720",
                 "is_visible" => true
             ]
         ];
 
-        
+
 
         foreach ($apartments as $apartment) {
             $new_apartment = new Apartment();
