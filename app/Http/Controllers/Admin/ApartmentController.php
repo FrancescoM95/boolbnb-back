@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
 {
@@ -40,7 +41,6 @@ class ApartmentController extends Controller
      */
     public function store(StoreApartmentRequest $request)
     {
-
         //Auth::user()->name
         $data = $request->validated();
 
@@ -53,12 +53,19 @@ class ApartmentController extends Controller
         $apartment->slug = Str::slug($apartment->title);
         $apartment->is_visible = Arr::exists($data, 'is_visible');
         $apartment->user_id = Auth::user()->id;
-
+        if (Arr::exists($data, 'cover_image')) {
+            $extension = $data['cover_image']->extension();
+            //lo salvo e prendo l'url
+            $img_url = Storage::putFileAs('apartment_images', $data['cover_image'], "$apartment->slug.$extension");
+            $apartment->cover_image = $img_url;
+        }
         $apartment->save();
 
         if (Arr::exists($data, 'services')) {
             $apartment->services()->attach($data['services']);
         }
+
+
 
         return to_route('admin.apartments.show', $apartment);
     }
@@ -66,8 +73,9 @@ class ApartmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Apartment $apartment)
+    public function show(string $slug)
     {
+        $apartment = Apartment::whereSlug($slug)->first();
         return view('admin.apartments.show', compact('apartment'));
     }
 
@@ -88,17 +96,32 @@ class ApartmentController extends Controller
      */
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
+
         $data = $request->validated();
-        $apartment->fill($data);
-        $apartment->slug = Str::slug($apartment->title);
-        $apartment->is_visible = Arr::exists($data, 'is_visible');
-        $apartment->user_id = Auth::user()->id;
-        $apartment->save();
+        $data['slug'] = Str::slug($data['title']);
+        $data['is_visible'] = Arr::exists($data, 'is_visible');
+        $data['user_id'] = Auth::user()->id;
+
+        if (Arr::exists($data, 'image')) {
+            $extension = $data['cover_image']->extension();
+            if ($apartment->cover_image) Storage::delete($apartment->cover_image); //Cancello la vecchia immagine associata al file
+            $img_url = Storage::putFileAs('apartment_images', $data['cover_image'], "{$data['slug']}.$extension");
+            $apartment->cover_image = $img_url;
+        }
+
+
+        $apartment->update($data);
 
         if (Arr::exists($data, 'services')) {
             $apartment->services()->sync($data['services']);
+            // $apartment->fill($data);
+            // $apartment->slug = Str::slug($apartment->title);
+            // $apartment->is_visible = Arr::exists($data, 'is_visible');
+
+
+
+            return to_route('admin.apartments.show', $apartment->slug);
         }
-        return to_route('admin.apartments.show', $apartment);
     }
 
     /**
@@ -126,6 +149,7 @@ class ApartmentController extends Controller
 
     public function drop(Apartment $apartment)
     {
+        if ($apartment->cover_image) Storage::delete($apartment->cover_image);
         if ($apartment->has('services')) $apartment->services()->detach();
         // if ($apartment->has('sponsorships')) $apartment->sponsorships()->detach();
         $apartment->forceDelete();

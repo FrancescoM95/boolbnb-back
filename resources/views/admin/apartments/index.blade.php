@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
-            <h1 class="py-3">I tuoi Appartamenti</h1>
+            <h1 class="py-3">Lista Appartamenti</h1>
             <div>
                 <a href="{{ route('admin.apartments.create') }}" class="btn btn-success"><i class="fa-solid fa-plus"></i>
                     Aggiungi appartamento
@@ -54,18 +54,20 @@
                         <td class="text-center">{{ $apartment->beds }}</td>
                         <td>
                             @forelse ($apartment->services as $service)
-                                <span class="badge rounded-pill text-bg-primary p-2 mb-1">
+                                <span class="badge rounded-pill text-bg-secondary p-2 mb-1">
                                     <i class="{{ $service->icon }} fa-xl"></i>
                                     <span>{{ $service->label }}</span>
                                 </span>
                             @empty
-                                N.D.
+                                <span class="badge rounded-pill text-bg-danger p-2 mb-1">
+                                    <i class="fa-solid fa-ban fa-xl"></i>
+                                </span>
                             @endforelse
                         </td>
                         <td>{{ $apartment->getUpdatedAt() }}</td>
                         <td>
                             <div class="d-flex gap-2">
-                                <a href="{{ route('admin.apartments.show', $apartment->id) }}"
+                                <a href="{{ route('admin.apartments.show', $apartment->slug) }}"
                                     class="btn btn-sm btn-primary">
                                     <i class="far fa-eye"></i>
                                 </a>
@@ -74,7 +76,7 @@
                                     <i class="fas fa-pencil"></i>
                                 </a>
                                 <form action="{{ route('admin.apartments.destroy', $apartment->id) }}" method="POST"
-                                    id="delete-form">
+                                    class="delete-form">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-sm btn-danger"><i class="far fa-trash-can"></i></button>
@@ -105,14 +107,14 @@
         });
 
 
-        const deleteForm = document.getElementById('delete-form');
-
-        deleteForm.addEventListener('submit', e => {
-            e.preventDefault();
-
-            const confirmation = confirm('Sei sicuro di voler spostare questo appartamento nel cestino?');
-
-            if (confirmation) deleteForm.submit();
-        });
+        const deleteForm = document.querySelectorAll('.delete-form');
+        deleteForm.forEach(form => {
+            form.addEventListener('submit', e => {
+                e.preventDefault();
+                const confirmation = confirm(
+                    'Sei sicuro di voler spostare questo appartamento nel cestino?');
+                if (confirmation) deleteForm.submit();
+            })
+        })
     </script>
 @endsection
