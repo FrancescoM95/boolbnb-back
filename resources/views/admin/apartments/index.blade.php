@@ -3,13 +3,24 @@
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-between align-items-center">
-            <h1 class="py-3">Lista Appartamenti</h1>
-            <div>
-                <a href="{{ route('admin.apartments.create') }}" class="btn btn-success"><i class="fa-solid fa-plus"></i>
-                    Aggiungi appartamento
+            <div class="d-flex gap-3 align-items-center">
+                <h1 class="py-3">Lista Appartamenti</h1>
+
+                <a href="{{ route('admin.apartments.create') }}" class="btn cssbuttons-io-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="25" height="25">
+                        <path fill="none" d="M0 0h24v24H0z"></path>
+                        <path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path>
+                    </svg>
+                    <span></span>
                 </a>
-                <a href="{{ route('admin.apartments.trash') }}" class="btn btn-danger"><i class="fa-solid fa-trash"></i>
-                    Cestino
+            </div>
+            <div class="d-flex align-items-center">
+                <a href="{{ route('admin.apartments.trash') }}" class="btn btn-trash">
+                    <svg viewBox="0 0 448 512" class="svgIcon">
+                        <path
+                            d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z">
+                        </path>
+                    </svg>
                 </a>
             </div>
         </div>
@@ -45,19 +56,21 @@
                             </form>
                         </th>
                         <td>
-                            @php
-                                $imageName =
-                                    'apartment_images/' .
-                                    $apartment->slug .
-                                    '.' .
-                                    pathinfo($apartment->cover_image, PATHINFO_EXTENSION);
-                                $imageUrl = asset('storage/' . $imageName);
-                            @endphp
-                            @if (Storage::disk('public')->exists($imageName))
-                                <img src="{{ $imageUrl }}" alt="{{ $apartment->slug }}" class="img-fluid">
-                            @else
-                                <img src="{{ $apartment->cover_image }}" alt="{{ $apartment->slug }}" class="img-fluid">
-                            @endif
+                            <div class="img-box">
+                                @php
+                                    $imageName =
+                                        'apartment_images/' .
+                                        $apartment->slug .
+                                        '.' .
+                                        pathinfo($apartment->cover_image, PATHINFO_EXTENSION);
+                                    $imageUrl = asset('storage/' . $imageName);
+                                @endphp
+                                @if (Storage::disk('public')->exists($imageName))
+                                    <img src="{{ $imageUrl }}" alt="{{ $apartment->slug }}" class="img-fluid">
+                                @else
+                                    <img src="{{ $apartment->cover_image }}" alt="{{ $apartment->slug }}" class="img-fluid">
+                                @endif
+                            </div>
                         </td>
                         <td>{{ $apartment->title }}</td>
                         <td>{{ $apartment->address }}</td>
@@ -91,7 +104,7 @@
 
                         </td>
                         <td>
-                            <div class="dropdown-center">
+                            <div class="dropdown">
                                 <button class="btn btn-sm btn-info m-0" type="button" data-bs-toggle="dropdown"
                                     aria-expanded="false" id="services_button">
                                     <i class="fa-solid fa-gear"></i>
@@ -118,6 +131,7 @@
                                         </form>
                                     </div>
                                 </div>
+                            </div>
 
                         </td>
                     </tr>
@@ -143,15 +157,14 @@
             })
         });
 
-
         const deleteForm = document.querySelectorAll('.delete-form');
         deleteForm.forEach(form => {
             form.addEventListener('submit', e => {
                 e.preventDefault();
                 const confirmation = confirm(
                     'Sei sicuro di voler spostare questo appartamento nel cestino?');
-                if (confirmation) deleteForm.submit();
+                if (confirmation) form.submit();
             })
-        })
+        });
     </script>
 @endsection
