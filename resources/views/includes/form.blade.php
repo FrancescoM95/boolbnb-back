@@ -11,7 +11,7 @@
     <div class="row mb-5">
 
         {{-- * TITOLO --}}
-        <div class="col-12">
+        <div class="col-11">
             <div class="mb-3">
                 <label for="title" class="form-label">Titolo</label>
                 <input type="text"
@@ -24,6 +24,18 @@
                         {{ $message }}
                     </div>
                 @enderror
+            </div>
+        </div>
+
+        {{-- * PUBBLICAZIONE --}}
+        <div class="col-1">
+            <label for="is_visible" class="form-label">Pubblico</label>
+            <div class="mb-3">
+                <div class="form-check form-switch toggle-switch">
+                    <input class="form-check-input toggle-input" type="checkbox" role="switch" id="is_visible"
+                        name="is_visible" @if (old('is_visible', $apartment->is_visible)) checked @endif>
+                    <label class="form-check-label toggle-label" for="is_visible"></label>
+                </div>
             </div>
         </div>
 
@@ -181,16 +193,7 @@
             </div>
         </div>
 
-        {{-- * PUBBLICAZIONE --}}
-        <div class="col-6">
-            <div class="my-3">
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="is_visible"
-                        name="is_visible" @if (old('is_visible', $apartment->is_visible)) checked @endif>
-                    <label class="form-check-label" for="is_visible">Pubblica</label>
-                </div>
-            </div>
-        </div>
+
     </div>
 
     {{-- * BOTTONI --}}
