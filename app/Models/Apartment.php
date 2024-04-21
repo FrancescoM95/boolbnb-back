@@ -12,7 +12,7 @@ class Apartment extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['title', 'baths', 'rooms', 'square_meters', 'beds', 'address', 'latitude', 'longitude'];
+    protected $fillable = ['title', 'baths', 'rooms', 'square_meters', 'beds', 'cover_image', 'address', 'latitude', 'longitude'];
 
     public function getCreatedAt()
     {
