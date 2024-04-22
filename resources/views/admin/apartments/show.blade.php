@@ -27,7 +27,7 @@
                     @endif
                 </div>
                 {{-- descrizione a comparsa in large --}}
-                <div id="description" class="d-none d-lg-block col-lg-4">
+                <div id="description" class="d-none d-lg-block col-lg-4 pt-1 ps-4">
                     <h3 class="text-center pb-1 mb-2 bottom-border">Descrizione</h3>
                     <p class="m-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque quisquam illum at
                         odit, harum iusto
