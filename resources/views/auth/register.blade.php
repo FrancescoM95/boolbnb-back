@@ -5,7 +5,7 @@
         <div class="container h-100">
             <div class="row justify-content-center h-100">
                 <div class="col-md-8 pt-5">
-                    <div class="card">
+                    <div class="card home-bg">
                         <div class="card-header">{{ __('Inserisci i tuoi dati') }}</div>
 
                         <div class="card-body">

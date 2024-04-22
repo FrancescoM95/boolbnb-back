@@ -7,8 +7,6 @@
                 </h1>
 
                 <p class="fw-bold text-center mb-5">
-                    BoolBnB ti offre tutto ciò di cui hai bisogno per vivere o offrire un'esperienza di
-                    viaggio indimenticabile. <br>
                     Che tu sia un viaggiatore in cerca di una sistemazione confortevole o un ospite desideroso di
                     condividere la
                     tua casa con il mondo, BoolbnB è qui per te.

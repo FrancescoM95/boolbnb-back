@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row justify-content-center pt-5">
                 <div class="col-md-8">
-                    <div class="card">
+                    <div class="card home-bg">
                         <div class="card-header">{{ __('Accedi') }}</div>
 
                         <div class="card-body">
