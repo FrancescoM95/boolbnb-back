@@ -8,8 +8,8 @@
             <h1 class="text-center py-3 m-0">{{ $apartment->title }}</h1>
         </header>
         {{-- immagine + location --}}
-        <section id="eye-catcher" class="pb-3 row justify-content-center">
-            <div class="pb-3 col-12 col-md-10 col-lg-9 col-xl-8 col-xxl-7">
+        <section id="eye-catcher" class="pb-3">
+            <div class="mb-3 row justify-content-center">
                 @php
                     $imageName =
                         'apartment_images/' .
@@ -19,10 +19,25 @@
                     $imageUrl = asset('storage/' . $imageName);
                 @endphp
                 @if (Storage::disk('public')->exists($imageName))
-                    <img src="{{ $imageUrl }}" alt="{{ $apartment->slug }}" class="img-fluid rounded">
+                    <img src="{{ $imageUrl }}" alt="{{ $apartment->slug }}" class="img-fluid rounded col-lg-8">
                 @else
-                    <img src="{{ $apartment->cover_image }}" alt="{{ $apartment->slug }}" class="img-fluid rounded">
+                    <img src="{{ $apartment->cover_image }}" alt="{{ $apartment->slug }}" class="img-fluid rounded col-lg-8">
                 @endif
+                <div id="description" class="pb-3 d-none d-lg-block col-lg-4 overflow-auto">
+                    <h3 class="text-center pb-1 mb-2 bottom-border">Descrizione</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque quisquam illum at odit, harum iusto
+                        repudiandae ex in quaerat vitae aliquid. Incidunt labore ipsa similique asperiores. Perferendis
+                        quibusdam
+                        dignissimos deleniti? Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit magni,
+                        assumenda
+                        veniam nemo totam nulla esse ea quam labore, animi accusamus ut sed aspernatur fugiat voluptatum
+                        reiciendis
+                        necessitatibus mollitia! Alias.Omnis quisquam laudantium dicta, ab molestiae quis modi perspiciatis
+                        veniam
+                        laboriosam? Numquam itaque eligendi, modi doloribus deleniti necessitatibus ullam deserunt ipsam
+                        omnis totam
+                        sit, veniam, enim voluptate quasi tempore corrupti!</p>
+                </div>
             </div>
 
             {{-- <div class="row row-cols-2 row-cols-md-3 row-cols-xxl-4 text-center justify-content-center pb-3"> --}}
@@ -83,7 +98,7 @@
             </ul>
         </section>
         {{-- descrizione --}}
-        <section id="description" class="pb-3">
+        <section id="description" class="pb-3 d-lg-none">
             <h3 class="text-center pb-1 mb-2 bottom-border">Descrizione</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque quisquam illum at odit, harum iusto
                 repudiandae ex in quaerat vitae aliquid. Incidunt labore ipsa similique asperiores. Perferendis quibusdam
