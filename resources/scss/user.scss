@@ -1,7 +1,8 @@
 .registration,
-.login {
+.login,
+.jumbotron {
     height: calc(100vh - 70px);
-    background-image: url('/storage/jumbotron.webp');
+    background-image: url('../../resources/img/jumbotron.webp');
     background-size: cover;
 
     .card {
