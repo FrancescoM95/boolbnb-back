@@ -9,6 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ env('APP_NAME', 'Boolbnb') }}</title>
+    <link rel="icon" href="{{ asset('storage/public/Boolbnb-icon.png') }}">
 
     <!--§ font-awesome -->
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css'
@@ -37,7 +38,7 @@
         @include('includes.navbar')
 
         <main class="">
-            <div class="container my-3">
+            <div class="container">
                 @include('includes.alerts')
             </div>
             @yield('content')

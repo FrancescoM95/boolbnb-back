@@ -1,12 +1,10 @@
 @import '~bootstrap/scss/bootstrap';
 
 @import 'index.scss';
+@import 'user.scss';
 
 body {
     visibility: visible;
     background-color: #e8e8e8;
-    // <uniquifier>: Use a unique and descriptive class name
-    // <weight>: Use a value from 100 to 900
-
     font-family: "Montserrat", sans-serif;
 }
