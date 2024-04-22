@@ -25,8 +25,6 @@
                 @endif
             </div>
 
-            {{-- <img src="{{ $apartment->printImage() }}" alt="{{ $apartment->title }}" class="img-fluid rounded"> --}}
-
             {{-- <div class="row row-cols-2 row-cols-md-3 row-cols-xxl-4 text-center justify-content-center pb-3"> --}}
             <div class="d-flex justify-content-evenly pb-3">
                 {{-- <div> --}}
