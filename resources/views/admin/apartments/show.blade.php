@@ -69,7 +69,7 @@
             </div>
             <div class="row justify-content-center text-center flex-column">
                 <p class="m-0">{{ $apartment->address }}</p>
-                <p class="m-0"><a href="https://www.google.it/maps/preview" target="blank">Trova su mappa!</a></p>
+                <p class="m-0"><a href="#apartment-map">Trova su mappa <i class="fa-solid fa-chevron-down"></i></a></p>
             </div>
         </section>
         {{-- proprietà --}}
@@ -98,7 +98,7 @@
         </section>
         {{-- descrizione --}}
         <section id="description" class="pb-3 d-lg-none">
-            <h3 class="text-center pb-1 mb-2 bottom-border">Descrizione</h3>
+            <h3 class="text-center pb-1 mb-3 bottom-border">Descrizione</h3>
             <p class="m-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque quisquam illum at odit, harum
                 iusto
                 repudiandae ex in quaerat vitae aliquid. Incidunt labore ipsa similique asperiores. Perferendis quibusdam
@@ -108,9 +108,20 @@
                 laboriosam? Numquam itaque eligendi, modi doloribus deleniti necessitatibus ullam deserunt ipsam omnis totam
                 sit, veniam, enim voluptate quasi tempore corrupti!</p>
         </section>
+        {{-- mappa --}}
+        <section id="apartment-map" class="pb-3">
+            <h3 class="text-center pb-1 mb-3 bottom-border">Dove sarai</h3>
+            <div id="map-div"></div>
+        </section>
+    </div>
+    {{-- coordinate per recupero in js --}}
+    <div class="d-none">
+        <p id="latitude-aprtmnt">{{ $apartment->latitude }}</p>
+        <p id="longitude-aprtmnt">{{ $apartment->longitude }}</p>
     </div>
 @endsection
 
 @section('scripts')
     @vite('resources/js/delete_confirmation.js')
+    @vite('resources/js/map-marker.js')
 @endsection
