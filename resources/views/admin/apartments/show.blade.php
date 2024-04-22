@@ -69,7 +69,7 @@
             </div>
             <div class="row justify-content-center text-center flex-column">
                 <p class="m-0">{{ $apartment->address }}</p>
-                <p class="m-0"><a href="https://www.google.it/maps/preview" target="blank">Trova su mappa!</a></p>
+                <p class="m-0"><a href="#apartment-map">Trova su mappa <i class="fa-solid fa-chevron-down"></i></a></p>
             </div>
         </section>
         {{-- proprietà --}}
@@ -99,6 +99,18 @@
         {{-- descrizione --}}
         <section id="description" class="pb-3 d-lg-none">
             <h3 class="text-center pb-1 mb-2 bottom-border">Descrizione</h3>
+            <p class="m-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque quisquam illum at odit, harum
+                iusto
+                repudiandae ex in quaerat vitae aliquid. Incidunt labore ipsa similique asperiores. Perferendis quibusdam
+                dignissimos deleniti? Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit magni, assumenda
+                veniam nemo totam nulla esse ea quam labore, animi accusamus ut sed aspernatur fugiat voluptatum reiciendis
+                necessitatibus mollitia! Alias.Omnis quisquam laudantium dicta, ab molestiae quis modi perspiciatis veniam
+                laboriosam? Numquam itaque eligendi, modi doloribus deleniti necessitatibus ullam deserunt ipsam omnis totam
+                sit, veniam, enim voluptate quasi tempore corrupti!</p>
+        </section>
+        {{-- mappa --}}
+        <section id="apartment-map" class="pb-3">
+            <h3 class="text-center pb-1 mb-2 bottom-border">Dove sarai</h3>
             <p class="m-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque quisquam illum at odit, harum
                 iusto
                 repudiandae ex in quaerat vitae aliquid. Incidunt labore ipsa similique asperiores. Perferendis quibusdam
