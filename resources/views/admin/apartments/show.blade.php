@@ -45,9 +45,10 @@
                 </div>
             </div>
             {{-- bottone indietro --}}
+            {{-- # {{ url()->previous() }} --}}
             <div class="d-flex justify-content-evenly pb-3">
-                <a href="{{ url()->previous() }}" class="btn btn-secondary btn-sm"><i
-                        class="fas fa-arrow-left me-2 d-none d-sm-inline"></i>Indietro</a>
+                <a href="@if ($apartment->deleted_at) {{ route('admin.apartments.trash') }} @else {{ route('admin.apartments.index') }} @endif"
+                    class="btn btn-secondary btn-sm"><i class="fas fa-arrow-left me-2 d-none d-sm-inline"></i>Indietro</a>
                 {{-- bottone modifica / elimina --}}
                 @if ($apartment->user_id == Auth::user()->id)
                     <a href="{{ route('admin.apartments.edit', $apartment) }}" class="btn btn-primary btn-sm"><i
