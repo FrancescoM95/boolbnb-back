@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-            <div class="logo_laravel">
-                {{-- TODO LOGO --}}
+            <div class="">
+                <img src="{{ asset('storage/Boolbnb-logo.png') }}" alt="Logo" style="height: 50px">
             </div>
             {{-- config('app.name', 'Laravel') --}}
         </a>
@@ -53,7 +53,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ url('admin') }}">{{ __('Admin Home') }}</a>
+                            <a class="dropdown-item" href="{{ url('admin') }}">{{ __('Dashboard') }}</a>
                             <a class="dropdown-item"
                                 href="{{ url('admin/apartments') }}">{{ __('I miei appartamenti') }}</a>
                             <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profilo') }}</a>

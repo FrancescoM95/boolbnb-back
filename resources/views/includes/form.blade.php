@@ -119,8 +119,8 @@
                     class="form-control @error('address') is-invalid
               @elseif (old('address', '')) is-valid @enderror"
                     id="address" name="address" value="{{ old('address', $apartment->address) }}">
-                <input type="text" id="latitude" name="latitude" class="d-none">
-                <input type="text" id="longitude" name="longitude" class="d-none">
+                <input type="text" id="latitude" name="latitude" class="d-none" value="{{ old('latitude', $apartment->latitude) }}">
+                <input type="text" id="longitude" name="longitude" class="d-none" value="{{ old('longitude', $apartment->longitude) }}">
                 <ul id="suggestions-list" class="p-2"></ul>
                 @error('adress')
                     <div class="invalid-feedback">
@@ -133,15 +133,16 @@
         {{-- * SERVIZI --}}
         <div class="col-12">
             <div class="mt-3">
-                <div class="row">
+                <div class="row form-group @error('services') is-invalid @enderror">
+                    <p>Seleziona i servizi inclusi</p>
                     @foreach ($services as $service)
                         <div class="form-check form-check-inline col-3">
                             <label class="check-container d-flex align-items-center">
-                                <input class="form-check-input" type="checkbox" id="{{ "tech-$service->label" }}"
+                                <input class="form-check-input" type="checkbox" id="{{ "tech-$service->id" }}"
                                     name='services[]' value="{{ $service->id }}"
-                                    @if (in_array($service->id, old('services', $prev_service ?? []))) checked @endif>
+                                    @if (in_array($service->id, old('services', $prev_services ?? []))) checked @endif>
                                 <div class="checkmark"></div>
-                                <label class="form-check-label" for="{{ "tech-$service->label" }}" role="button">
+                                <label class="form-check-label" for="{{ "tech-$service->id" }}" role="button">
                                     <i class="{{ $service->icon }} mx-2"></i>
                                     {{ $service->label }}
                                 </label>
@@ -284,7 +285,7 @@
 
     // Api
     const baseParams = {
-        key: 'vDGqRtusGtGdJKA6KXnnnRPK44NG2Uwn', // API KEY 
+        key: '{{ env('API_KEY') }}',
         limit: 5,
         language: 'it-IT',
         countrySet: 'IT'
