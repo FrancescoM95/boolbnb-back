@@ -53,7 +53,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ url('admin') }}">{{ __('Admin Home') }}</a>
+                            <a class="dropdown-item" href="{{ url('admin') }}">{{ __('Dashboard') }}</a>
                             <a class="dropdown-item"
                                 href="{{ url('admin/apartments') }}">{{ __('I miei appartamenti') }}</a>
                             <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profilo') }}</a>
