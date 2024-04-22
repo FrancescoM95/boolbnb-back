@@ -120,19 +120,19 @@
 
                                     {{-- Icona visualizza appartamento --}}
                                     <div class="d-flex flex-column flex-lg-row gap-1">
-                                        <a href="{{ route('admin.apartments.show', $apartment->slug) }}"
+                                        <a title="Visualizza" href="{{ route('admin.apartments.show', $apartment->slug) }}"
                                             class="btn btn-sm btn-primary mb-2" style="width: 30px">
                                             <i class="far fa-eye"></i>
                                         </a>
 
                                         {{-- Icona modifica appartamento --}}
-                                        <a href="{{ route('admin.apartments.edit', $apartment->id) }}"
+                                        <a title="Modifica" href="{{ route('admin.apartments.edit', $apartment->id) }}"
                                             class="btn btn-sm btn-secondary mb-2" style="width: 30px">
                                             <i class="fas fa-pencil"></i>
                                         </a>
 
                                         {{-- Pulsante elimina --}}
-                                        <form action="{{ route('admin.apartments.drop', $apartment->id) }}" method="POST"
+                                        <form title="Elimina" action="{{ route('admin.apartments.drop', $apartment->id) }}" method="POST"
                                             class="delete-form">
                                             @csrf
                                             @method('DELETE')
@@ -143,7 +143,7 @@
                                         </form>
 
                                         {{-- Pulsante restore --}}
-                                        <form action="{{ route('admin.apartments.restore', $apartment->id) }}"
+                                        <form title="Ripristina" action="{{ route('admin.apartments.restore', $apartment->id) }}"
                                             method="POST" class="restore-form">
                                             @csrf
                                             @method('PATCH')
