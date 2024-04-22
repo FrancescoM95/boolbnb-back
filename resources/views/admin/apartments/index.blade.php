@@ -130,7 +130,7 @@
                                             method="POST" class="delete-form w-100">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-sm btn-danger w-100">
+                                            <button class="btn btn-sm btn-danger w-100" data-bs-toggle="modal" data-bs-target="#modal">
                                                 <i class="far fa-trash-can"></i>
                                                 Elimina
                                             </button>
@@ -163,14 +163,36 @@
             })
         });
 
+
+        // Modale eliminazione appartamento
         const deleteForm = document.querySelectorAll('.delete-form');
+        const modal = document.getElementById('modal');
+        const modalBody = document.querySelector('.modal-body');
+        const modalTitle = document.querySelector('.modal-title');
+        const confirmationButton = document.getElementById('modal-confirmation-button');
+
+        let activeForm = null;
+
         deleteForm.forEach(form => {
-            form.addEventListener('submit', e => {
-                e.preventDefault();
-                const confirmation = confirm(
-                    'Sei sicuro di voler spostare questo appartamento nel cestino?');
-                if (confirmation) form.submit();
-            })
+        form.addEventListener('submit', e => {
+        e.preventDefault();
+
+        activeForm = form;
+
+        confirmationButton.innerText = 'Conferma Eliminazione';
+        confirmationButton.className = 'btn btn-danger';
+        modalTitle.innerText = 'Elimina appartamento';
+        modalBody.innerText = 'Sei sicuro di voler procedere all\'eliminazione?';
+         })
+        })
+
+        confirmationButton.addEventListener('click', () => {
+        if (activeForm) activeForm.submit();
         });
-    </script>
+
+        modal.addEventListener('hidden.bs.modal', () => {
+        activeForm = null;
+        })
+
+    </script>    
 @endsection
