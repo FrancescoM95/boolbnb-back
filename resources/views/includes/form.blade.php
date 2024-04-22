@@ -133,21 +133,22 @@
         {{-- * SERVIZI --}}
         <div class="col-12">
             <div class="mt-3">
-                <div class="row">
+                <div class="row form-group @error('services') is-invalid @enderror">
+                    <p>Seleziona i servizi inclusi</p>
                     @foreach ($services as $service)
                         <div class="form-check form-check-inline col-3">
                             <label class="check-container d-flex align-items-center">
-                                <input class="form-check-input" type="checkbox" id="{{ "tech-$service->label" }}"
+                                <input class="form-check-input" type="checkbox" id="{{ "tech-$service->id" }}"
                                     name='services[]' value="{{ $service->id }}"
-                                    @if (in_array($service->id, old('services', $prev_service ?? []))) checked @endif>
+                                    @if (in_array($service->id, old('services', $prev_services ?? []))) checked @endif>
                                 <div class="checkmark"></div>
-                                <label class="form-check-label" for="{{ "tech-$service->label" }}" role="button">
+                                <label class="form-check-label" for="{{ "tech-$service->id" }}" role="button">
                                     <i class="{{ $service->icon }} mx-2"></i>
                                     {{ $service->label }}
                                 </label>
                             </label>
                         </div>
-                    @endforeach
+                    @endforeach 
                 </div>
             </div>
             @error('services')

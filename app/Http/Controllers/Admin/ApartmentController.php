@@ -61,6 +61,8 @@ class ApartmentController extends Controller
         }
         $apartment->save();
 
+        //dopo aver salvato il modello, se ci sono i services li aggancio alla tabella ponte
+
         if (Arr::exists($data, 'services')) {
             $apartment->services()->attach($data['services']);
         }
@@ -88,6 +90,7 @@ class ApartmentController extends Controller
 
         $prev_services = $apartment->services->pluck('id')->toArray();
 
+
         return view('admin.apartments.edit', compact('apartment', 'services', 'prev_services'));
     }
 
@@ -114,14 +117,11 @@ class ApartmentController extends Controller
 
         if (Arr::exists($data, 'services')) {
             $apartment->services()->sync($data['services']);
-            // $apartment->fill($data);
-            // $apartment->slug = Str::slug($apartment->title);
-            // $apartment->is_visible = Arr::exists($data, 'is_visible');
-
-
-
-            return to_route('admin.apartments.show', $apartment->slug);
         }
+
+        elseif (!Arr::exists($data, 'tags') && count($apartment->services)) $apartment->services()->detach();
+
+        return to_route('admin.apartments.show', $apartment->slug);
     }
 
     /**
