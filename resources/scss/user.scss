@@ -1,0 +1,14 @@
+.registration,
+.login {
+    height: calc(100vh - 70px);
+    background-image: url('/public/storage/public/jumbotron.webp');
+    background-size: cover;
+
+    .card {
+        box-shadow: 0 0 2px #172BA1;
+    }
+}
+
+nav {
+    height: 70px;
+}
