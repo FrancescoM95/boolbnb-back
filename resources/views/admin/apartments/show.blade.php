@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 {{-- @section('title', 'Alloggio') --}}
-{{-- @dd($apartment) --}}
+
 @section('content')
-    <div class="container">
+    <div class="container" id="show">
         <header>
             <h1 class="text-center py-3 m-0">{{ $apartment->title }}</h1>
         </header>
-        {{-- immagine + location --}}
+        {{-- immagine --}}
         <section id="eye-catcher" class="pb-3">
             <div class="mb-3 row justify-content-center">
                 @php
@@ -23,9 +23,11 @@
                 @else
                     <img src="{{ $apartment->cover_image }}" alt="{{ $apartment->slug }}" class="img-fluid rounded col-lg-8">
                 @endif
-                <div id="description" class="pb-3 d-none d-lg-block col-lg-4 overflow-auto">
+                {{-- descrizione a comparsa in large --}}
+                <div id="description" class="d-none d-lg-block col-lg-4 overflow-auto">
                     <h3 class="text-center pb-1 mb-2 bottom-border">Descrizione</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque quisquam illum at odit, harum iusto
+                    <p class="m-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque quisquam illum at
+                        odit, harum iusto
                         repudiandae ex in quaerat vitae aliquid. Incidunt labore ipsa similique asperiores. Perferendis
                         quibusdam
                         dignissimos deleniti? Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit magni,
@@ -39,16 +41,12 @@
                         sit, veniam, enim voluptate quasi tempore corrupti!</p>
                 </div>
             </div>
-
-            {{-- <div class="row row-cols-2 row-cols-md-3 row-cols-xxl-4 text-center justify-content-center pb-3"> --}}
+            {{-- bottone indietro --}}
             <div class="d-flex justify-content-evenly pb-3">
-                {{-- <div> --}}
                 <a href="{{ url()->previous() }}" class="btn btn-secondary"><i
                         class="fas fa-arrow-left me-2 d-none d-sm-inline"></i>Indietro</a>
-                {{-- </div> --}}
                 {{-- bottone modifica / elimina --}}
                 @if ($apartment->user_id == Auth::user()->id)
-                    {{-- <div class="d-flex justify-content-center align-items-center gap-3"> --}}
                     <a href="{{ route('admin.apartments.edit', $apartment) }}" class="btn btn-warning"><i
                             class="fas fa-pencil me-2 d-none d-sm-inline"></i>Modifica</a>
                     <form action="{{ route('admin.apartments.destroy', $apartment->id) }}" method="POST"
@@ -61,7 +59,6 @@
                     </form>
                     {{-- bottone invia messaggio --}}
                 @else
-                    {{-- <div class="d-flex justify-content-evenly align-items-center"> --}}
                     <a href="#" class="btn btn-primary"><i
                             class="fas fa-comments me-2 d-none d-sm-inline"></i>Contatta
                         l'host</a>
@@ -91,7 +88,6 @@
             <h3 class="text-center pb-1 mb-3 bottom-border">Servizi</h3>
             <ul class="row m-0 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 list-unstyled">
                 @foreach ($apartment->services as $service)
-                    {{-- <li class="list-unstyled col-6 col-md-4 col-lg-3 mb-2"><i --}}
                     <li><span><i class="{{ $service->icon }} me-2 brand-color"></i>
                             {{ $service->label }}</span></li>
                 @endforeach

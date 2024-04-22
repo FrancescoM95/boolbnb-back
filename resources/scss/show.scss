@@ -2,8 +2,13 @@
     border-bottom: 1px #172BA1 solid;
 }
 
-#eye-catcher img,
+#eye-catcher img {
+    object-fit: cover;
+}
+
+// #eye-catcher img,
 #eye-catcher div {
+    overflow: hidden;
     max-height: 384px;
 }
 
