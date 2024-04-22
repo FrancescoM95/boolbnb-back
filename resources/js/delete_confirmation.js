@@ -7,6 +7,7 @@ const confirmationButton = document.getElementById('modal-confirmation-button');
 
 let activeForm = null;
 
+// Modale eliminazione appartamento
 deleteForms.forEach(form => {
     form.addEventListener('submit', e => {
         e.preventDefault();
@@ -20,6 +21,7 @@ deleteForms.forEach(form => {
     })
 })
 
+// Modale ripristino appartamento
 restoreForms.forEach(form => {
     form.addEventListener('submit', e => {
         e.preventDefault();
