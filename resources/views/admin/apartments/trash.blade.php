@@ -107,7 +107,7 @@
                                 <td class="text-center px-0">{{ $apartment->beds }}</td>
                                 <td class="px-0">
                                     @forelse ($apartment->services as $service)
-                                        <span class="badge rounded-pill text-bg-primary p-2 mb-1">
+                                        <span class="badge rounded-pill text-bg-secondary p-2 mb-1">
                                             <i class="{{ $service->icon }} fa-xl"></i>
                                             <span>{{ $service->label }}</span>
                                         </span>
