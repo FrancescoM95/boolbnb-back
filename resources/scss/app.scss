@@ -1,6 +1,7 @@
 @import '~bootstrap/scss/bootstrap';
 
 @import 'index.scss';
+@import 'show.scss';
 @import 'user.scss';
 @import 'home.scss';
 
@@ -8,4 +9,8 @@ body {
     visibility: visible;
     background-color: #e8e8e8;
     font-family: "Montserrat", sans-serif;
+}
+
+.brand-color {
+    color: #172BA1;
 }
