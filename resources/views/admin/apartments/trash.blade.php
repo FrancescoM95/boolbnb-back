@@ -121,13 +121,13 @@
                                     {{-- Icona visualizza appartamento --}}
                                     <div class="d-flex flex-column flex-lg-row gap-1">
                                         <a title="Visualizza" href="{{ route('admin.apartments.show', $apartment->slug) }}"
-                                            class="btn btn-sm btn-primary mb-2" style="width: 30px">
+                                            class="btn btn-sm btn-primary mb-2 d-flex align-items-center justify-content-center" style="width: 30px">
                                             <i class="far fa-eye"></i>
                                         </a>
 
                                         {{-- Icona modifica appartamento --}}
                                         <a title="Modifica" href="{{ route('admin.apartments.edit', $apartment->id) }}"
-                                            class="btn btn-sm btn-secondary mb-2" style="width: 30px">
+                                            class="btn btn-sm btn-secondary mb-2 d-flex align-items-center justify-content-center" style="width: 30px">
                                             <i class="fas fa-pencil"></i>
                                         </a>
 
