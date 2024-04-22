@@ -37,6 +37,9 @@
         @include('includes.navbar')
 
         <main class="">
+            <div class="container my-3">
+                @include('includes.alerts')
+            </div>
             @yield('content')
         </main>
     </div>
