@@ -148,7 +148,7 @@
                                 </label>
                             </label>
                         </div>
-                    @endforeach 
+                    @endforeach
                 </div>
             </div>
             @error('services')
@@ -285,7 +285,7 @@
 
     // Api
     const baseParams = {
-        key: 'vDGqRtusGtGdJKA6KXnnnRPK44NG2Uwn', // API KEY 
+        key: '{{ env('API_KEY') }}',
         limit: 5,
         language: 'it-IT',
         countrySet: 'IT'
