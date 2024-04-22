@@ -60,7 +60,7 @@
         {{-- proprietà --}}
         <section id="details" class="pb-3">
             <h3 class="text-center pb-1 mb-3 bottom-border">Dettagli</h3>
-            <ul class="row m-0 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 list-unstyled">
+            <ul class="row m-0 row-cols-1 row-cols-sm-2 row-cols-lg-4 list-unstyled">
                 <li><span><i class="fa-solid fa-ruler-combined me-2 brand-color"></i> Metri quadri:
                         {{ $apartment->square_meters }}</span></li>
                 <li><span><i class="fa-solid fa-door-closed me-2 brand-color"></i> Numero stanze:
