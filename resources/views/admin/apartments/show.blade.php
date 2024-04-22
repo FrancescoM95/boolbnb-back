@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container" id="show">
-        <header>
+        <header class="mt-3">
             <h1 class="text-center m-0">{{ $apartment->title }}</h1>
         </header>
         {{-- immagine --}}
