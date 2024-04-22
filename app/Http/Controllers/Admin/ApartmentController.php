@@ -75,7 +75,7 @@ class ApartmentController extends Controller
      */
     public function show(string $slug)
     {
-        $apartment = Apartment::whereSlug($slug)->first();
+        $apartment = Apartment::whereSlug($slug)->withTrashed()->first();
         return view('admin.apartments.show', compact('apartment'));
     }
 

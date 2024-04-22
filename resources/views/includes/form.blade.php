@@ -121,7 +121,7 @@
                     id="address" name="address" value="{{ old('address', $apartment->address) }}">
                 <input type="text" id="latitude" name="latitude" class="d-none">
                 <input type="text" id="longitude" name="longitude" class="d-none">
-                <ul id="suggestions-list" class=" p-2"></ul>
+                <ul id="suggestions-list" class="p-2"></ul>
                 @error('adress')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -293,6 +293,8 @@
         delete headers.common["X-Requested-With"];
         return data
     }];
+
+
     // variables
     let timeoutId = null;
 
@@ -322,6 +324,12 @@
         // Chiudo la lista di indirizzi suggeriti
         suggestionAddress.innerHTML = '';
     });
+
+
+
+
+
+
 
     // Funzione reset preview
     function resetCoverImagePreview() {
