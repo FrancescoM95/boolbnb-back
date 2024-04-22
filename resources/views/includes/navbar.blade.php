@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-            <div class="logo_laravel">
-                {{-- TODO LOGO --}}
+            <div class="">
+                <img src="{{ asset('storage/public/Boolbnb-logo.png') }}" alt="Logo" style="height: 50px">
             </div>
             {{-- config('app.name', 'Laravel') --}}
         </a>
