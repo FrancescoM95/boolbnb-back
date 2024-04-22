@@ -1,6 +1,7 @@
 @import '~bootstrap/scss/bootstrap';
 
 @import 'index.scss';
+@import 'show.scss';
 
 body {
     visibility: visible;
@@ -9,4 +10,8 @@ body {
     // <weight>: Use a value from 100 to 900
 
     font-family: "Montserrat", sans-serif;
+}
+
+.brand-color {
+    color: #172BA1;
 }

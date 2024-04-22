@@ -1,0 +1,15 @@
+.bottom-border {
+    border-bottom: 1px #172BA1 solid;
+}
+
+#details li,
+#services li {
+    margin-bottom: 1rem;
+
+    span {
+        background-color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+    }
+
+}
