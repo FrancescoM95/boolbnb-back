@@ -48,40 +48,39 @@
                     <thead>
                         <tr>
                             <th scope="col">
-                                <span class="d-none d-md-inline">Pubblico</span><span class="d-md-none"><i
+                                <span class="d-none d-lg-inline">Pubblico</span><span class="d-lg-none"><i
                                         class="fa-regular fa-eye"></i>
                             </th>
                             <th scope="col">
-                                <span class="d-none d-md-inline">Titolo</span><span class="d-md-none"><i
-                                        class="fas fa-arrows-rotate "></i></span>
+                                <span class="d-none d-lg-inline">Titolo</span><span class="d-lg-none"><i class="fa-solid fa-house"></i></span>
                             </th>
                             <th scope="col">
-                                <span class="d-none d-md-inline">Indirizzo</span><span class="d-md-none"><i
+                                <span class="d-none d-lg-inline">Indirizzo</span><span class="d-lg-none"><i
                                         class="fa-solid fa-map-location-dot"></i></span>
                             </th>
                             <th scope="col" class="text-center">
-                                <span class="d-none d-md-inline">m²</span><span class="d-md-none"><i
+                                <span class="d-none d-lg-inline">m²</span><span class="d-lg-none"><i
                                         class="fa-solid fa-ruler-combined"></i></span>
                             </th>
                             <th scope="col" class="text-center">
-                                <span class="d-none d-md-inline">Stanze</span><span class="d-md-none"><i
+                                <span class="d-none d-lg-inline">Stanze</span><span class="d-lg-none"><i
                                         class="fas fa-door-closed"></i></span>
                             </th>
                             <th scope="col" class="text-center">
-                                <span class="d-none d-md-inline">Bagni</span><span class="d-md-none"><i
+                                <span class="d-none d-lg-inline">Bagni</span><span class="d-lg-none"><i
                                         class="fa-solid fa-bath"></i></span>
                             </th>
                             <th scope="col" class="text-center">
-                                <span class="d-none d-md-inline">Letti</span><span class="d-md-none"><i
+                                <span class="d-none d-lg-inline">Letti</span><span class="d-lg-none"><i
                                         class="fa-solid fa-bed"></i></span>
                             </th>
                             <th scope="col">
-                                <span class="d-none d-md-inline">Servizi</span><span class="d-md-none"><i
+                                <span class="d-none d-lg-inline">Servizi</span><span class="d-lg-none"><i
                                         class="fas fa-tools"></i></span>
                             </th>
                             <th scope="col" class="d-none d-lg-table-cell">Ultima modifica</th>
                             <th scope="col">
-                                <span class="d-none d-md-inline">Azioni</span><span class="d-md-none"><i
+                                <span class="d-none d-lg-inline">Azioni</span><span class="d-lg-none"><i
                                         class="fa-solid fa-gear"></i></span>
                             </th>
                         </tr>
@@ -99,8 +98,8 @@
                                         </div>
                                     </form>
                                 </th>
-                                <td class="">{{ $apartment->title }}</td>
-                                <td class="px-0">{{ $apartment->address }}</td>
+                                <td>{{ $apartment->title }}</td>
+                                <td>{{ $apartment->address }}</td>
                                 <td class="text-center px-0">{{ $apartment->square_meters }}</td>
                                 <td class="text-center px-0">{{ $apartment->rooms }}</td>
                                 <td class="text-center px-0">{{ $apartment->baths }}</td>
@@ -109,7 +108,7 @@
                                     @forelse ($apartment->services as $service)
                                         <span class="badge rounded-pill text-bg-secondary p-2 mb-1">
                                             <i class="{{ $service->icon }} fa-xl"></i>
-                                            <span>{{ $service->label }}</span>
+                                            <span class="d-none d-md-inline">{{ $service->label }}</span>
                                         </span>
                                     @empty
                                         N.D.
