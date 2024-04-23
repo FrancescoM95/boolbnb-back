@@ -13,6 +13,7 @@
 
 @csrf
 <section class="container mt-3">
+
     <div class="row mb-5">
 
         {{-- * TITOLO --}}
@@ -128,12 +129,16 @@
                     value="{{ old('latitude', $apartment->latitude) }}">
                 <input type="text" id="longitude" name="longitude" class="d-none"
                     value="{{ old('longitude', $apartment->longitude) }}">
+
                 <ul id="suggestions-list" class="p-2"></ul>
-                @error('adress')
+                @error('address')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
+                <div id="address-error" class="invalid-feedback">
+                    Seleziona un indirizzo suggerito dalla lista
+                </div>
             </div>
         </div>
 
@@ -200,12 +205,10 @@
                     id='preview'>
             </div>
         </div>
-
-
     </div>
 
     {{-- * BOTTONI --}}
-    <div class="d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center justify-content-between mb-5">
         <a href="{{ route('admin.apartments.index') }}" class="btn btn-primary"><i
                 class="fa-solid fa-arrow-left me-2"></i>Torna
             indietro</a>
@@ -213,8 +216,9 @@
             <button class="btn btn-secondary" type="reset" onclick="resetCoverImagePreview()">
                 <i class="fa-solid fa-eraser me-2"></i>Svuota i campi
             </button>
-            <button class="btn btn-success" type="submit"><i class="fa-solid fa-floppy-disk me-2"></i>Salva</button>
-
+            <button class="btn btn-success" type="submit" id="btn-submit">
+                <i class="fa-solid fa-floppy-disk me-2"></i>Salva
+            </button>
         </div>
     </div>
     </div>
@@ -334,14 +338,21 @@
     });
 
 
-
-
-
-
-
     // Funzione reset preview
     function resetCoverImagePreview() {
         const preview = document.getElementById('preview');
         preview.src = 'https://marcolanci.it/boolean/assets/placeholder.png';
     }
+
+    const submitButton = document.getElementById('btn-submit');
+    const addressError = document.getElementById('address-error');
+
+    submitButton.addEventListener('click', e => {
+        if (inputAddressSearch.value.trim() && !latInput.value && !lonInput.value) {
+            addressError.style.display = 'block';
+            e.preventDefault();
+        } else {
+            addressError.style.display = 'none';
+        }
+    });
 </script>
