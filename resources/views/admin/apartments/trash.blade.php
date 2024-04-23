@@ -10,7 +10,7 @@
 
                 {{-- Back to home --}}
                 <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary d-block">
-                    <i class="far fa-hand-point-left"></i>
+                    <i class="fa-solid fa-arrow-left"></i>
                     <span class="d-none d-md-inline ms-2">Torna agli appartamenti</span>
                 </a>
                 <div class="d-flex justify-content-between gap-2">

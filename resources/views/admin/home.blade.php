@@ -2,13 +2,13 @@
 
 @section('content')
     <div class="container">
-        <h2 class="fs-4 text-secondary my-4">
+        <h2 class="fs-4 my-4" id="welcoming">
             Benvenuto {{ $user->name }}
         </h2>
         <div class="row justify-content-center">
             {{-- Aggiungi appartamento --}}
             <div class="col">                
-                <div class="card">
+                <div class="card card-donate">
                     <a href="{{ route('admin.apartments.create') }}" class="text-decoration-none text-dark">
                         <div class="card-body d-flex justify-content-between align-items-center">
                             <span>Aggiungi un appartamento</span>
@@ -19,7 +19,7 @@
             </div>
             {{-- Visualizza appartamenti caricati --}}            
             <div class="col">
-                <div class="card">
+                <div class="card card-donate">
                     <a href="{{ route('admin.apartments.index') }}" class="text-decoration-none text-dark">
                         <div class="card-body d-flex justify-content-between align-items-center">
                             <span>Visualizza i tuoi appartamenti</span>
