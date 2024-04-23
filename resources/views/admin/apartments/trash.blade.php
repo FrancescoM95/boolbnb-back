@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">        
+    <div class="container">
         <div class="d-flex justify-content-between align-items-center gap-3 align-items-center">
             <h1 class="py-3">Appartamenti eliminati</h1>
             {{-- Bottoni --}}
@@ -20,7 +20,7 @@
                         <span class="d-none d-md-inline ms-2">Ripristina tutto</span>
                     </button>
                 </form>
-            </div>            
+            </div>
         </div>
 
         {{-- Tabella appartamenti eliminati --}}
@@ -109,13 +109,15 @@
                             <div class="d-flex flex-column flex-lg-row gap-1">
                                 {{-- Icona visualizza appartamento --}}
                                 <a title="Visualizza" href="{{ route('admin.apartments.show', $apartment->slug) }}"
-                                    class="btn btn-md btn-primary mb-2 d-flex align-items-center justify-content-center" style="width: 30px">
+                                    class="btn btn-md btn-primary mb-2 d-flex align-items-center justify-content-center"
+                                    style="width: 30px">
                                     <i class="far fa-eye"></i>
                                 </a>
 
                                 {{-- Icona modifica appartamento --}}
-                                <a title="Modifica" href="{{ route('admin.apartments.edit', $apartment->id) }}"
-                                    class="btn btn-md btn-secondary mb-2 d-flex align-items-center justify-content-center" style="width: 30px">
+                                <a title="Modifica" href="{{ route('admin.apartments.edit', $apartment->slug) }}"
+                                    class="btn btn-md btn-secondary mb-2 d-flex align-items-center justify-content-center"
+                                    style="width: 30px">
                                     <i class="fas fa-pencil"></i>
                                 </a>
 
@@ -135,7 +137,9 @@
                                     method="POST" class="restore-form">
                                     @csrf
                                     @method('PATCH')
-                                    <button type="submit" class="btn btn-md btn-success d-flex align-items-center justify-content-center" data-bs-toggle="modal" data-bs-target="#modal" style="width: 30px">
+                                    <button type="submit"
+                                        class="btn btn-md btn-success d-flex align-items-center justify-content-center"
+                                        data-bs-toggle="modal" data-bs-target="#modal" style="width: 30px">
                                         <i class="fas fa-arrows-rotate"></i>
                                     </button>
                                 </form>
