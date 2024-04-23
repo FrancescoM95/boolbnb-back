@@ -13,7 +13,7 @@
         {{-- * TITOLO --}}
         <div class="col-11">
             <div class="mb-3">
-                <label for="title" class="form-label">Titolo</label>
+                <label for="title" class="form-label">Titolo<span class="text-danger">*</span></label>
                 <input type="text"
                     class="form-control @error('title') is-invalid
               @elseif (old('title', '')) is-valid 
@@ -42,7 +42,7 @@
         {{-- * CAMERE --}}
         <div class="col-3">
             <div class="mb-3">
-                <label for="rooms" class="form-label">Numero Camere</label>
+                <label for="rooms" class="form-label">Numero Camere<span class="text-danger">*</span></label>
                 <input type="number" min="0"
                     class="form-control @error('rooms') is-invalid
               @elseif (old('rooms', '')) is-valid 
@@ -59,7 +59,7 @@
         {{-- * LETTI --}}
         <div class="col-3">
             <div class="mb-3">
-                <label for="beds" class="form-label">Numero letti</label>
+                <label for="beds" class="form-label">Numero letti<span class="text-danger">*</span></label>
                 <input type="number" min="0"
                     class="form-control @error('beds') is-invalid
               @elseif (old('beds', '')) is-valid 
@@ -76,7 +76,7 @@
         {{-- * BAGNI --}}
         <div class="col-3">
             <div class="mb-3">
-                <label for="baths" class="form-label">Numero Bagni</label>
+                <label for="baths" class="form-label">Numero Bagni<span class="text-danger">*</span></label>
                 <input type="number" min="0"
                     class="form-control @error('baths') is-invalid
               @elseif (old('baths', '')) is-valid 
@@ -95,7 +95,7 @@
         {{-- * METRI QUADRI --}}
         <div class="col-3">
             <div class="mb-3">
-                <label for="square_meters" class="form-label">Mq</label>
+                <label for="square_meters" class="form-label">Mq<span class="text-danger">*</span></label>
                 <input type="number" min="0"
                     class="form-control @error('square_meters') is-invalid
               @elseif (old('square_meters', '')) is-valid 
@@ -114,13 +114,15 @@
         {{-- * INDIRIZZO --}}
         <div class="col-12">
             <div class="mb-3">
-                <label for="address" class="form-label">Indirizzo</label>
+                <label for="address" class="form-label">Indirizzo<span class="text-danger">*</span></label>
                 <input type="text"
                     class="form-control @error('address') is-invalid
               @elseif (old('address', '')) is-valid @enderror"
                     id="address" name="address" value="{{ old('address', $apartment->address) }}">
-                <input type="text" id="latitude" name="latitude" class="d-none" value="{{ old('latitude', $apartment->latitude) }}">
-                <input type="text" id="longitude" name="longitude" class="d-none" value="{{ old('longitude', $apartment->longitude) }}">
+                <input type="text" id="latitude" name="latitude" class="d-none"
+                    value="{{ old('latitude', $apartment->latitude) }}">
+                <input type="text" id="longitude" name="longitude" class="d-none"
+                    value="{{ old('longitude', $apartment->longitude) }}">
                 <ul id="suggestions-list" class="p-2"></ul>
                 @error('adress')
                     <div class="invalid-feedback">
@@ -134,7 +136,7 @@
         <div class="col-12">
             <div class="mt-3">
                 <div class="row form-group @error('services') is-invalid @enderror">
-                    <p>Seleziona i servizi inclusi</p>
+                    <p>Seleziona i servizi inclusi<span class="text-danger">*</span></p>
                     @foreach ($services as $service)
                         <div class="form-check form-check-inline col-3">
                             <label class="check-container d-flex align-items-center">
@@ -149,13 +151,15 @@
                             </label>
                         </div>
                     @endforeach
+                    
                 </div>
+                @error('services')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
-            @error('services')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
+            
         </div>
 
         {{-- * IMMAGINE  --}}

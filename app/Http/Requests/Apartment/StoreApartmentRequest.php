@@ -33,7 +33,7 @@ class StoreApartmentRequest extends FormRequest
             'cover_image' => 'nullable|image|mimes:jpeg,png,jpg',
             'is_visible' => 'nullable',
             'user_id' => 'nullable|exists:users,id',
-            'services' => 'nullable|exists:services,id'
+            'services' => 'required|exists:services,id'
         ];
     }
 
@@ -70,6 +70,9 @@ class StoreApartmentRequest extends FormRequest
             'address.required' => 'Indirizzo obbligatorio',
             'cover_image.image' => 'Il file inserito non è un\'immagine',
             'cover_image.mimes' => 'Il file deve essere di tipo .jpg .jpeg .png',
+
+            //Validazione servizi
+            'services.required' => 'Selezionare almeno un servizio'
         ];
     }
 }
