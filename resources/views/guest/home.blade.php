@@ -3,7 +3,7 @@
     <div class="jumbotron">
         <div class="container py-5">
             <div class="home-bg p-3">
-                <h1 class="text-center"><img src="{{ asset('storage/Boolbnb-logo-nobg.png') }}" alt="Logo">
+                <h1 class="text-center"><img src="{{ Vite::asset('resources/img/Boolbnb-logo-nobg.png') }}" alt="Logo">
                 </h1>
 
                 <p class="fw-bold text-center mb-5">

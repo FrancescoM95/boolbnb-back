@@ -2,7 +2,7 @@
     <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
             <div class="">
-                <img src="{{ asset('storage/Boolbnb-logo.png') }}" alt="Logo" style="height: 50px">
+                <img src="{{ Vite::asset('resources/img/Boolbnb-logo.png') }}" alt="Logo" style="height: 50px">
             </div>
             {{-- config('app.name', 'Laravel') --}}
         </a>
