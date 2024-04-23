@@ -52,7 +52,8 @@
                                         class="fa-regular fa-eye"></i>
                             </th>
                             <th scope="col">
-                                <span class="d-none d-lg-inline">Titolo</span><span class="d-lg-none"><i class="fa-solid fa-house"></i></span>
+                                <span class="d-none d-lg-inline">Titolo</span><span class="d-lg-none"><i
+                                        class="fa-solid fa-house"></i></span>
                             </th>
                             <th scope="col">
                                 <span class="d-none d-lg-inline">Indirizzo</span><span class="d-lg-none"><i
@@ -119,13 +120,15 @@
                                     <div class="d-flex flex-column flex-lg-row gap-1">
                                         {{-- Icona visualizza appartamento --}}
                                         <a title="Visualizza" href="{{ route('admin.apartments.show', $apartment->slug) }}"
-                                            class="btn btn-md btn-primary mb-2 d-flex align-items-center justify-content-center" style="width: 30px">
+                                            class="btn btn-md btn-primary mb-2 d-flex align-items-center justify-content-center"
+                                            style="width: 30px">
                                             <i class="far fa-eye"></i>
                                         </a>
 
                                         {{-- Icona modifica appartamento --}}
-                                        <a title="Modifica" href="{{ route('admin.apartments.edit', $apartment->id) }}"
-                                            class="btn btn-md btn-secondary mb-2 d-flex align-items-center justify-content-center" style="width: 30px">
+                                        <a title="Modifica" href="{{ route('admin.apartments.edit', $apartment->slug) }}"
+                                            class="btn btn-md btn-secondary mb-2 d-flex align-items-center justify-content-center"
+                                            style="width: 30px">
                                             <i class="fas fa-pencil"></i>
                                         </a>
 
@@ -141,11 +144,14 @@
                                         </form> --}}
 
                                         {{-- Pulsante restore --}}
-                                        <form title="Ripristina" action="{{ route('admin.apartments.restore', $apartment->id) }}"
-                                            method="POST" class="restore-form">
+                                        <form title="Ripristina"
+                                            action="{{ route('admin.apartments.restore', $apartment->id) }}" method="POST"
+                                            class="restore-form">
                                             @csrf
                                             @method('PATCH')
-                                            <button type="submit" class="btn btn-md btn-success d-flex align-items-center justify-content-center" data-bs-toggle="modal" data-bs-target="#modal" style="width: 30px">
+                                            <button type="submit"
+                                                class="btn btn-md btn-success d-flex align-items-center justify-content-center"
+                                                data-bs-toggle="modal" data-bs-target="#modal" style="width: 30px">
                                                 <i class="fas fa-arrows-rotate"></i>
                                             </button>
                                         </form>
