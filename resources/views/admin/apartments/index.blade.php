@@ -122,7 +122,7 @@
                                             <i class="far fa-eye"></i>
                                             Dettagli
                                         </a>
-                                        <a href="{{ route('admin.apartments.edit', $apartment->id) }}"
+                                        <a href="{{ route('admin.apartments.edit', $apartment->slug) }}"
                                             class="btn btn-sm btn-secondary">
                                             <i class="fas fa-pencil"></i> Modifica
                                         </a>

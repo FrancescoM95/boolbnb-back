@@ -51,7 +51,7 @@
                     class="btn btn-secondary btn-sm"><i class="fas fa-arrow-left me-2 d-none d-sm-inline"></i>Indietro</a>
                 {{-- bottone modifica / elimina --}}
                 @if ($apartment->user_id == Auth::user()->id)
-                    <a href="{{ route('admin.apartments.edit', $apartment) }}" class="btn btn-primary btn-sm"><i
+                    <a href="{{ route('admin.apartments.edit', $apartment->slug) }}" class="btn btn-primary btn-sm"><i
                             class="fas fa-pencil me-2 d-none d-sm-inline"></i>Modifica</a>
                     <form action="{{ route('admin.apartments.destroy', $apartment->id) }}" method="POST"
                         class="delete-form">
