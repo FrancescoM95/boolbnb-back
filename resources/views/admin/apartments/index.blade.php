@@ -6,7 +6,7 @@
             <div class="d-flex gap-3 align-items-center">
                 <h1 class="py-3">Lista Appartamenti</h1>
 
-                <a href="{{ route('admin.apartments.create') }}" class="btn cssbuttons-io-button">
+                <a href="{{ route('admin.apartments.create') }}" class="btn cssbuttons-io-button text-light">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="25" height="25">
                         <path fill="none" d="M0 0h24v24H0z"></path>
                         <path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path>
@@ -99,7 +99,7 @@
 
                         <td>
                             @forelse ($apartment->services as $service)
-                                <span class="badge rounded-pill text-bg-secondary p-2 mb-1">
+                                <span class="badge rounded-pill text-bg-bool p-2 mb-1">
                                     <i class="{{ $service->icon }} fa-xl"></i>
                                     <span>{{ $service->label }}</span>
                                 </span>
@@ -130,7 +130,8 @@
                                             method="POST" class="delete-form w-100">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-sm btn-danger w-100" data-bs-toggle="modal" data-bs-target="#modal">
+                                            <button class="btn btn-sm btn-danger w-100" data-bs-toggle="modal"
+                                                data-bs-target="#modal">
                                                 <i class="far fa-trash-can"></i>
                                                 Elimina
                                             </button>
@@ -174,25 +175,24 @@
         let activeForm = null;
 
         deleteForm.forEach(form => {
-        form.addEventListener('submit', e => {
-        e.preventDefault();
+            form.addEventListener('submit', e => {
+                e.preventDefault();
 
-        activeForm = form;
+                activeForm = form;
 
-        confirmationButton.innerText = 'Conferma Eliminazione';
-        confirmationButton.className = 'btn btn-danger';
-        modalTitle.innerText = 'Elimina appartamento';
-        modalBody.innerText = 'Sei sicuro di voler procedere all\'eliminazione?';
-         })
+                confirmationButton.innerText = 'Conferma Eliminazione';
+                confirmationButton.className = 'btn btn-danger';
+                modalTitle.innerText = 'Elimina appartamento';
+                modalBody.innerText = 'Sei sicuro di voler procedere all\'eliminazione?';
+            })
         })
 
         confirmationButton.addEventListener('click', () => {
-        if (activeForm) activeForm.submit();
+            if (activeForm) activeForm.submit();
         });
 
         modal.addEventListener('hidden.bs.modal', () => {
-        activeForm = null;
+            activeForm = null;
         })
-
-    </script>    
+    </script>
 @endsection

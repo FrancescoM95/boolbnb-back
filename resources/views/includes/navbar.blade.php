@@ -21,7 +21,7 @@
                     </a>
                 </li>
                 @auth
-                    <a class="nav-link @if (Request::is('admin/apartment*')) active @endif"
+                    <a class="nav-link @if (Route::is('admin.apartments.index')) active @endif"
                         href="{{ route('admin.apartments.index') }}">I miei appartamenti
                     </a>
                     </li>
