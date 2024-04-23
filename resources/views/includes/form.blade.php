@@ -203,7 +203,7 @@
 
     {{-- * BOTTONI --}}
     <div class="d-flex align-items-center justify-content-between">
-        <a href="{{ route('admin.apartments.index') }}" class="btn btn-primary"><i
+        <a href="@if ($apartment->deleted_at) {{ route('admin.apartments.trash') }} @else {{ route('admin.apartments.index') }} @endif" class="btn btn-primary"><i
                 class="fa-solid fa-arrow-left me-2"></i>Torna
             indietro</a>
         <div class="align-items-center d-flex gap-2">
