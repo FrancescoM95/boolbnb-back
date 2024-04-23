@@ -15,7 +15,7 @@
                                 {{-- ? NOME --}}
                                 <div class="mb-4 row">
                                     <label for="name"
-                                        class="col-md-4 col-form-label text-md-right">{{ __('Nome') }}</label>
+                                        class="col-md-4 col-form-label text-md-right text-dark">{{ __('Nome') }}</label>
 
                                     <div class="col-md-6">
                                         <input id="name" type="text"
@@ -33,7 +33,7 @@
                                 {{-- ? COGNOME --}}
                                 <div class="mb-4 row">
                                     <label for="surname"
-                                        class="col-md-4 col-form-label text-md-right">{{ __('Cognome') }}</label>
+                                        class="col-md-4 col-form-label text-md-right text-dark">{{ __('Cognome') }}</label>
 
                                     <div class="col-md-6">
                                         <input id="surname" type="text"
@@ -51,7 +51,7 @@
                                 {{-- ? DATA DI NASCITA --}}
                                 <div class="mb-4 row">
                                     <label for="birth_date"
-                                        class="col-md-4 col-form-label text-md-right">{{ __('Data di nascita') }}</label>
+                                        class="col-md-4 col-form-label text-md-right text-dark">{{ __('Data di nascita') }}</label>
 
                                     <div class="col-md-6">
                                         <input id="birth_date" type="date"
@@ -69,7 +69,7 @@
                                 {{-- ? EMAIL --}}
                                 <div class="mb-4 row">
                                     <label for="email"
-                                        class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo email') }}</label>
+                                        class="col-md-4 col-form-label text-md-right text-dark">{{ __('Indirizzo email') }}</label>
 
                                     <div class="col-md-6">
                                         <input id="email" type="email"
@@ -87,7 +87,7 @@
                                 {{-- ? PASSWORD --}}
                                 <div class="mb-4 row">
                                     <label for="password"
-                                        class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                        class="col-md-4 col-form-label text-md-right text-dark">{{ __('Password') }}</label>
 
                                     <div class="col-md-6">
                                         <input id="password" type="password"
@@ -105,7 +105,7 @@
                                 {{-- ? CONFERMA PASSWORD --}}
                                 <div class="mb-4 row">
                                     <label for="password-confirm"
-                                        class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password') }}</label>
+                                        class="col-md-4 col-form-label text-md-right text-dark">{{ __('Conferma Password') }}</label>
 
                                     <div class="col-md-6">
                                         <input id="password-confirm" type="password" class="form-control"
