@@ -36,6 +36,10 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'birth_date' => ['nullable', 'date'],
+        ], [
+            'email.unique' => 'Questo indirizzo email è già stato utilizzato.',
+            'password.confirmed' => 'Le password non corrispondono.',
+            'password.min' => 'La password deve essere lunga almeno 8 caratteri.',
         ]);
 
         $user = User::create([
