@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container">        
-        <div class="d-flex justify-content-between align-items-center gap-3 align-items-center">
-            <h1 class="py-3">Appartamenti eliminati</h1>
+        <div class="d-flex justify-content-between align-items-center gap-3 align-items-center my-5">
+            <h1 class="py-3 ">Appartamenti eliminati</h1>
             {{-- Bottoni --}}
             <div class="d-flex gap-2">
                 {{-- Torna agli appartamenti --}}
@@ -24,11 +24,11 @@
         </div>
 
         {{-- Tabella appartamenti eliminati --}}
-        <table class="table table-striped table-hover mb-5">
+        <table class="table table-striped table-hover mb-5 ">
             <thead>
                 <tr>
                     <th scope="col" class="col-1">Pubblico</th>
-                    <th scope="col" class="col-2 d-none d-md-inline">Cover</th>
+                    <th scope="col" class="col-auto d-none d-md-table-cell">Cover</th>
                     <th scope="col" class="col-4">Info</th>
                     <th scope="col" class="col-5">Servizi</th>
                     <th scope="col" class="col-auto"></th>
