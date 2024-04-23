@@ -16,14 +16,14 @@
                 <div class="d-flex justify-content-between gap-2">
 
                     {{-- massive drop --}}
-                    <form action="{{ route('admin.apartments.massivedrop') }}" method="POST" class="delete-form">
+                    {{-- <form action="{{ route('admin.apartments.massivedrop') }}" method="POST" class="delete-form">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal">
                             <i class="fas fa-trash"></i>
                             <span class="d-none d-md-inline ms-2">Svuota cestino</span>
                         </button>
-                    </form>
+                    </form> --}}
 
                     {{-- massive restore --}}
                     <form action="{{ route('admin.apartments.massiverestore') }}" method="POST" class="restore-form">
@@ -116,22 +116,21 @@
                                 </td>
                                 <td class="d-none d-lg-table-cell">{{ $apartment->getUpdatedAt() }}</td>
                                 <td>
-
-                                    {{-- Icona visualizza appartamento --}}
                                     <div class="d-flex flex-column flex-lg-row gap-1">
+                                        {{-- Icona visualizza appartamento --}}
                                         <a title="Visualizza" href="{{ route('admin.apartments.show', $apartment->slug) }}"
-                                            class="btn btn-sm btn-primary mb-2 d-flex align-items-center justify-content-center" style="width: 30px">
+                                            class="btn btn-md btn-primary mb-2 d-flex align-items-center justify-content-center" style="width: 30px">
                                             <i class="far fa-eye"></i>
                                         </a>
 
                                         {{-- Icona modifica appartamento --}}
                                         <a title="Modifica" href="{{ route('admin.apartments.edit', $apartment->id) }}"
-                                            class="btn btn-sm btn-secondary mb-2 d-flex align-items-center justify-content-center" style="width: 30px">
+                                            class="btn btn-md btn-secondary mb-2 d-flex align-items-center justify-content-center" style="width: 30px">
                                             <i class="fas fa-pencil"></i>
                                         </a>
 
                                         {{-- Pulsante elimina --}}
-                                        <form title="Elimina" action="{{ route('admin.apartments.drop', $apartment->id) }}" method="POST"
+                                        {{-- <form title="Elimina" action="{{ route('admin.apartments.drop', $apartment->id) }}" method="POST"
                                             class="delete-form">
                                             @csrf
                                             @method('DELETE')
@@ -139,14 +138,14 @@
                                             <button class="btn btn-sm btn-danger mb-2" data-bs-toggle="modal" data-bs-target="#modal">
                                                 <i class="far fa-trash-can"></i>
                                             </button>                                            
-                                        </form>
+                                        </form> --}}
 
                                         {{-- Pulsante restore --}}
                                         <form title="Ripristina" action="{{ route('admin.apartments.restore', $apartment->id) }}"
                                             method="POST" class="restore-form">
                                             @csrf
                                             @method('PATCH')
-                                            <button type="submit" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modal">
+                                            <button type="submit" class="btn btn-md btn-success d-flex align-items-center justify-content-center" data-bs-toggle="modal" data-bs-target="#modal" style="width: 30px">
                                                 <i class="fas fa-arrows-rotate"></i>
                                             </button>
                                         </form>
