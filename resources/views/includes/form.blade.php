@@ -13,12 +13,13 @@
 
 @csrf
 <section class="container mt-3">
+
     <div class="row mb-5">
 
         {{-- * TITOLO --}}
         <div class="col-11">
             <div class="mb-3">
-                <label for="title" class="form-label">Titolo</label>
+                <label for="title" class="form-label">Titolo<span class="text-danger">*</span></label>
                 <input type="text"
                     class="form-control @error('title') is-invalid
               @elseif (old('title', '')) is-valid 
@@ -47,8 +48,8 @@
         {{-- * CAMERE --}}
         <div class="col-3">
             <div class="mb-3">
-                <label for="rooms" class="form-label">Numero Camere</label>
-                <input type="number" min="0"
+                <label for="rooms" class="form-label">Numero Camere<span class="text-danger">*</span></label>
+                <input type="number" min="1"
                     class="form-control @error('rooms') is-invalid
               @elseif (old('rooms', '')) is-valid 
             @enderror"
@@ -64,8 +65,8 @@
         {{-- * LETTI --}}
         <div class="col-3">
             <div class="mb-3">
-                <label for="beds" class="form-label">Numero letti</label>
-                <input type="number" min="0"
+                <label for="beds" class="form-label">Numero letti<span class="text-danger">*</span></label>
+                <input type="number" min="1"
                     class="form-control @error('beds') is-invalid
               @elseif (old('beds', '')) is-valid 
             @enderror"
@@ -81,8 +82,8 @@
         {{-- * BAGNI --}}
         <div class="col-3">
             <div class="mb-3">
-                <label for="baths" class="form-label">Numero Bagni</label>
-                <input type="number" min="0"
+                <label for="baths" class="form-label">Numero Bagni<span class="text-danger">*</span></label>
+                <input type="number" min="1"
                     class="form-control @error('baths') is-invalid
               @elseif (old('baths', '')) is-valid 
             @enderror"
@@ -100,8 +101,8 @@
         {{-- * METRI QUADRI --}}
         <div class="col-3">
             <div class="mb-3">
-                <label for="square_meters" class="form-label">Mq</label>
-                <input type="number" min="0"
+                <label for="square_meters" class="form-label">Mq<span class="text-danger">*</span></label>
+                <input type="number" min="1"
                     class="form-control @error('square_meters') is-invalid
               @elseif (old('square_meters', '')) is-valid 
             @enderror"
@@ -119,7 +120,7 @@
         {{-- * INDIRIZZO --}}
         <div class="col-12">
             <div class="mb-3">
-                <label for="address" class="form-label">Indirizzo</label>
+                <label for="address" class="form-label">Indirizzo<span class="text-danger">*</span></label>
                 <input type="text"
                     class="form-control @error('address') is-invalid
               @elseif (old('address', '')) is-valid @enderror"
@@ -129,11 +130,14 @@
                 <input type="text" id="longitude" name="longitude" class="d-none"
                     value="{{ old('longitude', $apartment->longitude) }}">
                 <ul id="suggestions-list" class="p-2"></ul>
-                @error('adress')
+                @error('address')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
+                <div id="address-error" class="invalid-feedback">
+                    Seleziona un indirizzo suggerito dalla lista
+                </div>
             </div>
         </div>
 
@@ -141,7 +145,7 @@
         <div class="col-12">
             <div class="mt-3">
                 <div class="row form-group @error('services') is-invalid @enderror">
-                    <p>Seleziona i servizi inclusi</p>
+                    <p>Seleziona i servizi inclusi<span class="text-danger">*</span></p>
                     @foreach ($services as $service)
                         <div class="form-check form-check-inline col-3">
                             <label class="check-container d-flex align-items-center">
@@ -156,13 +160,15 @@
                             </label>
                         </div>
                     @endforeach
+                    
                 </div>
+                @error('services')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
-            @error('services')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
+            
         </div>
 
         {{-- * IMMAGINE  --}}
@@ -200,21 +206,20 @@
                     id='preview'>
             </div>
         </div>
-
-
     </div>
 
     {{-- * BOTTONI --}}
     <div class="d-flex align-items-center justify-content-between">
-        <a href="{{ route('admin.apartments.index') }}" class="btn btn-primary"><i
+        <a href="@if ($apartment->deleted_at) {{ route('admin.apartments.trash') }} @else {{ route('admin.apartments.index') }} @endif" class="btn btn-primary"><i
                 class="fa-solid fa-arrow-left me-2"></i>Torna
             indietro</a>
         <div class="align-items-center d-flex gap-2">
             <button class="btn btn-secondary" type="reset" onclick="resetCoverImagePreview()">
                 <i class="fa-solid fa-eraser me-2"></i>Svuota i campi
             </button>
-            <button class="btn btn-success" type="submit"><i class="fa-solid fa-floppy-disk me-2"></i>Salva</button>
-
+            <button class="btn btn-success" type="submit" id="btn-submit">
+                <i class="fa-solid fa-floppy-disk me-2"></i>Salva
+            </button>
         </div>
     </div>
     </div>
@@ -334,14 +339,21 @@
     });
 
 
-
-
-
-
-
     // Funzione reset preview
     function resetCoverImagePreview() {
         const preview = document.getElementById('preview');
         preview.src = 'https://marcolanci.it/boolean/assets/placeholder.png';
     }
+
+    const submitButton = document.getElementById('btn-submit');
+    const addressError = document.getElementById('address-error');
+
+    submitButton.addEventListener('click', e => {
+        if (inputAddressSearch.value.trim() && !latInput.value && !lonInput.value) {
+            addressError.style.display = 'block';
+            e.preventDefault();
+        } else {
+            addressError.style.display = 'none';
+        }
+    });
 </script>

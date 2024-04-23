@@ -39,10 +39,13 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
     Route::patch('/apartments/{apartment}/publish', [ApartmentController::class, 'togglePublication'])->name('apartments.publish');
 
     //* Rotte admin apartment CRUD
-    Route::resource('apartments', ApartmentController::class)->except('show')->withTrashed(['edit', 'update']);
+    Route::resource('apartments', ApartmentController::class)->except(['show', 'edit'])->withTrashed(['update']);
 
     //* Rotta show con slug
     Route::get('/apartments/{slug}', [ApartmentController::class, 'show'])->name('apartments.show');
+
+    //* Rotta edit con slug
+    Route::get('/apartments/{slug}/edit', [ApartmentController::class, 'edit'])->name('apartments.edit')->withTrashed();
 });
 
 
