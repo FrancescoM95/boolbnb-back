@@ -84,12 +84,14 @@ class ApartmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Apartment $apartment)
+    public function edit(string $slug)
     {
+
+        $apartment = Apartment::whereSlug($slug)->withTrashed()->first();
+
         $services = Service::select('label', 'id', 'icon')->get();
 
         $prev_services = $apartment->services->pluck('id')->toArray();
-
 
         return view('admin.apartments.edit', compact('apartment', 'services', 'prev_services'));
     }
