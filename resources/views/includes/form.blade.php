@@ -43,7 +43,7 @@
         <div class="col-3">
             <div class="mb-3">
                 <label for="rooms" class="form-label">Numero Camere</label>
-                <input type="number"
+                <input type="number" min="0"
                     class="form-control @error('rooms') is-invalid
               @elseif (old('rooms', '')) is-valid 
             @enderror"
@@ -60,7 +60,7 @@
         <div class="col-3">
             <div class="mb-3">
                 <label for="beds" class="form-label">Numero letti</label>
-                <input type="number"
+                <input type="number" min="0"
                     class="form-control @error('beds') is-invalid
               @elseif (old('beds', '')) is-valid 
             @enderror"
@@ -77,7 +77,7 @@
         <div class="col-3">
             <div class="mb-3">
                 <label for="baths" class="form-label">Numero Bagni</label>
-                <input type="number"
+                <input type="number" min="0"
                     class="form-control @error('baths') is-invalid
               @elseif (old('baths', '')) is-valid 
             @enderror"
@@ -96,7 +96,7 @@
         <div class="col-3">
             <div class="mb-3">
                 <label for="square_meters" class="form-label">Mq</label>
-                <input type="number"
+                <input type="number" min="0"
                     class="form-control @error('square_meters') is-invalid
               @elseif (old('square_meters', '')) is-valid 
             @enderror"
