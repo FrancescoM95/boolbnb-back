@@ -84,12 +84,14 @@ class ApartmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Apartment $apartment)
+    public function edit(string $slug)
     {
+
+        $apartment = Apartment::whereSlug($slug)->withTrashed()->first();
+
         $services = Service::select('label', 'id', 'icon')->get();
 
         $prev_services = $apartment->services->pluck('id')->toArray();
-
 
         return view('admin.apartments.edit', compact('apartment', 'services', 'prev_services'));
     }
@@ -117,9 +119,7 @@ class ApartmentController extends Controller
 
         if (Arr::exists($data, 'services')) {
             $apartment->services()->sync($data['services']);
-        }
-
-        elseif (!Arr::exists($data, 'tags') && count($apartment->services)) $apartment->services()->detach();
+        } elseif (!Arr::exists($data, 'tags') && count($apartment->services)) $apartment->services()->detach();
 
         return to_route('admin.apartments.show', $apartment->slug);
     }
@@ -147,24 +147,24 @@ class ApartmentController extends Controller
         return to_route('admin.apartments.index')->with('type', 'success')->with('message', 'Appartamento ripristinato con successo');
     }
 
-    public function drop(Apartment $apartment)
-    {
-        if ($apartment->cover_image) Storage::delete($apartment->cover_image);
-        if ($apartment->has('services')) $apartment->services()->detach();
-        // if ($apartment->has('sponsorships')) $apartment->sponsorships()->detach();
-        $apartment->forceDelete();
-        return to_route('admin.apartments.trash')->with('type', 'warning')->with('message', 'Appartamento eliminato definitivamente');
-    }
+    // public function drop(Apartment $apartment)
+    // {
+    //     if ($apartment->cover_image) Storage::delete($apartment->cover_image);
+    //     if ($apartment->has('services')) $apartment->services()->detach();
+    //     if ($apartment->has('sponsorships')) $apartment->sponsorships()->detach();
+    //     $apartment->forceDelete();
+    //     return to_route('admin.apartments.trash')->with('type', 'warning')->with('message', 'Appartamento eliminato definitivamente');
+    // }
 
     // Rotte Delete All e Restore all
-    public function massiveDrop()
-    {
-        $apartments = Apartment::onlyTrashed()->get();
-        foreach ($apartments as $apartment) {
-            $apartment->forceDelete();
-        }
-        return to_route('admin.apartments.trash')->with('type', 'warning')->with('message', 'Tutti gli appartamenti sono stati eliminati definitivamente');
-    }
+    // public function massiveDrop()
+    // {
+    //     $apartments = Apartment::onlyTrashed()->get();
+    //     foreach ($apartments as $apartment) {
+    //         $apartment->forceDelete();
+    //     }
+    //     return to_route('admin.apartments.trash')->with('type', 'warning')->with('message', 'Tutti gli appartamenti sono stati eliminati definitivamente');
+    // }
 
     public function massiveRestore()
     {

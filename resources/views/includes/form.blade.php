@@ -1,6 +1,11 @@
-@if ($apartment->exists)
+{{-- Se l'appartamento esiste e l'id nel db coincide con quello dello user --}}
+@if ($apartment->exists && $apartment->user_id == Auth::user()->id)
     <form action="{{ route('admin.apartments.update', $apartment->id) }}" method="POST" enctype="multipart/form-data">
         @method('PUT')
+        {{-- Se l'appartamento esiste e l'id nel db NON coincide con quello dello user --}}
+    @elseif ($apartment->exists && $apartment->user_id != Auth::user()->id)
+        @php return abort(404) @endphp
+        {{-- Se l'appartamento non esiste --}}
     @else
         <form action="{{ route('admin.apartments.store') }}" method="POST" enctype="multipart/form-data">
 @endif
@@ -8,6 +13,7 @@
 
 @csrf
 <section class="container mt-3">
+
     <div class="row mb-5">
 
         {{-- * TITOLO --}}
@@ -124,11 +130,14 @@
                 <input type="text" id="longitude" name="longitude" class="d-none"
                     value="{{ old('longitude', $apartment->longitude) }}">
                 <ul id="suggestions-list" class="p-2"></ul>
-                @error('adress')
+                @error('address')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
+                <div id="address-error" class="invalid-feedback">
+                    Seleziona un indirizzo suggerito dalla lista
+                </div>
             </div>
         </div>
 
@@ -197,8 +206,6 @@
                     id='preview'>
             </div>
         </div>
-
-
     </div>
 
     {{-- * BOTTONI --}}
@@ -210,8 +217,9 @@
             <button class="btn btn-secondary" type="reset" onclick="resetCoverImagePreview()">
                 <i class="fa-solid fa-eraser me-2"></i>Svuota i campi
             </button>
-            <button class="btn btn-success" type="submit"><i class="fa-solid fa-floppy-disk me-2"></i>Salva</button>
-
+            <button class="btn btn-success" type="submit" id="btn-submit">
+                <i class="fa-solid fa-floppy-disk me-2"></i>Salva
+            </button>
         </div>
     </div>
     </div>
@@ -331,14 +339,21 @@
     });
 
 
-
-
-
-
-
     // Funzione reset preview
     function resetCoverImagePreview() {
         const preview = document.getElementById('preview');
         preview.src = 'https://marcolanci.it/boolean/assets/placeholder.png';
     }
+
+    const submitButton = document.getElementById('btn-submit');
+    const addressError = document.getElementById('address-error');
+
+    submitButton.addEventListener('click', e => {
+        if (inputAddressSearch.value.trim() && !latInput.value && !lonInput.value) {
+            addressError.style.display = 'block';
+            e.preventDefault();
+        } else {
+            addressError.style.display = 'none';
+        }
+    });
 </script>

@@ -49,22 +49,22 @@ class StoreApartmentRequest extends FormRequest
             // Validazione bagni
             'baths.required' => 'Numero di bagni obbligatorio',
             'baths.numeric' => 'Inserisci un numero',
-            'baths.min' => 'Il numero di bagni non può essere 0',
+            'baths.min' => 'Il numero di bagni non può essere minore di 1',
 
             // Validazione letti
             'beds.required' => 'Numero di letti obbligatorio',
             'beds.numeric' => 'Inserisci un numero',
-            'beds.min' => 'Il numero di letti non può essere 0',
+            'beds.min' => 'Il numero di letti non può essere minore di 1',
 
             // Validazione stanze
             'rooms.required' => 'Numero di stanze obbligatorio',
             'rooms.numeric' => 'Inserisci un numero',
-            'rooms.min' => 'Il numero di stanze non può essere 0',
+            'rooms.min' => 'Il numero di stanze non può essere minore di 1',
 
             // Validazione metri quadri
             'square_meters.required' => 'Numero di metri quadri obbligatorio',
             'square_meters.numeric' => 'Inserisci un numero',
-            'square_meters.min' => 'Il numero di metri quadri non può essere 0',
+            'square_meters.min' => 'Il numero di metri quadri non può essere minore di 5',
 
             //Validazione campi restanti
             'address.required' => 'Indirizzo obbligatorio',
