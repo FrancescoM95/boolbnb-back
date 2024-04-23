@@ -1,6 +1,11 @@
-@if ($apartment->exists)
+{{-- Se l'appartamento esiste e l'id nel db coincide con quello dello user --}}
+@if ($apartment->exists && $apartment->user_id == Auth::user()->id)
     <form action="{{ route('admin.apartments.update', $apartment->id) }}" method="POST" enctype="multipart/form-data">
         @method('PUT')
+        {{-- Se l'appartamento esiste e l'id nel db NON coincide con quello dello user --}}
+    @elseif ($apartment->exists && $apartment->user_id != Auth::user()->id)
+        @php return abort(404) @endphp
+        {{-- Se l'appartamento non esiste --}}
     @else
         <form action="{{ route('admin.apartments.store') }}" method="POST" enctype="multipart/form-data">
 @endif
@@ -119,8 +124,10 @@
                     class="form-control @error('address') is-invalid
               @elseif (old('address', '')) is-valid @enderror"
                     id="address" name="address" value="{{ old('address', $apartment->address) }}">
-                <input type="text" id="latitude" name="latitude" class="d-none" value="{{ old('latitude', $apartment->latitude) }}">
-                <input type="text" id="longitude" name="longitude" class="d-none" value="{{ old('longitude', $apartment->longitude) }}">
+                <input type="text" id="latitude" name="latitude" class="d-none"
+                    value="{{ old('latitude', $apartment->latitude) }}">
+                <input type="text" id="longitude" name="longitude" class="d-none"
+                    value="{{ old('longitude', $apartment->longitude) }}">
                 <ul id="suggestions-list" class="p-2"></ul>
                 @error('adress')
                     <div class="invalid-feedback">
