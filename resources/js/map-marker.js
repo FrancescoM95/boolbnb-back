@@ -14,7 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
         lng: lng
     };
 
-    var map = tt.map({
+    // Predispongo le variabili per mappa
+    let map = tt.map({
         key: API_KEY,
         container: 'map-div',
         center: yourApartment,
@@ -22,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Inserisco il marker
-    var customMarker = new tt.Marker({
+    let customMarker = new tt.Marker({
         element: createCustomMarkerElement('#172BA1'),
     })
         .setLngLat([lng, lat])
@@ -30,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Custom Marker
     function createCustomMarkerElement(color) {
-        var markerElement = document.createElement('div');
+        let markerElement = document.createElement('div');
         markerElement.innerHTML = `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${color}" width="24px" height="24px">
             <path d="M0 0h24v24H0V0z" fill="none"/> 
