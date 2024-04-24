@@ -35,11 +35,12 @@ class RegisteredUserController extends Controller
             'surname' => ['nullable', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'birth_date' => ['nullable', 'date'],
+            'birth_date' => ['nullable', 'date', 'before_or_equal:' . now()->subYears(18)->format('Y-m-d')], //L'utente deve essere maggiorenne per registrarsi
         ], [
             'email.unique' => 'Questo indirizzo email è già stato utilizzato.',
             'password.confirmed' => 'Le password non corrispondono.',
             'password.min' => 'La password deve essere lunga almeno 8 caratteri.',
+            'birth_date.before_or_equal' => 'Devi avere almeno 18 anni per registrarti.',
         ]);
 
         $user = User::create([
