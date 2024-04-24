@@ -129,7 +129,7 @@
                     value="{{ old('latitude', $apartment->latitude) }}">
                 <input type="text" id="longitude" name="longitude" class="d-none"
                     value="{{ old('longitude', $apartment->longitude) }}">
-                <ul id="suggestions-list" class="p-2"></ul>
+                <ul id="suggestions-list" class="p-2 mt-3 bg-light rounded d-none"></ul>
                 @error('address')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -160,7 +160,7 @@
                             </label>
                         </div>
                     @endforeach
-                    
+
                 </div>
                 @error('services')
                     <div class="invalid-feedback">
@@ -168,7 +168,7 @@
                     </div>
                 @enderror
             </div>
-            
+
         </div>
 
         {{-- * IMMAGINE  --}}
@@ -210,8 +210,8 @@
 
     {{-- * BOTTONI --}}
     <div class="d-flex align-items-center justify-content-between">
-        <a href="@if ($apartment->deleted_at) {{ route('admin.apartments.trash') }} @else {{ route('admin.apartments.index') }} @endif" class="btn btn-primary"><i
-                class="fa-solid fa-arrow-left me-2"></i>Torna
+        <a href="@if ($apartment->deleted_at) {{ route('admin.apartments.trash') }} @else {{ route('admin.apartments.index') }} @endif"
+            class="btn btn-primary"><i class="fa-solid fa-arrow-left me-2"></i>Torna
             indietro</a>
         <div class="align-items-center d-flex gap-2">
             <button class="btn btn-secondary" type="reset" onclick="resetCoverImagePreview()">
@@ -244,8 +244,8 @@
     const searchPlace = addressTerm => {
         // Mostro un loader per il caricamento dei sugeriti
         suggestionAddress.innerHTML =
-            '<li class="pe-none"><i class="fas fa-spinner fa-pulse text-danger p-3"></i></li>';
-        suggestionAddress.classList.add('show');
+            '<li class="pe-none"><i class="fas fa-spinner fa-pulse text-primary p-3"></i></li>';
+        suggestionAddress.classList.remove('d-none');
         // Handle API throttling
         clearTimeout(timeoutId);
         timeoutId = setTimeout(() => {
@@ -258,7 +258,7 @@
             // Resets
             latInput.value = null;
             lonInput.value = null;
-            suggestionAddress.classList.remove('show');
+            suggestionAddress.classList.add('d-none');
             suggestionAddress.innerHTML = '';
             return;
         }
@@ -284,7 +284,7 @@
                     };
                     // Aggiungo indirizzo ai suggeriti
                     suggestionAddress.innerHTML +=
-                        `<li class="suggestions-item py-2" data-lat="${place.lat}" data-lon="${place.lon}">${place.address}</li>`;
+                        `<li class="suggestions-item py-2 ps-1" role="button" data-lat="${place.lat}" data-lon="${place.lon}"> <i class="fa-solid fa-location-dot text-primary"></i> ${place.address}</li>`;
                 });
             })
             .catch(err => {
@@ -310,6 +310,7 @@
 
     // variables
     let timeoutId = null;
+    let suggest = '';
 
     //*** LOGIC ***//
     // Input address @keyup
@@ -327,6 +328,7 @@
     suggestionAddress.addEventListener('click', (e) => {
         // Get list item clicked
         const suggestion = e.target;
+        suggest = suggestion.innerText;
         // Check if is a suggestions list item
         if (!suggestion.classList.contains('suggestions-item')) return
         // Set values
@@ -335,7 +337,7 @@
         lonInput.value = suggestion.dataset.lon;
 
         // Chiudo la lista di indirizzi suggeriti
-        suggestionAddress.innerHTML = '';
+        suggestionAddress.classList.add('d-none');
     });
 
 
@@ -348,11 +350,22 @@
     const submitButton = document.getElementById('btn-submit');
     const addressError = document.getElementById('address-error');
 
+    // Controllo prima dell'invio del form
     submitButton.addEventListener('click', e => {
-        if (inputAddressSearch.value.trim() && !latInput.value && !lonInput.value) {
+        // Ottieni l'indirizzo inserito dall'utente
+        const enteredAddress = inputAddressSearch.value.trim();
+        // Ottieni l'indirizzo originale suggerito dal suggerimento
+        const suggestedAddress = suggest;
+        // Ottieni le coordinate
+        const enteredLat = latInput.value.trim();
+        const enteredLon = lonInput.value.trim();
+        // Se l'indirizzo inserito dall'utente è diverso dall'indirizzo originale suggerito 
+        // o le coordinate non corrispondono, mostra un messaggio di errore
+        if (enteredAddress !== suggestedAddress || (!enteredLat || !enteredLon)) {
             addressError.style.display = 'block';
-            e.preventDefault();
+            e.preventDefault(); // Impedisce l'invio del modulo
         } else {
+            // Altrimenti, rimuovi il messaggio di errore
             addressError.style.display = 'none';
         }
     });
