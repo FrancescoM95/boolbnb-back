@@ -355,7 +355,7 @@
         // Ottieni l'indirizzo inserito dall'utente
         const enteredAddress = inputAddressSearch.value.trim();
         // Ottieni l'indirizzo originale suggerito dal suggerimento
-        const suggestedAddress = suggest;
+        const suggestedAddress = suggest.trim();
         // Ottieni le coordinate
         const enteredLat = latInput.value.trim();
         const enteredLon = lonInput.value.trim();
