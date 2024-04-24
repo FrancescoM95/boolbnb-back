@@ -29,19 +29,7 @@
                 {{-- descrizione a comparsa in large --}}
                 <div id="description" class="d-none d-lg-block col-lg-4 pt-1 ps-4">
                     <h3 class="text-center pb-1 mb-2 bottom-border">Descrizione</h3>
-                    <p class="m-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque quisquam illum at
-                        odit, harum iusto
-                        repudiandae ex in quaerat vitae aliquid. Incidunt labore ipsa similique asperiores. Perferendis
-                        quibusdam
-                        dignissimos deleniti? Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit magni,
-                        assumenda
-                        veniam nemo totam nulla esse ea quam labore, animi accusamus ut sed aspernatur fugiat voluptatum
-                        reiciendis
-                        necessitatibus mollitia! Alias.Omnis quisquam laudantium dicta, ab molestiae quis modi perspiciatis
-                        veniam
-                        laboriosam? Numquam itaque eligendi, modi doloribus deleniti necessitatibus ullam deserunt ipsam
-                        omnis totam
-                        sit, veniam, enim voluptate quasi tempore corrupti!</p>
+                    <p class="m-0">{{ $apartment->description }}</p>
                 </div>
             </div>
             {{-- bottone indietro --}}
@@ -100,14 +88,7 @@
         {{-- descrizione --}}
         <section id="description" class="pb-3 d-lg-none">
             <h3 class="text-center pb-1 mb-3 bottom-border">Descrizione</h3>
-            <p class="m-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque quisquam illum at odit, harum
-                iusto
-                repudiandae ex in quaerat vitae aliquid. Incidunt labore ipsa similique asperiores. Perferendis quibusdam
-                dignissimos deleniti? Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit magni, assumenda
-                veniam nemo totam nulla esse ea quam labore, animi accusamus ut sed aspernatur fugiat voluptatum reiciendis
-                necessitatibus mollitia! Alias.Omnis quisquam laudantium dicta, ab molestiae quis modi perspiciatis veniam
-                laboriosam? Numquam itaque eligendi, modi doloribus deleniti necessitatibus ullam deserunt ipsam omnis totam
-                sit, veniam, enim voluptate quasi tempore corrupti!</p>
+            <p class="m-0">{{ $apartment->description }}</p>
         </section>
         {{-- mappa --}}
         <section id="apartment-map" class="pb-3">
