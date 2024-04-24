@@ -25,6 +25,9 @@
         </div>
 
         {{-- Tabella appartamenti eliminati --}}
+        @if ($apartments->isEmpty())
+            <h3 class="text-center">Non ci sono appartamenti eliminati.</h3>
+        @else
         <table class="table table-striped table-hover mb-5 ">
             <thead>
                 <tr>
@@ -156,6 +159,7 @@
                 @endforelse
             </tbody>
         </table>
+        @endif
     </div>
 @endsection
 
