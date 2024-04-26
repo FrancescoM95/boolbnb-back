@@ -38,7 +38,9 @@ class RegisteredUserController extends Controller
             'birth_date' => ['nullable', 'date', 'before_or_equal:' . now()->subYears(18)->format('Y-m-d')], //L'utente deve essere maggiorenne per registrarsi
         ], [
             'email.unique' => 'Questo indirizzo email è già stato utilizzato.',
+            'email.required' => 'Devi inserire un indirizzo email',
             'password.confirmed' => 'Le password non corrispondono.',
+            'password.required' => 'Devi inserire una password',
             'password.min' => 'La password deve essere lunga almeno 8 caratteri.',
             'birth_date.before_or_equal' => 'Devi avere almeno 18 anni per registrarti.',
         ]);
