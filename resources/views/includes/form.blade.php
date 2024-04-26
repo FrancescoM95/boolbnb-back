@@ -274,6 +274,7 @@
                 } = res.data;
                 if (!results.length) return;
                 // Lista suggeriti
+                console.log(results);
                 suggestionAddress.innerHTML = '';
                 results.forEach(result => {
                     // Get Dati indirizzo
@@ -322,7 +323,7 @@
     });
     // Handle suggestions visibility
     inputAddressSearch.addEventListener('focusout', () => {
-        suggestionAddress.classList.remove('show');
+        suggestionAddress.classList.remove('d-none');
     });
     // Handle suggestions list click
     suggestionAddress.addEventListener('click', (e) => {
@@ -337,6 +338,7 @@
         lonInput.value = suggestion.dataset.lon;
 
         // Chiudo la lista di indirizzi suggeriti
+        suggestionAddress.innerHTML = '';
         suggestionAddress.classList.add('d-none');
     });
 
