@@ -53,12 +53,10 @@ class ApartmentController extends Controller
     public function search(Request $request)
     {
 
-        //Coordinates given
+        //Coordinate indirizzo selezionato dall'utente
         $latitude = $request->input('latitude');
         $longitude = $request->input('longitude');
-
-        //Search radius in kilometers
-        $radius = 20; // Adjust this value according to your needs
+        $radius = $request->input('radius'); // Raggio selezionato dall'utente
 
         //Calculate maximum and minimum distance for search
         $minLatitude = $latitude - ($radius / 111);
