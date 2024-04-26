@@ -21,3 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('apartments', ApartmentController::class);
+
+//* Rotta per ricerca con filtro per distanza
+Route::get('/apartments/{distance?}', [ApartmentController::class, 'search']);
