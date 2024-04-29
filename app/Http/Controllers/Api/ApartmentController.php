@@ -52,21 +52,26 @@ class ApartmentController extends Controller
 
     public function search(Request $request)
     {
-
-        //Coordinate indirizzo selezionato dall'utente
+        // Coordinate indirizzo selezionato dall'utente
         $latitude = $request->input('latitude');
         $longitude = $request->input('longitude');
         $radius = $request->input('radius'); // Raggio selezionato dall'utente
 
-        //Calculate maximum and minimum distance for search
+        // Calcola massima e minima distanza per la ricerca
         $minLatitude = $latitude - ($radius / 111);
         $maxLatitude = $latitude + ($radius / 111);
         $minLongitude = $longitude - ($radius / (111 * cos(deg2rad($latitude))));
         $maxLongitude = $longitude + ($radius / (111 * cos(deg2rad($latitude))));
 
-        //Filter apartments based on distance
-        $apartments = Apartment::whereBetween('latitude', [$minLatitude, $maxLatitude])
+        // Ottieni gli appartamenti ordinati per distanza
+        $apartments = Apartment::selectRaw(
+            "*,
+            (6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance",
+            [$latitude, $longitude, $latitude]
+        )
+            ->whereBetween('latitude', [$minLatitude, $maxLatitude])
             ->whereBetween('longitude', [$minLongitude, $maxLongitude])
+            ->orderBy('distance')
             ->get();
 
         return response()->json($apartments);
