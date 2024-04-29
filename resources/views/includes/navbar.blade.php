@@ -16,9 +16,17 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link @if (Route::is('*home')) active @endif"
-                        href="{{ url('/') }}">{{ __('Home') }}
-                    </a>
+                    {{-- Se l'utente è loggato va alla homepage di Vue --}}
+                    @auth
+                        <a class="nav-link @if (Route::is('*home')) active @endif"
+                            href="http://localhost:5174/">{{ __('Home') }}
+                        </a>
+                    {{-- Altrimenti va alla pagina per la registrazione/login di Laravel--}}
+                    @else
+                        <a class="nav-link @if (Route::is('*home')) active @endif"
+                            href="{{ url('/') }}">{{ __('Home') }}
+                        </a>
+                    @endauth
                 </li>
                 @auth
                     <a class="nav-link @if (Request::is('admin/apartments*') && !Request::is('admin/apartments/trash*')) active @endif"
