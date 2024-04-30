@@ -12,16 +12,16 @@
                         <form method="POST" action="{{ route('admin.sponsorship.submit') }}">
                             @csrf
                             <div class="form-group">
-                                <label for="appartamento">Seleziona l'appartamento da sponsorizzare:</label>
-                                <select name="appartamento" id="appartamento" class="form-control">
+                                <label for="apartment">Seleziona l'appartamento da sponsorizzare:</label>
+                                <select name="apartment" id="apartment" class="form-control">
                                     @foreach ($apartments as $apartment)
                                         <option value="{{ $apartment->id }}">{{ $apartment->title }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="pacchetto">Seleziona il pacchetto promozionale:</label>
-                                <select name="pacchetto" id="pacchetto" class="form-control">
+                                <label for="sponsorship">Seleziona il pacchetto promozionale:</label>
+                                <select name="sponsorship" id="sponsorship" class="form-control">
                                     <option value="1">€2.99 per 24 ore</option>
                                     <option value="2">€5.99 per 72 ore</option>
                                     <option value="3">€9.99 per 144 ore</option>

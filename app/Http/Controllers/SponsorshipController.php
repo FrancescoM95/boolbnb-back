@@ -23,18 +23,25 @@ class SponsorshipController extends Controller
     {
         // Validazione dei dati
         $request->validate([
-            'appartamento' => 'required|exists:apartments,id',
-            'pacchetto' => 'required|in:1,2,3',
+            'apartment' => 'required|exists:apartments,id',
+            'sponsorship' => 'required|in:1,2,3',
         ]);
 
+
         // Logica per sponsorizzare l'appartamento
-        $apartment = Apartment::findOrFail($request->apartment);
+        $apartment = Apartment::find($request->apartment);
         $scadenza = now()->addHours($request->pacchetto == 1 ? 24 : ($request->pacchetto == 2 ? 72 : 144));
 
         $sponsorship = new Sponsorship();
+
         $sponsorship->apartment_id = $apartment->id;
         $sponsorship->expiration = $scadenza;
         $sponsorship->save();
+
+        $apartment->sponsorships()->attach($sponsorship->id);
+
+        // $apartment->services()->attach($request['services']);
+
 
         return to_route('admin.apartments.index')->with('success', 'apartment sponsorizzato con successo!');
     }
