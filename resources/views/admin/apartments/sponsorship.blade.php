@@ -20,11 +20,10 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="sponsorship">Seleziona il pacchetto promozionale:</label>
                                 <select name="sponsorship" id="sponsorship" class="form-control">
-                                    <option value="1">€2.99 per 24 ore</option>
-                                    <option value="2">€5.99 per 72 ore</option>
-                                    <option value="3">€9.99 per 144 ore</option>
+                                    @foreach ($sponsorships as $sponsorship)
+                                        <option value="{{ $sponsorship->id }}">{{ $sponsorship->label }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-primary">Sponsorizza</button>

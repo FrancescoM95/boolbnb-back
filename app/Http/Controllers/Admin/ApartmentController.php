@@ -68,7 +68,6 @@ class ApartmentController extends Controller
         }
 
 
-
         return to_route('admin.apartments.show', $apartment->slug);
     }
 

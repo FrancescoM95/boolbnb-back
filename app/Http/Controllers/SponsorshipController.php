@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Apartment;
 use App\Models\Sponsorship;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Carbon\Carbon;
 
 class SponsorshipController extends Controller
 {
@@ -15,34 +17,32 @@ class SponsorshipController extends Controller
 
         // Ottieni solo gli appartamenti dell'utente autenticato
         $apartments = Apartment::where('user_id', $userId)->get();
+        $sponsorships = Sponsorship::all();
 
-        return view('admin.apartments.sponsorship', compact('apartments'));
+        return view('admin.apartments.sponsorship', compact('apartments', 'sponsorships'));
     }
 
     public function sponsorship(Request $request)
     {
         // Validazione dei dati
-        $request->validate([
+        $data = $request->validate([
             'apartment' => 'required|exists:apartments,id',
             'sponsorship' => 'required|in:1,2,3',
+            'expiration' => 'nullable' // Assicurati che expiration sia valido, poiché è nullable
         ]);
 
+        // Trova l'appartamento
+        $apartment = Apartment::findOrFail($data['apartment']);
 
-        // Logica per sponsorizzare l'appartamento
-        $apartment = Apartment::find($request->apartment);
-        $scadenza = now()->addHours($request->pacchetto == 1 ? 24 : ($request->pacchetto == 2 ? 72 : 144));
+        $sponsorship = Sponsorship::findOrFail($data['sponsorship']);
+        $durationHours = $sponsorship->duration;
 
-        $sponsorship = new Sponsorship();
+        // Calcola la scadenza 24 ore dopo la sponsorizzazione
+        $expiration = Carbon::now()->addHours($durationHours);
 
-        $sponsorship->apartment_id = $apartment->id;
-        $sponsorship->expiration = $scadenza;
-        $sponsorship->save();
+        // Collega l'appartamento alla sponsorship e imposta expiration nella tabella pivot
+        $apartment->sponsorships()->attach($data['sponsorship'], ['expiration' => $expiration]);
 
-        $apartment->sponsorships()->attach($sponsorship->id);
-
-        // $apartment->services()->attach($request['services']);
-
-
-        return to_route('admin.apartments.index')->with('success', 'apartment sponsorizzato con successo!');
+        return redirect()->route('admin.apartments.index')->with('success', 'Appartamento sponsorizzato con successo!');
     }
 }

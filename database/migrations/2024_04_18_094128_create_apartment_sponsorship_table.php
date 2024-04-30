@@ -4,6 +4,7 @@ use App\Models\Apartment;
 use App\Models\Sponsorship;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -17,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Apartment::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Sponsorship::class)->constrained()->cascadeOnDelete();
-            $table->dateTime('expiration');
+            $table->dateTime('expiration')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 
@@ -27,7 +28,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('apartment_sponsorship');
-        
-
     }
 };

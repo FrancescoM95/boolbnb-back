@@ -13,9 +13,10 @@ class Apartment extends Model
     use HasFactory;
     use SoftDeletes;
 
+
     protected $with = ['services'];
 
-    protected $fillable = ['title', 'baths', 'rooms', 'square_meters', 'beds', 'cover_image', 'address', 'latitude', 'longitude', 'description'];
+    protected $fillable = ['title', 'baths', 'rooms', 'square_meters', 'beds', 'cover_image', 'address', 'latitude', 'longitude', 'description', 'expiration'];
 
     public function getCreatedAt()
     {
