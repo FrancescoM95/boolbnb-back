@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ApartmentController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Guest\HomeController as GuestHomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SponsorshipController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +26,10 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
 
     //* Rotta Admin Home
     Route::get('', AdminHomeController::class)->name('home');
+
+    //* Rotte sponsorizzazione
+    Route::post('apartments/sponsorship/confirm', [SponsorshipController::class, 'sponsorship'])->name('sponsorship.submit');
+    Route::get('apartments/sponsorship', [SponsorshipController::class, 'showForm'])->name('sponsorship.show');
 
     //* Rotte Admin Soft Delete
     Route::get('/apartments/trash', [ApartmentController::class, 'trash'])->name('apartments.trash');

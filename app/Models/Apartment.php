@@ -36,6 +36,11 @@ class Apartment extends Model
         return $this->belongsToMany(Service::class);
     }
 
+    public function sponsorships()
+    {
+        return $this->belongsToMany(Sponsorship::class);
+    }
+
     public function messages()
     {
         return $this->hasMany(Message::class);
@@ -51,8 +56,8 @@ class Apartment extends Model
         return asset('storage/' . $this->cover_image);
     }
 
-    public function image() :Attribute 
+    public function image(): Attribute
     {
-        return Attribute::make(fn ($value) => url('storage/' .$value));
+        return Attribute::make(fn ($value) => url('storage/' . $value));
     }
 }
