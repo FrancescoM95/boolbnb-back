@@ -56,6 +56,9 @@ class ApartmentController extends Controller
         $latitude = $request->input('latitude');
         $longitude = $request->input('longitude');
         $radius = $request->input('radius'); // Raggio selezionato dall'utente
+        $services = $request->input('services', []); // Servizi selezionati dall'utente
+        $beds = $request->input('beds');
+        $rooms = $request->input('rooms');
 
         // Calcola massima e minima distanza per la ricerca
         $minLatitude = $latitude - ($radius / 111);
@@ -71,8 +74,18 @@ class ApartmentController extends Controller
         )
             ->whereBetween('latitude', [$minLatitude, $maxLatitude])
             ->whereBetween('longitude', [$minLongitude, $maxLongitude])
-            ->orderBy('distance')
-            ->get();
+            ->where('rooms', '>=', $rooms)
+            ->where('beds', '>=', $beds);
+
+        // Filtra gli appartamenti che offrono tutti i servizi selezionati dall'utente
+        foreach ($services as $service) {
+            $apartments->whereHas('services', function ($query) use ($service) {
+                $query->where('service_id', $service);
+            });
+        }
+
+        // Esegui la query e ottieni gli appartamenti
+        $apartments = $apartments->orderBy('distance')->get();
 
         return response()->json($apartments);
     }
