@@ -19,9 +19,9 @@
                     {{-- Se l'utente è loggato va alla homepage di Vue --}}
                     @auth
                         <a class="nav-link @if (Route::is('*home')) active @endif"
-                            href="http://localhost:5174/">{{ __('Home') }}
+                            href="{{ env('VUE_HOME_URL') }}">{{ __('Home') }}
                         </a>
-                    {{-- Altrimenti va alla pagina per la registrazione/login di Laravel--}}
+                        {{-- Altrimenti va alla pagina per la registrazione/login di Laravel --}}
                     @else
                         <a class="nav-link @if (Route::is('*home')) active @endif"
                             href="{{ url('/') }}">{{ __('Home') }}
