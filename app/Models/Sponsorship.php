@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Sponsorship extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        // Altri attributi...
+        'expiration'
+    ];
+
+    public function apartments()
+    {
+        return $this->belongsToMany(Apartment::class);
+    }
 }
