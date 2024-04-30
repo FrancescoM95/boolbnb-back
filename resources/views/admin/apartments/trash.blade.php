@@ -31,7 +31,7 @@
         <table class="table table-striped table-hover mb-5 ">
             <thead>
                 <tr>
-                    <th scope="col" class="col-1">Pubblico</th>
+                    {{-- <th scope="col" class="col-1">Pubblico</th> --}}
                     <th scope="col" class="col-auto d-none d-md-table-cell">Cover</th>
                     <th scope="col" class="col-4">Info</th>
                     <th scope="col" class="col-5">Servizi</th>
@@ -41,7 +41,7 @@
             <tbody>
                 @forelse ($apartments as $apartment)
                     <tr>
-                        <th scope="row">
+                        {{-- <th scope="row">
                             <form action="{{ route('admin.apartments.update', $apartment->id) }}" method="POST">
                                 @csrf
                                 @method('PATCH')
@@ -50,7 +50,7 @@
                                         name="is_visible" @if (old('is_visible', $apartment->is_visible)) checked @endif>
                                 </div>
                             </form>
-                        </th>
+                        </th> --}}
                         <td class="d-none d-md-table-cell">
                             <div class="img-box">
                                 @php
@@ -112,18 +112,18 @@
                         <td>
                             <div class="d-flex flex-column flex-lg-row gap-1">
                                 {{-- Icona visualizza appartamento --}}
-                                <a title="Visualizza" href="{{ route('admin.apartments.show', $apartment->slug) }}"
+                                {{-- <a title="Visualizza" href="{{ route('admin.apartments.show', $apartment->slug) }}"
                                     class="btn btn-md btn-primary mb-2 d-flex align-items-center justify-content-center"
                                     style="width: 30px">
                                     <i class="far fa-eye"></i>
-                                </a>
+                                </a> --}}
 
                                 {{-- Icona modifica appartamento --}}
-                                <a title="Modifica" href="{{ route('admin.apartments.edit', $apartment->slug) }}"
+                                {{-- <a title="Modifica" href="{{ route('admin.apartments.edit', $apartment->slug) }}"
                                     class="btn btn-md btn-secondary mb-2 d-flex align-items-center justify-content-center"
                                     style="width: 30px">
                                     <i class="fas fa-pencil"></i>
-                                </a>
+                                </a> --}}
 
                                 {{-- Pulsante elimina --}}
                                 {{-- <form title="Elimina" action="{{ route('admin.apartments.drop', $apartment->id) }}" method="POST"
