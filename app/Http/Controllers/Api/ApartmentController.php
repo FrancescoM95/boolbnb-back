@@ -31,8 +31,9 @@ class ApartmentController extends Controller
      */
     public function show(string $slug)
     {
-        $slug = Apartment::findOrFail($slug);
-        return response()->json($slug);
+        $apartment = Apartment::whereIsVisible(true)->whereSlug($slug)->withTrashed()->first();
+        if (!$apartment) return response(null, 404);
+        return response()->json($apartment);
     }
 
     /**
