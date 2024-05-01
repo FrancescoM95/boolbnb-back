@@ -26,4 +26,5 @@ Route::get('apartments/search', [ApartmentController::class, 'search'])->name('a
 
 Route::get('services', [ServiceController::class, 'index']);
 
-Route::apiResource('apartments', ApartmentController::class);
+Route::apiResource('apartments', ApartmentController::class)->except('show');
+Route::get('apartments/{slug}', [ApartmentController::class, 'show']);

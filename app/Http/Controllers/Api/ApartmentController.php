@@ -29,9 +29,10 @@ class ApartmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Apartment $apartment)
+    public function show(string $slug)
     {
-        //
+        $slug = Apartment::findOrFail($slug);
+        return response()->json($slug);
     }
 
     /**
