@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\ApartmentController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Guest\HomeController as GuestHomeController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SponsorshipController;
+use App\Http\Controllers\Admin\SponsorshipController;
 use Illuminate\Support\Facades\Route;
 
 /*
