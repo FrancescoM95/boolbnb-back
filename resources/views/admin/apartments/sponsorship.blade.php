@@ -36,8 +36,8 @@
     </div>
     <script src="https://js.braintreegateway.com/web/dropin/1.42.0/js/dropin.js"></script>
     <script>
-        var form = document.getElementById('payment-form');
-        var dropinContainer = document.getElementById('dropin-container');
+        let form = document.getElementById('payment-form');
+        let dropinContainer = document.getElementById('dropin-container');
 
         braintree.dropin.create({
             authorization: 'sandbox_hctvp4tg_4btxgk9wmhbyp96h',
@@ -58,7 +58,7 @@
                     }
 
                     // Aggiungi il nonce al modulo di pagamento
-                    var nonceInput = document.createElement('input');
+                    let nonceInput = document.createElement('input');
                     nonceInput.setAttribute('type', 'hidden');
                     nonceInput.setAttribute('name', 'payment_method_nonce');
                     nonceInput.setAttribute('value', payload.nonce);
@@ -70,7 +70,7 @@
             });
 
             // Aggiungi un pulsante per annullare il pagamento
-            var cancelButton = document.getElementById('cancel-button');
+            let cancelButton = document.getElementById('cancel-button');
             cancelButton.addEventListener('click', function () {
                 dropinInstance.clearSelectedPaymentMethod();
             });
