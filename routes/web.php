@@ -31,6 +31,9 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
     Route::post('apartments/sponsorship/confirm', [SponsorshipController::class, 'sponsorship'])->name('sponsorship.submit');
     Route::get('apartments/sponsorship', [SponsorshipController::class, 'showForm'])->name('sponsorship.show');
 
+    //* Rotta messaggi
+    Route::get('/apartments/{apartment}/messages', [ApartmentController::class, 'showMessages'])->name('apartments.messages');
+
     //* Rotte Admin Soft Delete
     Route::get('/apartments/trash', [ApartmentController::class, 'trash'])->name('apartments.trash');
     //! Route x eliminazione MASSIVA definitiva

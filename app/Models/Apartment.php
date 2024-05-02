@@ -47,6 +47,11 @@ class Apartment extends Model
         return $this->hasMany(Message::class);
     }
 
+    public function getMessageCountAttribute()
+    {
+        return $this->messages()->count();
+    }
+
     public function views()
     {
         return $this->hasMany(View::class);

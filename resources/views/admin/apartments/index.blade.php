@@ -30,8 +30,9 @@
                 <tr>
                     <th scope="col" class="col-1">Pubblico</th>
                     <th scope="col" class="col-2">Cover</th>
-                    <th scope="col" class="col-4">Info</th>
-                    <th scope="col" class="col-5">Servizi</th>
+                    <th scope="col" class="col-6">Info</th>
+                    <th scope="col" class="col-2">Statistiche</th>
+                    <th scope="col" class="col-1">Messaggi</th>
                     <th scope="col" class="col-auto"></th>
                 </tr>
             </thead>
@@ -95,13 +96,11 @@
                             <div>
                                 <i class="fa-solid fa-ruler-combined"></i> m²: {{ $apartment->square_meters }}
                             </div>
-                        </td>
-
-                        <td>
+                            <hr>
                             @forelse ($apartment->services as $service)
                                 <span class="badge rounded-pill text-bg-bool p-2 mb-1">
                                     <i class="{{ $service->icon }} fa-xl"></i>
-                                    <span>{{ $service->label }}</span>
+
                                 </span>
                             @empty
                                 <span class="badge rounded-pill text-bg-danger p-2 mb-1">
@@ -109,6 +108,54 @@
                                 </span>
                             @endforelse
                         </td>
+
+                        <td>
+                            <div class="d-flex flex-column gap-5">
+                                <div>
+                                    <a href="{{ route('admin.sponsorship.show') }}" class="btn-premium">
+                                        <svg viewBox="0 0 576 512" height="1em" class="logoIcon">
+                                            <path
+                                                d="M309 106c11.4-7 19-19.7 19-34c0-22.1-17.9-40-40-40s-40 17.9-40 40c0 14.4 7.6 27 19 34L209.7 220.6c-9.1 18.2-32.7 23.4-48.6 10.7L72 160c5-6.7 8-15 8-24c0-22.1-17.9-40-40-40S0 113.9 0 136s17.9 40 40 40c.2 0 .5 0 .7 0L86.4 427.4c5.5 30.4 32 52.6 63 52.6H426.6c30.9 0 57.4-22.1 63-52.6L535.3 176c.2 0 .5 0 .7 0c22.1 0 40-17.9 40-40s-17.9-40-40-40s-40 17.9-40 40c0 9 3 17.3 8 24l-89.1 71.3c-15.9 12.7-39.5 7.5-48.6-10.7L309 106z">
+                                            </path>
+                                        </svg>
+                                        SPONSORIZZA
+                                    </a>
+                                </div>
+                                <div>
+                                    <button class="learn-more">
+                                        <span class="circle" aria-hidden="true">
+                                            <span class="icon arrow"></span>
+                                        </span>
+                                        <span class="button-text">
+                                            Statistiche
+                                            <i class="fa-solid fa-chart-line fa-xl"></i></span>
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </td>
+
+                        <td>
+                            <a href="{{ route('admin.apartments.messages', $apartment->id) }}"
+                                class="btn btn-primary messages">
+                                <svg class="svg-icon" fill="none" height="22" viewBox="0 0 20 20" width="22"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g stroke="#fff" stroke-linecap="round" stroke-width="1.5">
+                                        <path d="m6.66669 6.66667h6.66671"></path>
+                                        <path clip-rule="evenodd"
+                                            d="m3.33331 5.00001c0-.92047.74619-1.66667 1.66667-1.66667h10.00002c.9205 0 1.6666.7462 1.6666 1.66667v6.66669c0 .9205-.7461 1.6666-1.6666 1.6666h-4.8274c-.1105 0-.21654.044-.29462.122l-2.50004 2.5c-.26249.2625-.71129.0766-.71129-.2945v-1.9108c0-.2301-.18655-.4167-.41667-.4167h-1.25c-.92048 0-1.66667-.7461-1.66667-1.6666z"
+                                            fill-rule="evenodd"></path>
+                                        <path d="m6.66669 10h2.5"></path>
+                                    </g>
+                                </svg>
+                                <span class="lable">
+                                    {{ $apartment->message_count }}
+                                </span>
+                            </a>
+                        </td>
+
+
                         <td>
                             <div class="dropdown-center">
                                 <button class="btn btn-sm btn-info m-0" type="button" data-bs-toggle="dropdown"

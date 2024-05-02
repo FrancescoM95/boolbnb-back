@@ -6,7 +6,7 @@ ul {
 
 .img-box {
     width: 250px;
-    height: 150px;
+    height: 180px;
     overflow: hidden;
 }
 
@@ -18,6 +18,11 @@ ul {
 
 .text-bg-bool {
     background-color: #172BA1;
+}
+
+hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 //* FORM CHECKBOX
@@ -87,8 +92,8 @@ ul {
     justify-content: center;
     outline: none;
     cursor: pointer;
-    width: 35px;
-    height: 35px;
+    width: 28px;
+    height: 28px;
     background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
     border: 1px solid #8F9092;
     transition: all 0.2s ease;
@@ -270,4 +275,194 @@ ul {
 
 .cssbuttons-io-button:active {
     box-shadow: 0 0.3em 1em -0.5em #14a73e98;
+}
+
+// MESSAGES BUTTON
+.messages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 8px;
+    gap: 8px;
+    height: 28px;
+    width: 100px;
+    border: none;
+    background: #056bfae0;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.lable {
+    line-height: 20px;
+    font-size: 17px;
+    color: #fff;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+}
+
+.messages:hover {
+    background: #056DFA;
+}
+
+.messages:hover .svg-icon {
+    animation: msg 2s linear infinite;
+}
+
+@keyframes msg {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    15% {
+        transform: translateX(1px);
+    }
+
+    30% {
+        transform: scale(1.1);
+    }
+
+    45% {
+        transform: translateY(1px);
+    }
+
+    60% {
+        transform: translateY(0px);
+    }
+
+    75% {
+        transform: scale(1);
+    }
+
+    90% {
+        transform: translateX(-px);
+    }
+
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+// BOTTONE SPONSORIZZAZIONI
+.btn-premium {
+    width: 180px;
+    height: 28px;
+    border: none;
+    border-radius: 40px;
+    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.8em;
+    color: rgb(121, 103, 3);
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    transition-duration: 3s;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.144);
+    background-size: 200% 200%;
+    text-decoration: none;
+}
+
+.logoIcon path {
+    fill: rgb(121, 103, 3);
+}
+
+.btn-premium:hover {
+    transform: scale(0.95);
+    transition-duration: 3s;
+    animation: gradient 5s ease infinite;
+    background-position: right;
+}
+
+
+//BOTTONE STATISTICHE
+.learn-more {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    background: transparent;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+}
+
+.learn-more {
+    width: 11rem;
+    height: auto;
+}
+
+.learn-more .circle {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: relative;
+    display: block;
+    margin: 0;
+    width: 3rem;
+    height: 3rem;
+    background: #172ba1;
+    border-radius: 1.625rem;
+}
+
+.learn-more .circle .icon {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: #fff;
+}
+
+.learn-more .circle .icon.arrow {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    left: 0.625rem;
+    width: 1.125rem;
+    height: 0.125rem;
+    background: none;
+}
+
+.learn-more .circle .icon.arrow::before {
+    position: absolute;
+    content: "";
+    top: -0.29rem;
+    right: 0.0625rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-top: 0.125rem solid #fff;
+    border-right: 0.125rem solid #fff;
+    transform: rotate(45deg);
+}
+
+.learn-more .button-text {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.75rem 0;
+    margin: 0 0 0 1.85rem;
+    color: #172ba1;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.6;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.learn-more:hover .circle {
+    width: 100%;
+}
+
+.learn-more:hover .circle .icon.arrow {
+    background: #fff;
+    transform: translate(1rem, 0);
+}
+
+.learn-more:hover .button-text {
+    color: #fff;
 }
