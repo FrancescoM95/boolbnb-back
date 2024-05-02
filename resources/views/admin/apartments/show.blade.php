@@ -88,12 +88,23 @@
             <h3 class="text-center pb-1 mb-3 bottom-border">Dove sarai</h3>
             <div id="map-div"></div>
         </section>
+        <section id="messages">
+            @forelse ($apartment->messages as $message)
+            <p>{{$message->name}}</p>
+            <p>{{$message->surname}}</p>
+            <p>{{$message->email}}</p>
+                <p>{{$message->text}}</p>
+            @empty
+                <p>non ci sono messaggi...</p>
+            @endforelse
+        </section>
     </div>
     {{-- coordinate NASCOSTE per recupero in js --}}
     <div class="d-none">
         <p id="latitude-aprtmnt">{{ $apartment->latitude }}</p>
         <p id="longitude-aprtmnt">{{ $apartment->longitude }}</p>
     </div>
+
 @endsection
 
 @section('scripts')
