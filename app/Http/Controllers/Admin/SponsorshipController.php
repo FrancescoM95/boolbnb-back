@@ -27,6 +27,7 @@ class SponsorshipController extends Controller
 
     public function sponsorship(Request $request)
     {
+
         // Validazione dei dati
         $data = $request->validate([
             'apartment' => 'required|exists:apartments,id',
@@ -51,22 +52,21 @@ class SponsorshipController extends Controller
             'privateKey' => env('BRAINTREE_PRIVATE_KEY')
         ]);
 
+        $paymentMethodNonce = $request->input('payment_method_nonce');
+
         // Ora gestisci il pagamento con Braintree
         $result = $gateway->transaction()->sale([
             'amount' => $amount,
-            'paymentMethodNonce' => 'fake-valid-nonce', // Da sostituire con il nonce reale generato dal client-side
+            'paymentMethodNonce' => $paymentMethodNonce, // Da sostituire con il nonce reale generato dal client-side
             'options' => [
                 'submitForSettlement' => true
             ]
         ]);
 
-
-        dd($result);
-
         // Verifica se il pagamento è avvenuto con successo
         if ($result->success) {
             // Calcola la scadenza 24 ore dopo la sponsorizzazione
-            $expiration = Carbon::now()->addHours($durationHours);
+            $expiration = Carbon::now('UTC')->addHours($durationHours)->setTimezone('Europe/Rome');;
 
             // Collega l'appartamento alla sponsorship e imposta expiration nella tabella pivot
             $apartment->sponsorships()->attach($data['sponsorship'], ['expiration' => $expiration]);

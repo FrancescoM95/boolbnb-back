@@ -13,7 +13,10 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::whereIsVisible(true)->get();
+        $apartments = Apartment::whereIsVisible(true)
+            ->leftJoin('apartment_sponsorship', 'apartments.id', '=', 'apartment_sponsorship.apartment_id')
+            ->orderByRaw('ISNULL(apartment_sponsorship.id) ASC')
+            ->get();
 
         return response()->json($apartments);
     }
