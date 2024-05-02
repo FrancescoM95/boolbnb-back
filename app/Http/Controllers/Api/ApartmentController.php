@@ -31,8 +31,9 @@ class ApartmentController extends Controller
      */
     public function show(string $slug)
     {
-        $apartment = Apartment::whereIsVisible(true)->whereSlug($slug)->withTrashed()->first();
+        $apartment = Apartment::whereIsVisible(true)->whereSlug($slug)->withTrashed()->with('services')->first();
         if (!$apartment) return response(null, 404);
+        if ($apartment->image) $apartment->image = url('storage/' . $apartment->image);
         return response()->json($apartment);
     }
 
