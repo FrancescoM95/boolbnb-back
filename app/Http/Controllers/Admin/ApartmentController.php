@@ -77,6 +77,7 @@ class ApartmentController extends Controller
     public function show(string $slug)
     {
         $apartment = Apartment::whereSlug($slug)->withTrashed()->first();
+        if (!$apartment || $apartment->user_id != Auth::user()->id) abort(404);
         return view('admin.apartments.show', compact('apartment'));
     }
 
