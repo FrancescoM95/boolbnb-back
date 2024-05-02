@@ -9,14 +9,18 @@ class MessageController extends Controller
 {
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $data = $request->validate([
+            'name' => 'nullable',
+            'surname' => 'nullable',
             'email' => 'required|email',
             'text' => 'required',
-            'apartment_id' => 'required|exists:apartments,id'
+            'apartment_id' => 'nullable'
         ]);
 
-        $message = Message::create($validatedData);
+        $message = new Message();
+        $message->fill($data);
+        $message->save();
 
-        return response()->json(['message' => 'Message sent successfully', 'data' => $message], 201);
+        return response()->json(['message' => 'Message stored successfully']);
     }
 }
