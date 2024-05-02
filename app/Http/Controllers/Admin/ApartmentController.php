@@ -192,6 +192,6 @@ class ApartmentController extends Controller
     public function showMessages(Apartment $apartment)
     {
         $messages = $apartment->messages()->paginate(10); // Modifica il paginate secondo le tue esigenze
-        return view('admin.apartments.messages', compact('apartment', 'messages'));
+        return view('admin.messages.show', compact('apartment', 'messages'));
     }
 }

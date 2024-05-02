@@ -48,10 +48,21 @@
                             data-bs-target="#modal"></i>Elimina</button>
                 </form>
             </div>
-            <div class="row justify-content-center text-center flex-column">
-                <p class="m-0">{{ $apartment->address }}</p>
-                <p class="m-0"><a href="#apartment-map">Trova su mappa <i class="fa-solid fa-chevron-down"></i></a>
-                </p>
+            {{-- Indirizzo con link su mappa --}}
+            <div class="row row-cols-1 row-cols-sm-2 justify-content-center row-gap-2">
+                <div class="row justify-content-center text-center flex-column">
+                    <p class="m-0">{{ $apartment->address }}</p>
+                    <p class="m-0"><a href="#apartment-map">Trova su mappa <i class="fa-solid fa-chevron-down"></i></a>
+                    </p>
+                </div>
+                <div class="row justify-content-center text-center flex-column">
+                    <p class="m-0">Hai {{ $apartment->message_count }}
+                        {{ $apartment->message_count == 1 ? 'messaggio' : 'messaggi' }} da leggere</p>
+                    <p class="m-0"><a href="{{ route('admin.messages.show', $apartment->id) }}">Vai all'inbox
+                            <i
+                                class="fa-solid {{ $apartment->message_count > 0 ? 'fa-envelope-open-text' : 'fa-envelope-circle-check' }}"></i></a>
+                    </p>
+                </div>
             </div>
         </section>
         {{-- proprietà --}}
@@ -89,16 +100,18 @@
             <div id="map-div"></div>
         </section>
         {{-- messaggi --}}
-        <section id="messages">
+        {{-- <section id="messages" class="pb-3">
+            <h3 class="text-center pb-1 mb-3 bottom-border">Inbox messaggi
+            </h3>
             @forelse ($apartment->messages as $message)
                 <p>{{ $message->name }}</p>
                 <p>{{ $message->surname }}</p>
                 <p>{{ $message->email }}</p>
                 <p>{{ $message->text }}</p>
             @empty
-                <p>non ci sono messaggi...</p>
+                <p>Non ci sono messaggi al momento...</p>
             @endforelse
-        </section>
+        </section> --}}
     </div>
     {{-- coordinate NASCOSTE per recupero in js --}}
     <div class="d-none">
