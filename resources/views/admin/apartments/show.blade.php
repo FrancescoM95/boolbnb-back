@@ -38,27 +38,20 @@
                 <a href="@if ($apartment->deleted_at) {{ route('admin.apartments.trash') }} @else {{ route('admin.apartments.index') }} @endif"
                     class="btn btn-secondary btn-sm"><i class="fas fa-arrow-left me-2 d-none d-sm-inline"></i>Indietro</a>
                 {{-- bottone modifica / elimina --}}
-                @if ($apartment->user_id == Auth::user()->id)
-                    <a href="{{ route('admin.apartments.edit', $apartment->slug) }}" class="btn btn-primary btn-sm"><i
-                            class="fas fa-pencil me-2 d-none d-sm-inline"></i>Modifica</a>
-                    <form action="{{ route('admin.apartments.destroy', $apartment->id) }}" method="POST"
-                        class="delete-form">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal">
-                            <i class="fas fa-trash me-2 d-none d-sm-inline" data-bs-toggle="modal"
-                                data-bs-target="#modal"></i>Elimina</button>
-                    </form>
-                    {{-- bottone invia messaggio --}}
-                @else
-                    <a href="#" class="btn btn-primary btn-sm"><i
-                            class="fas fa-comments me-2 d-none d-sm-inline"></i>Contatta
-                        l'host</a>
-                @endif
+                <a href="{{ route('admin.apartments.edit', $apartment->slug) }}" class="btn btn-primary btn-sm"><i
+                        class="fas fa-pencil me-2 d-none d-sm-inline"></i>Modifica</a>
+                <form action="{{ route('admin.apartments.destroy', $apartment->id) }}" method="POST" class="delete-form">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal">
+                        <i class="fas fa-trash me-2 d-none d-sm-inline" data-bs-toggle="modal"
+                            data-bs-target="#modal"></i>Elimina</button>
+                </form>
             </div>
             <div class="row justify-content-center text-center flex-column">
                 <p class="m-0">{{ $apartment->address }}</p>
-                <p class="m-0"><a href="#apartment-map">Trova su mappa <i class="fa-solid fa-chevron-down"></i></a></p>
+                <p class="m-0"><a href="#apartment-map">Trova su mappa <i class="fa-solid fa-chevron-down"></i></a>
+                </p>
             </div>
         </section>
         {{-- proprietà --}}
