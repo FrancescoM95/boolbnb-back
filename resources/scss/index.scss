@@ -447,7 +447,7 @@ hr {
     padding: 0.75rem 0;
     margin: 0 0 0 1.85rem;
     color: #172ba1;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
     line-height: 1.6;
     text-align: center;
@@ -465,4 +465,8 @@ hr {
 
 .learn-more:hover .button-text {
     color: #fff;
+}
+
+.fas {
+    color: #172ba1;
 }

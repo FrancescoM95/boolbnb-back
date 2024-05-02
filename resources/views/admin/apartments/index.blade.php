@@ -71,30 +71,30 @@
                         </td>
                         <td>
                             <div>
-                                <i class="fa-solid fa-house-chimney"></i>
+                                <i class="fas fa-house-chimney"></i>
                                 {{ $apartment->title }}
                             </div>
                             <div>
-                                <i class="fa-solid fa-location-dot"></i>
+                                <i class="fas fa-location-dot"></i>
                                 {{ $apartment->address }}
                                 <hr>
                             </div>
                             <div class="d-flex gap-3">
                                 <div>
-                                    <i class="fa-solid fa-door-closed"></i> Stanze:
+                                    <i class="fas fa-door-closed"></i> Stanze:
                                     {{ $apartment->rooms }}
                                 </div>
                                 <div>
-                                    <i class="fa-solid fa-bed"></i> Letti:
+                                    <i class="fas fa-bed"></i> Letti:
                                     {{ $apartment->baths }}
                                 </div>
                                 <div>
-                                    <i class="fa-solid fa-toilet"></i> Bagni:
+                                    <i class="fas fa-toilet"></i> Bagni:
                                     {{ $apartment->beds }}
                                 </div>
                             </div>
                             <div>
-                                <i class="fa-solid fa-ruler-combined"></i> m²: {{ $apartment->square_meters }}
+                                <i class="fas fa-ruler-combined"></i> m²: {{ $apartment->square_meters }}
                             </div>
                             <hr>
                             @forelse ($apartment->services as $service)
@@ -171,7 +171,7 @@
                                         </a>
                                         <a href="{{ route('admin.apartments.edit', $apartment->slug) }}"
                                             class="btn btn-sm btn-secondary">
-                                            <i class="fas fa-pencil"></i> Modifica
+                                            <i class="fa-solid fa-pencil"></i> Modifica
                                         </a>
                                         <form action="{{ route('admin.apartments.destroy', $apartment->id) }}"
                                             method="POST" class="delete-form w-100">
