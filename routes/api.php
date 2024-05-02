@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ApartmentController;
 use App\Http\Controllers\Api\ServiceController;
+use App\Http\Controllers\MessageController;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,3 +29,6 @@ Route::get('services', [ServiceController::class, 'index']);
 
 Route::get('apartments/{slug}', [ApartmentController::class, 'show']);
 Route::apiResource('apartments', ApartmentController::class)->except('show');
+
+
+Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
