@@ -8,10 +8,10 @@
             <a href="{{ route('admin.messages.index', $apartment->id) }}" class="btn btn-secondary"><i
                     class="fas fa-arrow-left me-2 d-none d-sm-inline"></i>Indietro</a>
             {{-- Ripristina tutto --}}
-            <form action="{{ route('admin.messages.massiverestore') }}" method="POST" class="restore-form">
+            <form action="{{ route('admin.messages.massiverestore', $apartment->id) }}" method="POST" class="restore-form">
                 @csrf
                 @method('PATCH')
-                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal">
+                <button class="btn btn-success">
                     <i class="fas fa-arrows-rotate "></i>
                     <span class="d-none d-md-inline ms-2">Ripristina tutto</span>
                 </button>

@@ -67,7 +67,7 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
     // recupera un messaggio
     Route::patch('/messages/{message}/restore', [MessageController::class, 'restore'])->name('messages.restore')->withTrashed();
     // recupera tutti i messaggi
-    Route::patch('/messages/massiverestore', [MessageController::class, 'massiverestore'])->name('messages.massiverestore');
+    Route::patch('/messages/{apartment}/massiverestore', [MessageController::class, 'massiverestore'])->name('messages.massiverestore');
 });
 
 //* Rotte profilo

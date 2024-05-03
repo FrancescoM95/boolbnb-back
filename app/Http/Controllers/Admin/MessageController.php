@@ -68,10 +68,8 @@ class MessageController extends Controller
     }
 
     // restore massivo
-    public function massiveRestore(Apartment $apartment)
+    public function massiveRestore(string $apartment)
     {
-        $apartment = Apartment::whereId('$apartment');
-        // @dd($apartment);
         $messages = Message::onlyTrashed()->get();
         foreach ($messages as $message) {
             $message->restore();
