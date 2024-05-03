@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
+use App\Models\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -38,8 +39,23 @@ class ApartmentController extends Controller
     public function show(string $slug)
     {
         $apartment = Apartment::whereIsVisible(true)->whereSlug($slug)->with('services')->first();
-        if (!$apartment) return response(null, 404);
-        if ($apartment->image) $apartment->image = url('storage/' . $apartment->image);
+        if (!$apartment) {
+            return response()->json(null, 404);
+        }
+        if ($apartment->image) {
+            $apartment->image = url('storage/' . $apartment->image);
+        }
+
+        // Aggiorna il contatore delle visite
+        $ip = request()->ip();
+        $existingVisit = View::where('apartment_id', $apartment->id)->where('ip', $ip)->exists();
+        if (!$existingVisit) {
+            View::create([
+                'apartment_id' => $apartment->id,
+                'ip' => $ip
+            ]);
+        }
+
         return response()->json($apartment);
     }
 
@@ -75,36 +91,27 @@ class ApartmentController extends Controller
         $minLongitude = $longitude - ($radius / (111 * cos(deg2rad($latitude))));
         $maxLongitude = $longitude + ($radius / (111 * cos(deg2rad($latitude))));
 
-        // Ottieni gli appartamenti ordinati per sponsorizzazione, distanza e altri criteri
+        // Ottieni gli appartamenti ordinati per distanza
         $apartments = Apartment::selectRaw(
-            "*, 
-            IF(id IN (SELECT apartment_id FROM apartment_sponsorship), 1, 0) AS sponsored,
+            "*,
             (6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance",
             [$latitude, $longitude, $latitude]
         )
             ->whereBetween('latitude', [$minLatitude, $maxLatitude])
             ->whereBetween('longitude', [$minLongitude, $maxLongitude])
             ->where('rooms', '>=', $rooms)
-            ->where('beds', '>=', $beds)
-            ->orderByRaw('sponsored DESC, distance ASC, created_at DESC'); // Ordina per sponsorizzazione, distanza e altri criteri
+            ->where('beds', '>=', $beds);
 
         // Filtra gli appartamenti che offrono tutti i servizi selezionati dall'utente
         foreach ($services as $service) {
-            $apartments = $apartments->whereHas('services', function ($query) use ($service) {
+            $apartments->whereHas('services', function ($query) use ($service) {
                 $query->where('service_id', $service);
             });
         }
 
         // Esegui la query e ottieni gli appartamenti
-        $apartments = $apartments->get();
+        $apartments = $apartments->orderBy('distance')->get();
 
-        // Modifica il formato dei dati per includere la distanza in chilometri
-        $apartmentsWithDistance = $apartments->map(function ($apartment) {
-            $apartmentData = $apartment->toArray();
-            $apartmentData['distance'] = $apartment->distance; // Aggiungi la distanza
-            return $apartmentData;
-        });
-
-        return response()->json($apartmentsWithDistance);
+        return response()->json($apartments);
     }
 }
