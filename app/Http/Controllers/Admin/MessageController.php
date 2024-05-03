@@ -20,6 +20,7 @@ class MessageController extends Controller
     public function index(Apartment $apartment)
     {
         $messages = $apartment->messages()->orderBy('created_at', 'desc')->paginate(10);
+        if (!$apartment || $apartment->user_id != Auth::user()->id) abort(404);
         return view('admin.messages.index', compact('apartment', 'messages'));
     }
 
@@ -57,6 +58,7 @@ class MessageController extends Controller
     public function trash(Apartment $apartment)
     {
         $messages = Message::onlyTrashed()->whereApartmentId($apartment->id)->get();
+        if (!$apartment || $apartment->user_id != Auth::user()->id) abort(404);
         return view('admin.messages.trash', compact('messages', 'apartment'));
     }
 
