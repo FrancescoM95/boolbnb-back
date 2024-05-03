@@ -24,7 +24,14 @@
                             <td>{{ $message->email }}</td>
                             <td>{{ $message->text }}</td>
                             <td>{{ $message->created_at->format('d/m/Y H:i') }}</td>
-                            <td>NA</td>
+                            <td>
+                                <form action="{{ route('admin.messages.read', $message->id) }}" method="POST">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button
+                                        class="btn btn-sm {{ $message->is_read ? 'btn-secondary' : 'btn-success' }}">{{ $message->is_read ? 'Letto' : 'Da leggere' }}</button>
+                                </form>
+                            </td>
                             <td class="text-center">
                                 <a href="{{ route('admin.messages.show', [$apartment->id, $message->id]) }}"
                                     class="btn btn-sm btn-primary"><i class="far fa-eye"></i> Dettagli</a>

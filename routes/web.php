@@ -54,13 +54,14 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/apartments/{slug}/edit', [ApartmentController::class, 'edit'])->name('apartments.edit')->withTrashed();
 
     //# Rotta messaggi
+    // toggle read
+    Route::patch('/messages/{message}/read', [MessageController::class, 'toggleRead'])->name('messages.read');
     // index
     Route::get('/messages/{apartment}', [MessageController::class, 'index'])->name('messages.index');
     // show
     Route::get('/messages/{apartment}/{message}', [MessageController::class, 'show'])->name('messages.show');
     // delete
     // Route::delete('/messages/{apartment}/{message}/destroy', [ApartmentController::class, 'destroyMessages'])->name('apartments.trash');
-
 });
 
 //* Rotte profilo

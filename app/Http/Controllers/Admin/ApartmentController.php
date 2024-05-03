@@ -182,7 +182,6 @@ class ApartmentController extends Controller
     {
         $apartment->is_visible = !$apartment->is_visible;
         $apartment->save();
-
         return back();
     }
 }
