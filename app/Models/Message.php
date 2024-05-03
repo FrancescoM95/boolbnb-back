@@ -15,4 +15,9 @@ class Message extends Model
     {
         return $this->belongsTo(Apartment::class);
     }
+
+    public function getAbstract($text)
+    {
+        return substr($text, 0, 20);
+    }
 }

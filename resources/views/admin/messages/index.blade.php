@@ -22,7 +22,8 @@
                         <tr>
                             <td>{{ $message->name }} {{ $message->surname }}</td>
                             <td>{{ $message->email }}</td>
-                            <td>{{ $message->text }}</td>
+                            <td>{{ $message->getAbstract($message->text) }}{{ strlen($message->text) > 20 ? ' [...]' : '' }}
+                            </td>
                             <td>{{ $message->created_at->format('d/m/Y H:i') }}</td>
                             <td>
                                 <form action="{{ route('admin.messages.read', $message->id) }}" method="POST">
