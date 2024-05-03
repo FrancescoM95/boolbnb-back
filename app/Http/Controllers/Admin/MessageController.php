@@ -42,14 +42,13 @@ class MessageController extends Controller
     //     return to_route('admin.apartments.index');
     // }
 
-    //# ROTTA PUBBLICAZIONE
+    //* Rotta Visualizzato
 
-    // public function togglePublication(Apartment $apartment)
-    // {
-    //     $apartment->is_visible = !$apartment->is_visible;
-    //     $apartment->save();
+    public function toggleRead(Message $message)
+    {
+        $message->is_read = !$message->is_read;
+        $message->save();
 
-    //     return back();
-    // }
-
+        return back();
+    }
 }
