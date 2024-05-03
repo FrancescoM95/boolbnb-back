@@ -61,7 +61,7 @@ class MessageController extends Controller
     }
 
     // restore singolo
-    public function restore(Message $message, Apartment $apartment)
+    public function restore(Message $message)
     {
         $message->restore();
         return back();
