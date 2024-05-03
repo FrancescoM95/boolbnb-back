@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ApartmentController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Guest\HomeController as GuestHomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\SponsorshipController;
@@ -31,9 +32,6 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
     Route::post('apartments/sponsorship/confirm', [SponsorshipController::class, 'sponsorship'])->name('sponsorship.submit');
     Route::get('apartments/sponsorship', [SponsorshipController::class, 'showForm'])->name('sponsorship.show');
 
-    //* Rotta messaggi
-    Route::get('/apartments/{apartment}/messages', [ApartmentController::class, 'showMessages'])->name('apartments.messages');
-
     //* Rotte Admin Soft Delete
     Route::get('/apartments/trash', [ApartmentController::class, 'trash'])->name('apartments.trash');
     //! Route x eliminazione MASSIVA definitiva
@@ -54,9 +52,23 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
 
     //* Rotta edit con slug
     Route::get('/apartments/{slug}/edit', [ApartmentController::class, 'edit'])->name('apartments.edit')->withTrashed();
+
+    //# Rotta messaggi
+    // all'archivio
+    Route::get('/messages/{apartment}/trash', [MessageController::class, 'trash'])->name('messages.trash');
+    // toggle read
+    Route::patch('/messages/{message}/read', [MessageController::class, 'toggleRead'])->name('messages.read');
+    // index
+    Route::get('/messages/{apartment}', [MessageController::class, 'index'])->name('messages.index');
+    // show
+    Route::get('/messages/{apartment}/{message}', [MessageController::class, 'show'])->name('messages.show');
+    // delete
+    Route::delete('/messages/{apartment}/{message}/destroy', [MessageController::class, 'destroy'])->name('messages.destroy');
+    // recupera un messaggio
+    Route::patch('/messages/{message}/restore', [MessageController::class, 'restore'])->name('messages.restore')->withTrashed();
+    // recupera tutti i messaggi
+    Route::patch('/messages/{apartment}/massiverestore', [MessageController::class, 'massiverestore'])->name('messages.massiverestore');
 });
-
-
 
 //* Rotte profilo
 
