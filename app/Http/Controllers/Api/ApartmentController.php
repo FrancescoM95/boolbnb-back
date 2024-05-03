@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ApartmentController extends Controller
 {
@@ -13,9 +14,11 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::whereIsVisible(true)
-            ->leftJoin('apartment_sponsorship', 'apartments.id', '=', 'apartment_sponsorship.apartment_id')
-            ->orderByRaw('ISNULL(apartment_sponsorship.id) ASC')
+        // Ottieni tutti gli appartamenti visibili, ordinati per sponsorizzazione
+        $apartments = Apartment::select('*', DB::raw('IF(id IN (SELECT apartment_id FROM apartment_sponsorship), 1, 0) AS sponsored'))
+            ->whereIsVisible(true)
+            ->orderBy('sponsored', 'desc') // Mette prima gli appartamenti sponsorizzati
+            ->orderBy('created_at', 'desc') // Ordina per altri criteri, come la data di creazione
             ->get();
 
         return response()->json($apartments);
