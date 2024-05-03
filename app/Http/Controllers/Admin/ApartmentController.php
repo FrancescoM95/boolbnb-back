@@ -189,9 +189,9 @@ class ApartmentController extends Controller
 
     //# ROTTA MESSAGGI
 
-    public function showMessages(Apartment $apartment)
+    public function indexMessages(Apartment $apartment)
     {
         $messages = $apartment->messages()->paginate(10); // Modifica il paginate secondo le tue esigenze
-        return view('admin.messages.show', compact('apartment', 'messages'));
+        return view('admin.messages.index', compact('apartment', 'messages'));
     }
 }

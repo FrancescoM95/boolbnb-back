@@ -32,7 +32,8 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('apartments/sponsorship', [SponsorshipController::class, 'showForm'])->name('sponsorship.show');
 
     //* Rotta messaggi
-    Route::get('/apartments/{apartment}/messages', [ApartmentController::class, 'showMessages'])->name('messages.show');
+    Route::get('/messages/{apartment}', [ApartmentController::class, 'indexMessages'])->name('messages.index');
+    Route::get('/messages/{apartment}/{message}', [ApartmentController::class, 'showMessages'])->name('messages.show');
 
     //* Rotte Admin Soft Delete
     Route::get('/apartments/trash', [ApartmentController::class, 'trash'])->name('apartments.trash');

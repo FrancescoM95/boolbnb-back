@@ -58,7 +58,7 @@
                 <div class="row justify-content-center text-center flex-column">
                     <p class="m-0">Hai {{ $apartment->message_count }}
                         {{ $apartment->message_count == 1 ? 'messaggio' : 'messaggi' }} da leggere</p>
-                    <p class="m-0"><a href="{{ route('admin.messages.show', $apartment->id) }}">Vai all'inbox
+                    <p class="m-0"><a href="{{ route('admin.messages.index', $apartment->id) }}">Vai all'inbox
                             <i
                                 class="fa-solid {{ $apartment->message_count > 0 ? 'fa-envelope-open-text' : 'fa-envelope-circle-check' }}"></i></a>
                     </p>
