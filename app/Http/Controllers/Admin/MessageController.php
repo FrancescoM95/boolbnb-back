@@ -56,7 +56,7 @@ class MessageController extends Controller
     // Rotta cestino
     public function trash(Apartment $apartment)
     {
-        $messages = Message::onlyTrashed()->get();
+        $messages = Message::onlyTrashed()->whereApartmentId($apartment->id)->get();
         return view('admin.messages.trash', compact('messages', 'apartment'));
     }
 

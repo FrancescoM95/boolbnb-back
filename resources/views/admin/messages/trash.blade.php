@@ -5,7 +5,7 @@
         <h1 class="my-3 text-center">Messaggi Archiviati</h1>
         {{-- indietro e massive restore --}}
         <div class="d-flex justify-content-between">
-            {{-- <a href="{{ route('admin.messages.index'), $apartment->id }}" class="btn btn-secondary"><i
+            {{-- <a href="{{ route('admin.messages.index', $apartment->id) }}" class="btn btn-secondary"><i
                     class="fas fa-arrow-left me-2 d-none d-sm-inline"></i>Indietro</a> --}}
             {{-- Ripristina tutto --}}
             <form action="{{ route('admin.messages.massiverestore') }}" method="POST" class="restore-form">

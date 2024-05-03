@@ -55,7 +55,7 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
 
     //# Rotta messaggi
     // all'archivio
-    Route::get('/messages/trash', [MessageController::class, 'trash'])->name('messages.trash');
+    Route::get('/messages/{apartment}/trash', [MessageController::class, 'trash'])->name('messages.trash');
     // toggle read
     Route::patch('/messages/{message}/read', [MessageController::class, 'toggleRead'])->name('messages.read');
     // index
