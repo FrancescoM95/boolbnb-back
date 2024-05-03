@@ -27,21 +27,26 @@ class SponsorshipController extends Controller
 
     public function sponsorship(Request $request)
     {
-
         // Validazione dei dati
         $data = $request->validate([
             'apartment' => 'required|exists:apartments,id',
             'sponsorship' => 'required|in:1,2,3',
-            'expiration' => 'nullable' // Assicurati che expiration sia valido, poiché è nullable
+            'expiration' => 'nullable'
         ]);
 
         // Trova l'appartamento
         $apartment = Apartment::findOrFail($data['apartment']);
 
+        // Verifica se l'appartamento ha già una sponsorizzazione attiva
+        if ($apartment->sponsorships()->where('expiration', '>', now())->exists()) {
+            return back()->with('message', 'Questo appartamento ha già una sponsorizzazione attiva.');
+        }
+
         // Trova la sponsorizzazione selezionata
         $sponsorship = Sponsorship::findOrFail($data['sponsorship']);
         $durationHours = $sponsorship->duration;
 
+        // Imposta il costo della sposorizzazione
         $amount = $sponsorship->fee;
 
         // Calcola il costo della sponsorizzazione
@@ -54,7 +59,7 @@ class SponsorshipController extends Controller
 
         $paymentMethodNonce = $request->input('payment_method_nonce');
 
-        // Ora gestisci il pagamento con Braintree
+        // Gestione pagamento con Braintree
         $result = $gateway->transaction()->sale([
             'amount' => $amount,
             'paymentMethodNonce' => $paymentMethodNonce, // Da sostituire con il nonce reale generato dal client-side
@@ -65,16 +70,16 @@ class SponsorshipController extends Controller
 
         // Verifica se il pagamento è avvenuto con successo
         if ($result->success) {
-            // Calcola la scadenza 24 ore dopo la sponsorizzazione
-            $expiration = Carbon::now('UTC')->addHours($durationHours)->setTimezone('Europe/Rome');;
+            // Calcola la scadenza 24 ore dopo la sponsorizzazione settata con orario UTC
+            $expiration = now()->addHours($durationHours)->setTimezone('Europe/Rome');
 
             // Collega l'appartamento alla sponsorship e imposta expiration nella tabella pivot
             $apartment->sponsorships()->attach($data['sponsorship'], ['expiration' => $expiration]);
 
-            return redirect()->route('admin.apartments.index')->with('success', 'Appartamento sponsorizzato con successo!');
+            return redirect()->route('admin.apartments.index')->with('message', 'Appartamento sponsorizzato con successo!');
         } else {
-            // Se il pagamento fallisce, gestisci di conseguenza
-            return back()->with('error', 'Errore durante il pagamento: ' . $result->message);
+            // Pagamento fallito
+            return back()->with('message', 'Errore durante il pagamento: ' . $result->message);
         }
     }
 }
