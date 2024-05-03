@@ -7,6 +7,7 @@ use App\Http\Requests\Apartment\StoreApartmentRequest;
 use App\Http\Requests\Apartment\UpdateApartmentRequest;
 use App\Models\Apartment;
 use App\Models\Service;
+use App\Models\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -76,8 +77,22 @@ class ApartmentController extends Controller
      */
     public function show(string $slug)
     {
-        $apartment = Apartment::whereSlug($slug)->withTrashed()->first();
-        if (!$apartment || $apartment->user_id != Auth::user()->id) abort(404);
+        $apartment = Apartment::whereSlug($slug)->withTrashed()->firstOrFail();
+        if (!$apartment || $apartment->user_id != Auth::user()->id) {
+            abort(404);
+        }
+
+        // Verifica se esiste già un record nella tabella views per l'IP e l'appartamento corrente
+        $ip = request()->ip();
+        $existingVisit = View::where('apartment_id', $apartment->id)->where('ip', $ip)->exists();
+        if (!$existingVisit) {
+            // Se non esiste alcun record per l'IP e l'appartamento corrente, crea un nuovo record della visita
+            View::create([
+                'apartment_id' => $apartment->id,
+                'ip' => $ip
+            ]);
+        }
+
         return view('admin.apartments.show', compact('apartment'));
     }
 
