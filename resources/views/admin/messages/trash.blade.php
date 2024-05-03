@@ -45,7 +45,8 @@
                             <td>{{ $message->created_at->format('d/m/Y H:i') }}</td>
                             <td class="text-center d-flex justify-content-center gap-2">
                                 {{-- Pulsante restore --}}
-                                <form title="Ripristina" action="{{ route('admin.messages.restore', $message->id) }}"
+                                <form title="Ripristina"
+                                    action="{{ route('admin.messages.restore', [$message->id, $apartment->id]) }}"
                                     method="POST" class="restore-form">
                                     @csrf
                                     @method('PATCH')

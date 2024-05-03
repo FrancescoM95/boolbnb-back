@@ -61,10 +61,10 @@ class MessageController extends Controller
     }
 
     // restore singolo
-    public function restore(Message $message)
+    public function restore(Message $message, Apartment $apartment)
     {
         $message->restore();
-        return to_route('admin.messages.trash');
+        return back();
     }
 
     // restore massivo
