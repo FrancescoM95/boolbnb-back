@@ -19,7 +19,7 @@ class MessageController extends Controller
 
     public function index(Apartment $apartment)
     {
-        $messages = $apartment->messages()->paginate(10);
+        $messages = $apartment->messages()->orderBy('created_at', 'desc')->paginate(10);
         return view('admin.messages.index', compact('apartment', 'messages'));
     }
 
