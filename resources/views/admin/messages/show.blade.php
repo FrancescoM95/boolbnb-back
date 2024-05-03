@@ -33,12 +33,16 @@
         <div class="d-flex justify-content-between">
             <a href="{{ route('admin.messages.index', $apartment->id) }}" class="btn btn-secondary"><i
                     class="fas fa-arrow-left me-2 d-none d-sm-inline"></i>Indietro</a>
-            <form action="{{ route('admin.messages.destroy', [$apartment->id, $message->id]) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-warning" title="Archivia"><i class="fa-solid fa-envelopes-bulk"></i>
-                    Archivia</button>
-            </form>
+            <div class="d-flex gap-2">
+                <form action="{{ route('admin.messages.destroy', [$apartment->id, $message->id]) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-warning" title="Archivia"><i class="fa-solid fa-envelopes-bulk"></i>
+                        Archivia</button>
+                </form>
+                <a href="mailto:{{ $message->email }}" class="btn btn-success" title="Rispondi via email"><i
+                        class="fas fa-reply"></i> Rispondi</a>
+            </div>
         </div>
     </div>
 @endsection
