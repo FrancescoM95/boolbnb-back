@@ -5,7 +5,13 @@
         <h1 class="my-3 text-center">Messaggi per {{ $apartment->title }}</h1>
 
         <div class="message-list">
-            <table class="table table-striped table-hover mb-5">
+            <table class="table table-striped table-hover my-3">
+                <div class="d-flex justify-content-between">
+                    <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary"><i
+                            class="fas fa-arrow-left me-2 d-none d-sm-inline"></i>Indietro</a>
+                    <a href="#" class="btn btn-warning"><i
+                            class="fa-solid fa-envelopes-bulk me-2 d-none d-sm-inline"></i>Archiviati</a>
+                </div>
                 <thead>
                     <tr>
                         <th scope="col" class="col-2">Nome e Cognome</th>
