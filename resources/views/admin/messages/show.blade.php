@@ -33,8 +33,12 @@
         <div class="d-flex justify-content-between">
             <a href="{{ route('admin.messages.index', $apartment->id) }}" class="btn btn-secondary"><i
                     class="fas fa-arrow-left me-2 d-none d-sm-inline"></i>Indietro</a>
-            <a href="#" class="btn btn-warning"><i
-                    class="fa-solid fa-envelopes-bulk me-2 d-none d-sm-inline"></i>Archivia</a>
+            <form action="{{ route('admin.messages.destroy', [$message->id, $apartment->id]) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-warning" title="Archivia"><i class="fa-solid fa-envelopes-bulk"></i>
+                    Archivia</button>
+            </form>
         </div>
     </div>
 @endsection

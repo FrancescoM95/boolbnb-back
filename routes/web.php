@@ -61,7 +61,7 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
     // show
     Route::get('/messages/{apartment}/{message}', [MessageController::class, 'show'])->name('messages.show');
     // delete
-    // Route::delete('/messages/{apartment}/{message}/destroy', [ApartmentController::class, 'destroyMessages'])->name('apartments.trash');
+    Route::delete('/messages/{apartment}/{message}/destroy', [MessageController::class, 'destroy'])->name('messages.destroy');
 });
 
 //* Rotte profilo

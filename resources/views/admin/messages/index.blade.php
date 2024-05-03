@@ -39,9 +39,16 @@
                                         class="btn btn-sm {{ $message->is_read ? 'btn-secondary' : 'btn-success' }}">{{ $message->is_read ? 'Letto' : 'Da leggere' }}</button>
                                 </form>
                             </td>
-                            <td class="text-center">
+                            <td class="text-center d-flex justify-content-center gap-2">
                                 <a href="{{ route('admin.messages.show', [$apartment->id, $message->id]) }}"
-                                    class="btn btn-sm btn-primary"><i class="far fa-eye"></i> Dettagli</a>
+                                    class="btn btn-sm btn-primary" title="Dettagli"><i class="far fa-eye"></i></a>
+                                <form action="{{ route('admin.messages.destroy', [$message->id, $apartment->id]) }}"
+                                    method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-sm btn-warning" title="Archivia"><i
+                                            class="fa-solid fa-envelopes-bulk"></i></button>
+                                </form>
                             </td>
                             {{-- <div class="message-card mb-4">
                                 <div class="message-header">
