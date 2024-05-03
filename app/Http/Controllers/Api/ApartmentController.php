@@ -75,27 +75,36 @@ class ApartmentController extends Controller
         $minLongitude = $longitude - ($radius / (111 * cos(deg2rad($latitude))));
         $maxLongitude = $longitude + ($radius / (111 * cos(deg2rad($latitude))));
 
-        // Ottieni gli appartamenti ordinati per distanza
+        // Ottieni gli appartamenti ordinati per sponsorizzazione, distanza e altri criteri
         $apartments = Apartment::selectRaw(
-            "*,
+            "*, 
+            IF(id IN (SELECT apartment_id FROM apartment_sponsorship), 1, 0) AS sponsored,
             (6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance",
             [$latitude, $longitude, $latitude]
         )
             ->whereBetween('latitude', [$minLatitude, $maxLatitude])
             ->whereBetween('longitude', [$minLongitude, $maxLongitude])
             ->where('rooms', '>=', $rooms)
-            ->where('beds', '>=', $beds);
+            ->where('beds', '>=', $beds)
+            ->orderByRaw('sponsored DESC, distance ASC, created_at DESC'); // Ordina per sponsorizzazione, distanza e altri criteri
 
         // Filtra gli appartamenti che offrono tutti i servizi selezionati dall'utente
         foreach ($services as $service) {
-            $apartments->whereHas('services', function ($query) use ($service) {
+            $apartments = $apartments->whereHas('services', function ($query) use ($service) {
                 $query->where('service_id', $service);
             });
         }
 
         // Esegui la query e ottieni gli appartamenti
-        $apartments = $apartments->orderBy('distance')->get();
+        $apartments = $apartments->get();
 
-        return response()->json($apartments);
+        // Modifica il formato dei dati per includere la distanza in chilometri
+        $apartmentsWithDistance = $apartments->map(function ($apartment) {
+            $apartmentData = $apartment->toArray();
+            $apartmentData['distance'] = $apartment->distance; // Aggiungi la distanza
+            return $apartmentData;
+        });
+
+        return response()->json($apartmentsWithDistance);
     }
 }
