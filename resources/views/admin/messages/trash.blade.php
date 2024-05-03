@@ -43,20 +43,20 @@
                             <td>{{ $message->getAbstract($message->text) }}{{ strlen($message->text) > 20 ? ' [...]' : '' }}
                             </td>
                             <td>{{ $message->created_at->format('d/m/Y H:i') }}</td>
+                            <td class="text-center d-flex justify-content-center gap-2">
+                                {{-- Pulsante restore --}}
+                                <form title="Ripristina" action="{{ route('admin.messages.restore', $message->id) }}"
+                                    method="POST" class="restore-form">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button type="submit"
+                                        class="btn btn-md btn-success d-flex align-items-center justify-content-center"
+                                        data-bs-toggle="modal" data-bs-target="#modal" style="width: 30px">
+                                        <i class="fas fa-arrows-rotate"></i>
+                                    </button>
+                                </form>
+                            </td>
                     @endforeach
-                    <td class="text-center d-flex justify-content-center gap-2">
-                        {{-- Pulsante restore --}}
-                        <form title="Ripristina" action="{{ route('admin.messages.restore', $message->id) }}" method="POST"
-                            class="restore-form">
-                            @csrf
-                            @method('PATCH')
-                            <button type="submit"
-                                class="btn btn-md btn-success d-flex align-items-center justify-content-center"
-                                data-bs-toggle="modal" data-bs-target="#modal" style="width: 30px">
-                                <i class="fas fa-arrows-rotate"></i>
-                            </button>
-                        </form>
-                    </td>
                 @endif
             </tbody>
         </table>

@@ -43,7 +43,7 @@
                             <td class="text-center d-flex justify-content-center gap-2">
                                 <a href="{{ route('admin.messages.show', [$apartment->id, $message->id]) }}"
                                     class="btn btn-sm btn-primary" title="Dettagli"><i class="far fa-eye"></i></a>
-                                <form action="{{ route('admin.messages.destroy', [$message->id, $apartment->id]) }}"
+                                <form action="{{ route('admin.messages.destroy', [$apartment->id, $message->id]) }}"
                                     method="POST">
                                     @csrf
                                     @method('DELETE')
