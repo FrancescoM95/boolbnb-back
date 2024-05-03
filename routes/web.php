@@ -54,6 +54,8 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/apartments/{slug}/edit', [ApartmentController::class, 'edit'])->name('apartments.edit')->withTrashed();
 
     //# Rotta messaggi
+    // all'archivio
+    Route::get('/messages/trash', [MessageController::class, 'trash'])->name('messages.trash');
     // toggle read
     Route::patch('/messages/{message}/read', [MessageController::class, 'toggleRead'])->name('messages.read');
     // index
@@ -62,6 +64,10 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/messages/{apartment}/{message}', [MessageController::class, 'show'])->name('messages.show');
     // delete
     Route::delete('/messages/{apartment}/{message}/destroy', [MessageController::class, 'destroy'])->name('messages.destroy');
+    // recupera un messaggio
+    Route::patch('/messages/{message}/restore', [MessageController::class, 'restore'])->name('messages.restore')->withTrashed();
+    // recupera tutti i messaggi
+    Route::patch('/messages/massiverestore', [MessageController::class, 'massiverestore'])->name('messages.massiverestore');
 });
 
 //* Rotte profilo

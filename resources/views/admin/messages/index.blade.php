@@ -3,15 +3,16 @@
 @section('content')
     <div class="container">
         <h1 class="my-3 text-center">Messaggi per {{ $apartment->title }}</h1>
-
+        {{-- indietro e archiviati --}}
+        <div class="d-flex justify-content-between">
+            <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary"><i
+                    class="fas fa-arrow-left me-2 d-none d-sm-inline"></i>Indietro</a>
+            <a href="{{ route('admin.messages.trash'), $apartment->id }}" class="btn btn-warning"><i
+                    class="fa-solid fa-envelopes-bulk me-2 d-none d-sm-inline"></i>Archiviati</a>
+        </div>
         <div class="message-list">
+            {{-- tabella --}}
             <table class="table table-striped table-hover my-3">
-                <div class="d-flex justify-content-between">
-                    <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary"><i
-                            class="fas fa-arrow-left me-2 d-none d-sm-inline"></i>Indietro</a>
-                    <a href="#" class="btn btn-warning"><i
-                            class="fa-solid fa-envelopes-bulk me-2 d-none d-sm-inline"></i>Archiviati</a>
-                </div>
                 <thead>
                     <tr>
                         <th scope="col" class="col-2">Nome e Cognome</th>

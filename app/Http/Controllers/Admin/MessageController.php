@@ -39,7 +39,7 @@ class MessageController extends Controller
     public function destroy(Apartment $apartment, Message $message)
     {
         $message->delete();
-        return to_route('admin.messages.index');
+        return to_route('admin.messages.index', compact('apartment'));
     }
 
     //* Rotta Visualizzato
@@ -50,5 +50,30 @@ class MessageController extends Controller
         $message->save();
 
         return back();
+    }
+
+    //# Soft deletes
+    // Rotta cestino
+    public function trash(Apartment $apartment)
+    {
+        $messages = Message::onlyTrashed()->get();
+        return view('admin.messages.trash', compact('messages', 'apartment'));
+    }
+
+    // restore singolo
+    public function restore(Message $message)
+    {
+        $message->restore();
+        return to_route('admin.messages.trash');
+    }
+
+    // restore massivo
+    public function massiveRestore()
+    {
+        $messages = Message::onlyTrashed()->get();
+        foreach ($messages as $message) {
+            $message->restore();
+        }
+        return to_route('admin.messages.index');
     }
 }
