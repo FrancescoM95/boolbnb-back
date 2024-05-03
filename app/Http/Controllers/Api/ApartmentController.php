@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
+use App\Models\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -38,8 +39,23 @@ class ApartmentController extends Controller
     public function show(string $slug)
     {
         $apartment = Apartment::whereIsVisible(true)->whereSlug($slug)->with('services')->first();
-        if (!$apartment) return response(null, 404);
-        if ($apartment->image) $apartment->image = url('storage/' . $apartment->image);
+        if (!$apartment) {
+            return response()->json(null, 404);
+        }
+        if ($apartment->image) {
+            $apartment->image = url('storage/' . $apartment->image);
+        }
+
+        // Aggiorna il contatore delle visite
+        $ip = request()->ip();
+        $existingVisit = View::where('apartment_id', $apartment->id)->where('ip', $ip)->exists();
+        if (!$existingVisit) {
+            View::create([
+                'apartment_id' => $apartment->id,
+                'ip' => $ip
+            ]);
+        }
+
         return response()->json($apartment);
     }
 
