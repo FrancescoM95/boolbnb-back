@@ -467,6 +467,19 @@ hr {
     color: #fff;
 }
 
-// .fas {
-//     color: #172ba1;
-// }
+.color-blue {
+    color: #172ba1;
+}
+
+
+table thead .thl {
+    padding: 8px;
+    border-top-left-radius: 8px;
+    /* Imposta il bordo arrotondato */
+}
+
+table thead .thr {
+    padding: 8px;
+    border-top-right-radius: 8px;
+    /* Imposta il bordo arrotondato */
+}

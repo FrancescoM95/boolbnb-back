@@ -28,12 +28,12 @@
         <table class="table table-striped table-hover mb-5">
             <thead>
                 <tr>
-                    <th scope="col" class="col-1">Pubblico</th>
+                    <th scope="col" class="col-1 thl">Pubblico</th>
                     <th scope="col" class="col-2">Cover</th>
                     <th scope="col" class="col-6">Info</th>
                     <th scope="col" class="col-2">Statistiche</th>
                     <th scope="col" class="col-1">Messaggi</th>
-                    <th scope="col" class="col-auto"></th>
+                    <th scope="col" class="col-auto thr"></th>
                 </tr>
             </thead>
             <tbody>
@@ -71,30 +71,30 @@
                         </td>
                         <td>
                             <div>
-                                <i class="fas fa-house-chimney"></i>
+                                <i class="fas fa-house-chimney color-blue"></i>
                                 {{ $apartment->title }}
                             </div>
                             <div>
-                                <i class="fas fa-location-dot"></i>
+                                <i class="fas fa-location-dot text-danger"></i>
                                 {{ $apartment->address }}
                                 <hr>
                             </div>
                             <div class="d-flex gap-3">
                                 <div>
-                                    <i class="fas fa-door-closed"></i> Stanze:
+                                    <i class="fas fa-door-closed color-blue"></i> Stanze:
                                     {{ $apartment->rooms }}
                                 </div>
                                 <div>
-                                    <i class="fas fa-bed"></i> Letti:
+                                    <i class="fas fa-bed color-blue"></i> Letti:
                                     {{ $apartment->baths }}
                                 </div>
                                 <div>
-                                    <i class="fas fa-toilet"></i> Bagni:
+                                    <i class="fas fa-toilet color-blue"></i> Bagni:
                                     {{ $apartment->beds }}
                                 </div>
                             </div>
                             <div>
-                                <i class="fas fa-ruler-combined"></i> m²: {{ $apartment->square_meters }}
+                                <i class="fas fa-ruler-combined color-blue"></i> m²: {{ $apartment->square_meters }}
                             </div>
                             <hr>
                             @forelse ($apartment->services as $service)
@@ -164,7 +164,7 @@
                                 <div class="dropdown-menu w-100 p-2">
                                     <div class="d-flex flex-column gap-2">
                                         <a href="{{ route('admin.apartments.show', $apartment->slug) }}"
-                                            class="btn btn-sm btn-primary">
+                                            class="btn btn-sm btn-info text-white">
                                             <i class="far fa-eye"></i>
                                             Dettagli
                                         </a>
