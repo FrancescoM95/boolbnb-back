@@ -84,13 +84,16 @@ class ApartmentController extends Controller
 
         // Verifica se esiste già un record nella tabella views per l'IP e l'appartamento corrente
         $ip = request()->ip();
-        $existingVisit = View::where('apartment_id', $apartment->id)->where('ip', $ip)->exists();
-        if (!$existingVisit) {
-            // Se non esiste alcun record per l'IP e l'appartamento corrente, crea un nuovo record della visita
-            View::create([
-                'apartment_id' => $apartment->id,
-                'ip' => $ip
-            ]);
+        $existingVisit = View::where('apartment_id', $apartment->id)->where('ip', $ip)->first();
+
+        // Se non esiste un record per questo appartamento e questo IP, o se è passato un giorno dall'ultima visita
+        if (!$existingVisit || $existingVisit->created_at->diffInDays(now()) > 0) {
+            // Crea o aggiorna il record della visita
+            if ($existingVisit) {
+                $existingVisit->update(['created_at' => now()]);
+            } else {
+                View::create(['apartment_id' => $apartment->id, 'ip' => $ip]);
+            }
         }
 
         return view('admin.apartments.show', compact('apartment'));

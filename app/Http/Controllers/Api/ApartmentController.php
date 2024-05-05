@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\View;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -38,24 +39,30 @@ class ApartmentController extends Controller
      */
     public function show(string $slug)
     {
-        $apartment = Apartment::whereIsVisible(true)->whereSlug($slug)->with('services')->first();
-        if (!$apartment) {
-            return response()->json(null, 404);
-        }
-        if ($apartment->image) {
-            $apartment->image = url('storage/' . $apartment->image);
-        }
+        $apartment = Apartment::whereSlug($slug)->with('services')->first();
+        if (!$apartment) return response(null, 404);
 
-        // Aggiorna il contatore delle visite
+        // Verifica se esiste una visita dell'IP per questo appartamento nelle ultime 24 ore
         $ip = request()->ip();
-        $existingVisit = View::where('apartment_id', $apartment->id)->where('ip', $ip)->exists();
-        if (!$existingVisit) {
+        $lastVisit = View::where('apartment_id', $apartment->id)
+            ->where('ip', $ip)
+            ->latest()
+            ->first();
+
+        if (!$lastVisit || $lastVisit->created_at->diffInDays(Carbon::now()) >= 1) {
+            // Se non esiste una visita precedente o è passato un giorno dall'ultima visita, crea una nuova visita
             View::create([
                 'apartment_id' => $apartment->id,
                 'ip' => $ip
             ]);
         }
 
+        // Aggiorna la data dell'ultima visita
+        if ($lastVisit) {
+            $lastVisit->update(['created_at' => Carbon::now()]);
+        }
+
+        if ($apartment->image) $apartment->image = url('storage/' . $apartment->image);
         return response()->json($apartment);
     }
 
