@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Apartment\StoreApartmentRequest;
 use App\Http\Requests\Apartment\UpdateApartmentRequest;
 use App\Models\Apartment;
+use App\Models\Message;
 use App\Models\Service;
 use App\Models\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
@@ -201,5 +203,23 @@ class ApartmentController extends Controller
         $apartment->is_visible = !$apartment->is_visible;
         $apartment->save();
         return back();
+    }
+
+
+    //# ROTTA STATISTICHE
+
+    public function statistics(Apartment $apartment)
+    {
+        $views = View::select(DB::raw('COUNT(*) as views_count'), DB::raw('MONTH(created_at) as month'))
+            ->where('apartment_id', $apartment->id)
+            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->get();
+
+        $messages = Message::select(DB::raw('COUNT(*) as messages_count'), DB::raw('MONTH(created_at) as month'))
+            ->where('apartment_id', $apartment->id)
+            ->groupBy(DB::raw('MONTH(created_at)'))
+            ->get();
+
+        return view('admin.apartments.statistics', compact('apartment', 'views', 'messages'));
     }
 }
