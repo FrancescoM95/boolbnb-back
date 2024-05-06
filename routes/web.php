@@ -68,6 +68,11 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
     Route::patch('/messages/{message}/restore', [MessageController::class, 'restore'])->name('messages.restore')->withTrashed();
     // recupera tutti i messaggi
     Route::patch('/messages/{apartment}/massiverestore', [MessageController::class, 'massiverestore'])->name('messages.massiverestore');
+
+
+    //# Rotta statistiche
+
+    Route::get('/apartment/{apartment}/statistics/', [ApartmentController::class, 'statistics'])->name('apartments.statistics');
 });
 
 //* Rotte profilo

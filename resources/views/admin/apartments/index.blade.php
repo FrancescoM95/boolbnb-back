@@ -122,14 +122,15 @@
                                     </a>
                                 </div>
                                 <div>
-                                    <button class="learn-more">
+                                    <a href="{{ route('admin.apartments.statistics', $apartment->id) }}"
+                                        class="learn-more">
                                         <span class="circle" aria-hidden="true">
                                             <span class="icon arrow"></span>
                                         </span>
                                         <span class="button-text">
                                             Statistiche
                                             <i class="fa-solid fa-chart-line fa-xl"></i></span>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
 
