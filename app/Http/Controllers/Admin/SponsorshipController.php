@@ -76,7 +76,7 @@ class SponsorshipController extends Controller
             // Collega l'appartamento alla sponsorship e imposta expiration nella tabella pivot
             $apartment->sponsorships()->attach($data['sponsorship'], ['expiration' => $expiration]);
 
-            return redirect()->route('admin.apartments.index')->with('message', 'Appartamento sponsorizzato con successo!');
+            return redirect()->route('admin.apartments.index')->with('message', "$apartment->title sponsorizzato con successo per $sponsorship->duration ore!");
         } else {
             // Pagamento fallito
             return back()->with('message', 'Errore durante il pagamento: ' . $result->message);
