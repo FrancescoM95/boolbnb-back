@@ -21,7 +21,8 @@ class ApartmentController extends Controller
             ->whereIsVisible(true)
             ->orderBy('sponsored', 'desc') // Mette prima gli appartamenti sponsorizzati
             ->orderBy('created_at', 'desc') // Ordina per altri criteri, come la data di creazione
-            ->get();
+            // ->get();
+            ->paginate(8);
 
         return response()->json($apartments);
     }
