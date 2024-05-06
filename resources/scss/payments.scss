@@ -31,3 +31,23 @@
     background-color: #8bdda8;
     color: white;
 }
+
+.sponsor-card {
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+
+    &.card-pro {
+        background-color: red;
+    }
+
+    &.card-standard {
+        background-color: green;
+    }
+
+    &.card-deluxe {
+        background-color: gold;
+    }
+}

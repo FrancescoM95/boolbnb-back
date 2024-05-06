@@ -1,39 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Sponsorizza Appartamento</div>
-                    <div class="card-body">
-                        <form id="payment-form" method="POST" action="{{ route('admin.sponsorship.submit') }}">
-                            @csrf
-                            <div class="form-group">
-                                <label for="apartment">Seleziona l'appartamento da sponsorizzare:</label>
-                                <select name="apartment" id="apartment" class="form-control">
-                                    @foreach ($apartments as $apartment)
-                                        <option value="{{ $apartment->id }}">{{ $apartment->title }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="sponsorship">Seleziona il tipo di sponsorizzazione:</label>
-                                <select name="sponsorship" id="sponsorship" class="form-control">
-                                    @foreach ($sponsorships as $sponsorship)
-                                        <option value="{{ $sponsorship->id }}">{{ $sponsorship->label }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div id="dropin-container"></div>
-                            <button type="submit" id="submit-button" class="btn btn-primary">Paga e Sponsorizza</button>
-                            <button type="button" id="cancel-button" class="btn btn-secondary">Annulla</button>
-                        </form>
-                    </div>
-                </div>
+    <div class="container mt-3">
+        <div class="row">
+            @foreach ($sponsorships as $s)                
+            <div class="col-12 col-sm-4">
+                <label for="{{$s->id}}" role="button" class="sponsor-card card-{{$s->label}}">
+                    <h2>{{$s->label}}</h2>
+                </label>
+                <input type="radio" class="d-none" id="{{$s->id}}" name="sponsorship" value="{{$s->id}}">
             </div>
+            @endforeach
         </div>
     </div>
+
+
+    {{-- Braintree --}}
     <script src="https://js.braintreegateway.com/web/dropin/1.42.0/js/dropin.js"></script>
     <script>
         let form = document.getElementById('payment-form');
