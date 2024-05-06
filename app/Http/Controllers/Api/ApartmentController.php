@@ -101,7 +101,8 @@ class ApartmentController extends Controller
         // Ottieni gli appartamenti ordinati per distanza
         $apartments = Apartment::selectRaw(
             "*,
-            (6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance",
+            (6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance,
+            IF(id IN (SELECT apartment_id FROM apartment_sponsorship), 1, 0) AS sponsored",
             [$latitude, $longitude, $latitude]
         )
             ->whereBetween('latitude', [$minLatitude, $maxLatitude])
@@ -117,7 +118,8 @@ class ApartmentController extends Controller
         }
 
         // Esegui la query e ottieni gli appartamenti
-        $apartments = $apartments->orderBy('distance')->get();
+        $apartments = $apartments->orderBy('sponsored', 'desc') // Mette prima gli appartamenti sponsorizzati
+            ->orderBy('distance')->get();
 
         return response()->json($apartments);
     }
