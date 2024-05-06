@@ -1,65 +1,80 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mt-3">
-        <form method="POST" id="payment-form" action="{{ route('admin.sponsorship.submit') }}">
-            @csrf
-            <div class="row">
-                <div class="form-group">
-                    <label for="apartment">Seleziona l'appartamento da sponsorizzare:</label>
-                    <select name="apartment" id="apartment" class="form-control">
-                        @foreach ($apartments as $apartment)
-                            <option value="{{ $apartment->id }}">{{ $apartment->title }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                @foreach ($sponsorships as $s)
-                <div class="col-12 col-md-4 d-flex justify-content-center">
-                    <div class="spons">
-                        <label for="{{ $s->id }}" role="button" class="sponsor-card card-{{ $s->label }} content">
+<div class="container mt-3">
+    <form method="POST" id="payment-form" action="{{ route('admin.sponsorship.submit') }}">
+        @csrf
+        <div class="row">
+            <div class="form-group my-3">
+                <label for="apartment">Seleziona l'appartamento da sponsorizzare:</label>
+                <select name="apartment" id="apartment" class="form-control">
+                    @foreach ($apartments as $apartment)
+                    <option value="{{ $apartment->id }}">{{ $apartment->title }}</option>
+                    @endforeach
+                </select>
+            </div>
+            @foreach ($sponsorships as $s)
+            <div class="col-12 col-md-4 d-flex justify-content-center">
+                <div class="spons" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <label for="{{ $s->id }}" role="button" class="sponsor-card card-{{ $s->label }} content">
                             <span class="pricing">
                                 <span>
                                     {{ $s->duration }}<small>ore</small>
                                 </span>
                             </span>
                             <h2 class="title">{{ $s->label }}</h2>
-                            <div class="price">{{ $s->fee }}</div>
+                            <div class="price">{{ $s->fee }}€</div>
                             <div class="description">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur at
-                                posuere eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+                                Metti in evidenza il tuo appartamento con il pacchetto {{$s->label}} per <strong>{{$s->duration}}</strong> ore a soli <strong>{{$s->fee}}€</strong>
                             </div>
-                            <div class="btn btn-donate btn-spons mt-2 text-light">
-                                Compra ora
-                            </div>
-                        </label>
-                        <input type="radio" class="d-none" id="{{ $s->id }}" name="sponsorship"
-                        value="{{ $s->id }}">
-                    </div>
+                    </label>
+                        <input type="radio" class="d-none" id="{{ $s->id }}" name="sponsorship" value="{{ $s->id }}">
                 </div>
-                @endforeach
-                <div id="dropin-container"></div>
-                <button type="submit" id="submit-button" class="btn btn-primary">Paga e Sponsorizza</button>
-                <button type="button" id="cancel-button" class="btn btn-secondary">Annulla</button>
-            </form>
+            </div>
+            @endforeach
         </div>
     </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-    var sponsorCards = document.querySelectorAll('.spons');
-
-    sponsorCards.forEach(function(card) {
-        card.addEventListener('click', function() {
-            sponsorCards.forEach(function(c) {
-                c.classList.remove('active');
-            });
-            card.classList.add('active');
-        });
-    });
-    });
-    </script>
+    {{-- Modale Braintree --}}
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="dropin-container"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="submit-button" class="btn btn-primary">Paga e Sponsorizza</button>
+                    <button type="button" id="cancel-button" class="btn btn-secondary">Annulla</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>  
+</div>
 @endsection
 
+@section('scripts')
+{{-- Scale card active --}}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let sponsorCards = document.querySelectorAll('.spons');
+    
+        sponsorCards.forEach(function(card) {
+            card.addEventListener('click', function() {
+                sponsorCards.forEach(function(c) {
+                    c.classList.remove('active');
+                });
+                card.classList.add('active');
+            });
+        });
+    });
+</script>
+@endsection
+
+{{-- Braintree --}}
 @vite('resources/js/payment.js')
 
 

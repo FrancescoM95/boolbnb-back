@@ -1,5 +1,6 @@
 let form = document.getElementById('payment-form');
 let dropinContainer = document.getElementById('dropin-container');
+let buyBtn = document.querySelectorAll('.btn-buy')
 
 braintree.dropin.create({
     authorization: 'sandbox_hctvp4tg_4btxgk9wmhbyp96h',
