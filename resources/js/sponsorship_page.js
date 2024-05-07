@@ -1,3 +1,4 @@
+// Braintree
 let form = document.getElementById('payment-form');
 let dropinContainer = document.getElementById('dropin-container');
 let buyBtn = document.querySelectorAll('.btn-buy')
@@ -37,4 +38,29 @@ braintree.dropin.create({
     cancelButton.addEventListener('click', function () {
         dropinInstance.clearSelectedPaymentMethod();
     });
+});
+
+
+// Effetto card all'active
+document.addEventListener("DOMContentLoaded", function () {
+    let sponsorCards = document.querySelectorAll('.spons');
+
+    sponsorCards.forEach(function (card) {
+        card.addEventListener('click', function () {
+            sponsorCards.forEach(function (c) {
+                c.classList.remove('active');
+            });
+            card.classList.add('active');
+        });
+    });
+});
+
+// Appartamento selezionato dalla index impostato di default
+document.addEventListener("DOMContentLoaded", function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const apartmentId = urlParams.get('apartment_id');
+
+    if (apartmentId) {
+        document.getElementById('apartment').value = apartmentId;
+    }
 });

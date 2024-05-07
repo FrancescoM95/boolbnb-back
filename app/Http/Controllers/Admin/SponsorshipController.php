@@ -19,7 +19,7 @@ class SponsorshipController extends Controller
         $userId = auth()->id();
 
         // Ottieni solo gli appartamenti dell'utente autenticato
-        $apartments = Apartment::where('user_id', $userId)->get();
+        $apartments = Apartment::where('user_id', $userId)->whereDoesntHave('sponsorships')->get();
         $sponsorships = Sponsorship::all();
 
         return view('admin.apartments.sponsorship', compact('apartments', 'sponsorships'));

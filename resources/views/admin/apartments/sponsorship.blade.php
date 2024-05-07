@@ -56,25 +56,7 @@
 </div>
 @endsection
 
-@section('scripts')
-{{-- Scale card active --}}
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        let sponsorCards = document.querySelectorAll('.spons');
-    
-        sponsorCards.forEach(function(card) {
-            card.addEventListener('click', function() {
-                sponsorCards.forEach(function(c) {
-                    c.classList.remove('active');
-                });
-                card.classList.add('active');
-            });
-        });
-    });
-</script>
-@endsection
-
-{{-- Braintree --}}
-@vite('resources/js/payment.js')
+{{-- Braintree e Card effect --}}
+@vite('resources/js/sponsorship_page.js')
 
 
