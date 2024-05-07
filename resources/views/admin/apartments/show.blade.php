@@ -140,7 +140,7 @@
             </ul>
         </section>
         {{-- descrizione --}}
-        <section id="description" class="pb-3">
+        <section id="description" class="pb-3 d-lg-none">
             <h3 class="text-center pb-1 mb-3 bottom-border">Descrizione</h3>
             <p class="m-0">{{ $apartment->description }}</p>
         </section>
