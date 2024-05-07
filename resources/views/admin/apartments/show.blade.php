@@ -34,7 +34,7 @@
             </div>
             {{-- bottone indietro --}}
             {{-- # {{ url()->previous() }} --}}
-            <div class="d-flex justify-content-evenly pb-3">
+            <div class="d-flex justify-content-evenly my-3 py-3">
                 <a href="@if ($apartment->deleted_at) {{ route('admin.apartments.trash') }} @else {{ route('admin.apartments.index') }} @endif"
                     class="btn btn-secondary btn-sm"><i class="fas fa-arrow-left me-2 d-none d-sm-inline"></i>Indietro</a>
                 {{-- bottone modifica / elimina --}}
