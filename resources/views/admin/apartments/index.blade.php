@@ -68,7 +68,8 @@
                                     <img src="{{ $apartment->cover_image }}" alt="{{ $apartment->slug }}" class="img-fluid">
                                 @endif
                                 @if ($apartment->sponsorships->isNotEmpty())
-                                    <span class="badge"><i class="fas fa-crown"></i> Sponsorizzato</span>
+                                    <span class="badge"><i class="fas fa-crown"></i> <span class="dispnone-md-col">
+                                            Sponsorizzato</span></span>
                                 @endif
                             </div>
                         </td>
@@ -129,7 +130,7 @@
                                 <div>
 
                                     @foreach ($apartment->sponsorships as $sponsorship)
-                                        <p>Data di scadenza della sponsorizzazione:
+                                        <p class="text-sm">Scadenza sponsorizzazione:
                                             {{ Carbon\Carbon::parse($sponsorship->pivot->expiration)->format('d/m/Y H:i') }}
                                         </p>
                                     @endforeach
@@ -175,7 +176,7 @@
                                     aria-expanded="false" id="services_button">
                                     <i class="fa-solid fa-gear"></i>
                                 </button>
-                                <div class="dropdown-menu w-100 p-2">
+                                <div class="dropdown-menu w-100 p-2 action-dropdown">
                                     <div class="d-flex flex-column gap-2">
                                         <a href="{{ route('admin.apartments.show', $apartment->slug) }}"
                                             class="btn btn-sm btn-info text-white">
