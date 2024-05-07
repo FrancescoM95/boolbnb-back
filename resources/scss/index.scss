@@ -8,6 +8,7 @@ ul {
     width: 250px;
     height: 180px;
     overflow: hidden;
+    position: relative;
 }
 
 .img-box img {
@@ -484,10 +485,20 @@ table thead .thr {
     /* Imposta il bordo arrotondato */
 }
 
-.sponsor-buttons-box {
+#dropdown-buttons-box {
     display: none;
 }
 
+.img-box .badge {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    padding: 5px 10px;
+    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    color: rgb(121, 103, 3);
+    border-radius: 5px;
+    font-size: 12px;
+}
 
 @media (max-width: 1199px) {
 
@@ -503,8 +514,8 @@ table thead .thr {
         padding: 0 15px;
     }
 
-    .sponsor-buttons-box {
-        display: block;
+    #dropdown-buttons-box {
+        display: flex;
     }
 
     table .dispnone-md-col {

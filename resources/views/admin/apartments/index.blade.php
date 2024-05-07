@@ -67,6 +67,9 @@
                                 @else
                                     <img src="{{ $apartment->cover_image }}" alt="{{ $apartment->slug }}" class="img-fluid">
                                 @endif
+                                @if ($apartment->sponsorships->isNotEmpty())
+                                    <span class="badge"><i class="fas fa-crown"></i> Sponsorizzato</span>
+                                @endif
                             </div>
                         </td>
                         <td>
@@ -80,21 +83,21 @@
                                 <hr>
                             </div>
                             <div class="d-flex gap-3">
-                                <div>
+                                <div class="d-flex gap-1 align-items-center">
                                     <i class="fas fa-door-closed color-blue"></i> <span
                                         class="dispnone-lg-col">Stanze:</span>
                                     {{ $apartment->rooms }}
                                 </div>
-                                <div>
+                                <div class="d-flex gap-1 align-items-center">
                                     <i class="fas fa-bed color-blue"></i> <span class="dispnone-lg-col">Letti:</span>
                                     {{ $apartment->baths }}
                                 </div>
-                                <div>
+                                <div class="d-flex gap-1 align-items-center">
                                     <i class="fas fa-toilet color-blue"></i> <span class="dispnone-lg-col">Bagni:</span>
                                     {{ $apartment->beds }}
                                 </div>
                             </div>
-                            <div>
+                            <div class="d-flex gap-1 align-items-center">
                                 <i class="fas fa-ruler-combined color-blue"></i> m²: {{ $apartment->square_meters }}
                             </div>
                             <hr>
@@ -190,7 +193,7 @@
                                                 <i class="far fa-trash-can"></i> Elimina
                                             </button>
                                         </form>
-                                        <div class="sponsor-buttons-box d-flex flex-column gap-2">
+                                        <div class="flex-column gap-2" id="dropdown-buttons-box">
                                             <a href="{{ route('admin.sponsorship.show', ['apartment_id' => $apartment->id]) }}"
                                                 class="btn btn-sm text-white btn-warning">
                                                 <i class="fa-solid fa-crown"></i>
