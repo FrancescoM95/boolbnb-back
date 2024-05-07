@@ -49,36 +49,65 @@
                 </form>
             </div>
             {{-- Vari link --}}
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4 justify-content-center row-gap-2">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4 justify-content-evenly row-gap-2"
+                id="cards-links">
                 {{-- Sponsorizza --}}
-                <div class="row justify-content-center text-center flex-column">
-                    <p class="m-0">Vuoi aumentare la visibilità?</p>
-                    <p class="m-0"><a href="{{ route('admin.sponsorship.show') }}">Promuovi l'appartamento!
-                            <i class="fa-solid fa-crown"></i></a>
-                    </p>
+                <div class="col">
+                    <a href="{{ route('admin.sponsorship.show') }}">
+                        <div class="d-flex justify-content-between card align-items-center flex-row px-2">
+                            <div>
+                                <p class="m-0">Vuoi aumentare la visibilità?</p>
+                                <p class="m-0">Promuovi l'appartamento!
+                                    <i class="fa-solid fa-crown"></i>
+                                </p>
+                            </div>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </a>
                 </div>
                 {{-- Statistiche --}}
-                <div class="row justify-content-center text-center flex-column">
-                    <p class="m-0">Monitora l'andamento</p>
-                    <p class="m-0"><a href="{{ route('admin.apartments.statistics', $apartment->id) }}">Visualizza
-                            statistiche
-                            <i class="fa-solid fa-chart-line"></i></a>
+                <div class="col">
+                    <a href="{{ route('admin.apartments.statistics', $apartment->id) }}">
+                        <div class="d-flex justify-content-between card align-items-center flex-row px-2">
+                            <div>
+                                <p class="m-0">Monitora l'andamento</p>
+                                <p class="m-0">Visualizza
+                                    statistiche
+                                    <i class="fa-solid fa-chart-line"></i>
+                                </p>
+                            </div>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </a>
                 </div>
                 {{-- Messaggi --}}
-                <div class="row justify-content-center text-center flex-column">
-                    <p class="m-0">Hai {{ $apartment->message_count }}
-                        {{ $apartment->message_count == 1 ? 'messaggio' : 'messaggi' }} da leggere</p>
-                    <p class="m-0"><a href="{{ route('admin.messages.index', $apartment->id) }}">Vai all'inbox
-                            <i
-                                class="fa-solid {{ $apartment->message_count > 0 ? 'fa-envelope-open-text' : 'fa-envelope-circle-check' }}"></i></a>
-                    </p>
+                <div class="col">
+                    <a href="{{ route('admin.messages.index', $apartment->id) }}">
+                        <div class="d-flex justify-content-between card align-items-center flex-row px-2">
+                            <div>
+                                <p class="m-0">Hai {{ $apartment->message_count }}
+                                    {{ $apartment->message_count == 1 ? 'messaggio' : 'messaggi' }} da leggere</p>
+                                <p class="m-0">Vai all'inbox
+                                    <i
+                                        class="fa-solid {{ $apartment->message_count > 0 ? 'fa-envelope-open-text' : 'fa-envelope-circle-check' }}"></i>
+                                </p>
+                            </div>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </a>
                 </div>
                 {{-- Indirizzo --}}
-                <div class="row justify-content-center text-center flex-column">
-                    <p class="m-0">{{ $apartment->address }}</p>
-                    <p class="m-0"><a href="#apartment-map">Trova su mappa <i class="fa-solid fa-chevron-down"></i></a>
-                    </p>
-                    </p>
+                <div class="col">
+                    <a href="#apartment-map">
+                        <div class="d-flex justify-content-between card align-items-center flex-row px-2">
+                            <div>
+                                <p class="m-0">{{ $apartment->address }}</p>
+                                <p class="m-0">Trova su mappa <i class="fa-solid fa-map-location-dot"></i>
+                                </p>
+                            </div>
+                            <i class="fa-solid fa-arrow-down"></i>
+                        </div>
+                    </a>
                 </div>
             </div>
         </section>
@@ -107,13 +136,13 @@
             </ul>
         </section>
         {{-- descrizione --}}
-        <section id="description" class="pb-3 d-lg-none">
+        <section id="description" class="pb-3">
             <h3 class="text-center pb-1 mb-3 bottom-border">Descrizione</h3>
             <p class="m-0">{{ $apartment->description }}</p>
         </section>
         {{-- mappa --}}
         <section id="apartment-map" class="pb-3">
-            <h3 class="text-center pb-1 mb-3 bottom-border">Dove sarai</h3>
+            <h3 class="text-center pb-1 mb-3 bottom-border">Posizione</h3>
             <div id="map-div"></div>
         </section>
         {{-- messaggi --}}

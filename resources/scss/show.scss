@@ -28,6 +28,30 @@
     div::-webkit-scrollbar {
         display: none;
     }
+
+    #cards-links {
+        &>div>a {
+            text-decoration: none;
+            color: black;
+
+            &>div {
+                border: 1px solid #172BA1;
+                border-radius: 5px;
+                padding: 0.5rem 0;
+
+                .fa-arrow-right,
+                .fa-arrow-down {
+                    color: #172BA1;
+                    font-size: 1.2rem;
+                }
+            }
+
+            p {
+                padding: 0;
+            }
+
+        }
+    }
 }
 
 #details li,
