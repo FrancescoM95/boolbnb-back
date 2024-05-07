@@ -54,21 +54,23 @@
                 {{-- Sponsorizza --}}
                 <div class="col">
                     <a href="{{ route('admin.sponsorship.show') }}">
-                        <div class="d-flex justify-content-between card align-items-center flex-row px-2">
+                        <div
+                            class="d-flex justify-content-between justify-content-md-center text-md-center card align-items-center flex-row px-2">
                             <div>
                                 <p class="m-0">Vuoi aumentare la visibilità?</p>
                                 <p class="m-0">Promuovi l'appartamento!
                                     <i class="fa-solid fa-crown"></i>
                                 </p>
                             </div>
-                            <i class="fa-solid fa-arrow-right"></i>
+                            <i class="fa-solid fa-arrow-right d-md-none"></i>
                         </div>
                     </a>
                 </div>
                 {{-- Statistiche --}}
                 <div class="col">
                     <a href="{{ route('admin.apartments.statistics', $apartment->id) }}">
-                        <div class="d-flex justify-content-between card align-items-center flex-row px-2">
+                        <div
+                            class="d-flex justify-content-between justify-content-md-center card align-items-center flex-row px-2 text-md-center">
                             <div>
                                 <p class="m-0">Monitora l'andamento</p>
                                 <p class="m-0">Visualizza
@@ -76,14 +78,15 @@
                                     <i class="fa-solid fa-chart-line"></i>
                                 </p>
                             </div>
-                            <i class="fa-solid fa-arrow-right"></i>
+                            <i class="fa-solid fa-arrow-right d-md-none"></i>
                         </div>
                     </a>
                 </div>
                 {{-- Messaggi --}}
                 <div class="col">
                     <a href="{{ route('admin.messages.index', $apartment->id) }}">
-                        <div class="d-flex justify-content-between card align-items-center flex-row px-2">
+                        <div
+                            class="d-flex justify-content-between justify-content-md-center card align-items-center flex-row px-2 text-md-center">
                             <div>
                                 <p class="m-0">Hai {{ $apartment->message_count }}
                                     {{ $apartment->message_count == 1 ? 'messaggio' : 'messaggi' }} da leggere</p>
@@ -92,20 +95,21 @@
                                         class="fa-solid {{ $apartment->message_count > 0 ? 'fa-envelope-open-text' : 'fa-envelope-circle-check' }}"></i>
                                 </p>
                             </div>
-                            <i class="fa-solid fa-arrow-right"></i>
+                            <i class="fa-solid fa-arrow-right d-md-none"></i>
                         </div>
                     </a>
                 </div>
                 {{-- Indirizzo --}}
                 <div class="col">
                     <a href="#apartment-map">
-                        <div class="d-flex justify-content-between card align-items-center flex-row px-2">
+                        <div
+                            class="d-flex justify-content-between justify-content-md-center card align-items-center flex-row px-2 text-md-center">
                             <div>
                                 <p class="m-0">{{ $apartment->address }}</p>
                                 <p class="m-0">Trova su mappa <i class="fa-solid fa-map-location-dot"></i>
                                 </p>
                             </div>
-                            <i class="fa-solid fa-arrow-down"></i>
+                            <i class="fa-solid fa-arrow-down d-md-none"></i>
                         </div>
                     </a>
                 </div>
