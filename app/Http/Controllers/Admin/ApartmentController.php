@@ -9,6 +9,7 @@ use App\Models\Apartment;
 use App\Models\Message;
 use App\Models\Service;
 use App\Models\View;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -23,8 +24,11 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::whereUserId(Auth::user()->id)->get();
-
+        // Ottieni gli appartamenti dell'utente autenticato
+        $userId = auth()->id();
+        $apartments = Apartment::whereUserId($userId)->with(['sponsorships' => function ($query) {
+            $query->select('sponsorships.id', 'sponsorships.duration')->where('expiration', '>', Carbon::now());
+        }])->get();
         return view('admin.apartments.index', compact('apartments'));
     }
 
