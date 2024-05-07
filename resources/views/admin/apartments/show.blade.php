@@ -48,19 +48,36 @@
                             data-bs-target="#modal"></i>Elimina</button>
                 </form>
             </div>
-            {{-- Indirizzo con link su mappa --}}
-            <div class="row row-cols-1 row-cols-sm-2 justify-content-center row-gap-2">
+            {{-- Vari link --}}
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4 justify-content-center row-gap-2">
+                {{-- Sponsorizza --}}
                 <div class="row justify-content-center text-center flex-column">
-                    <p class="m-0">{{ $apartment->address }}</p>
-                    <p class="m-0"><a href="#apartment-map">Trova su mappa <i class="fa-solid fa-chevron-down"></i></a>
+                    <p class="m-0">Vuoi aumentare la visibilità?</p>
+                    <p class="m-0"><a href="{{ route('admin.sponsorship.show') }}">Promuovi l'appartamento!
+                            <i class="fa-solid fa-crown"></i></a>
                     </p>
                 </div>
+                {{-- Statistiche --}}
+                <div class="row justify-content-center text-center flex-column">
+                    <p class="m-0">Monitora l'andamento</p>
+                    <p class="m-0"><a href="{{ route('admin.apartments.statistics', $apartment->id) }}">Visualizza
+                            statistiche
+                            <i class="fa-solid fa-chart-line"></i></a>
+                </div>
+                {{-- Messaggi --}}
                 <div class="row justify-content-center text-center flex-column">
                     <p class="m-0">Hai {{ $apartment->message_count }}
                         {{ $apartment->message_count == 1 ? 'messaggio' : 'messaggi' }} da leggere</p>
                     <p class="m-0"><a href="{{ route('admin.messages.index', $apartment->id) }}">Vai all'inbox
                             <i
                                 class="fa-solid {{ $apartment->message_count > 0 ? 'fa-envelope-open-text' : 'fa-envelope-circle-check' }}"></i></a>
+                    </p>
+                </div>
+                {{-- Indirizzo --}}
+                <div class="row justify-content-center text-center flex-column">
+                    <p class="m-0">{{ $apartment->address }}</p>
+                    <p class="m-0"><a href="#apartment-map">Trova su mappa <i class="fa-solid fa-chevron-down"></i></a>
+                    </p>
                     </p>
                 </div>
             </div>
