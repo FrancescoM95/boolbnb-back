@@ -483,3 +483,47 @@ table thead .thr {
     border-top-right-radius: 8px;
     /* Imposta il bordo arrotondato */
 }
+
+.sponsor-buttons-box {
+    display: none;
+}
+
+
+@media (max-width: 1199px) {
+
+    table .dispnone-lg-col {
+        display: none;
+    }
+}
+
+
+/* Media query per tablet */
+@media (max-width: 991px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .sponsor-buttons-box {
+        display: block;
+    }
+
+    table .dispnone-md-col {
+        display: none;
+    }
+
+    /* Altri stili specifici per tablet qui */
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 767px) {
+
+    table .dispnone-md-col {
+        display: none;
+    }
+
+    .img-box {
+        width: 150px;
+        height: 100px;
+    }
+
+}

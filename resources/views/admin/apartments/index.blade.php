@@ -31,8 +31,8 @@
                     <th scope="col" class="col-1 thl">Pubblico</th>
                     <th scope="col" class="col-2">Cover</th>
                     <th scope="col" class="col-6">Info</th>
-                    <th scope="col" class="col-2">Statistiche</th>
-                    <th scope="col" class="col-1">Messaggi</th>
+                    <th scope="col" class="col-2 dispnone-md-col">Statistiche</th>
+                    <th scope="col" class="col-1 dispnone-md-col">Messaggi</th>
                     <th scope="col" class="col-auto thr"></th>
                 </tr>
             </thead>
@@ -81,15 +81,16 @@
                             </div>
                             <div class="d-flex gap-3">
                                 <div>
-                                    <i class="fas fa-door-closed color-blue"></i> Stanze:
+                                    <i class="fas fa-door-closed color-blue"></i> <span
+                                        class="dispnone-lg-col">Stanze:</span>
                                     {{ $apartment->rooms }}
                                 </div>
                                 <div>
-                                    <i class="fas fa-bed color-blue"></i> Letti:
+                                    <i class="fas fa-bed color-blue"></i> <span class="dispnone-lg-col">Letti:</span>
                                     {{ $apartment->baths }}
                                 </div>
                                 <div>
-                                    <i class="fas fa-toilet color-blue"></i> Bagni:
+                                    <i class="fas fa-toilet color-blue"></i> <span class="dispnone-lg-col">Bagni:</span>
                                     {{ $apartment->beds }}
                                 </div>
                             </div>
@@ -98,35 +99,36 @@
                             </div>
                             <hr>
                             @forelse ($apartment->services as $service)
-                                <span class="badge rounded-pill text-bg-bool p-2 mb-1">
-                                    <i class="{{ $service->icon }} fa-xl"></i>
+                                <span class="p-1 mb-1">
+                                    <i class="{{ $service->icon }} color-blue"></i>
 
                                 </span>
                             @empty
-                                <span class="badge rounded-pill text-bg-danger p-2 mb-1">
+                                <span class="badge rounded-pill text-bg-danger mb-1">
                                     <i class="fa-solid fa-ban fa-xl"></i>
                                 </span>
                             @endforelse
                         </td>
 
-                        <td>
+                        <td class="dispnone-md-col">
                             <div class="d-flex flex-column gap-5">
                                 @if ($apartment->sponsorships->isNotEmpty())
-                                <div>
-                                    <span class="badge bg-primary">Appartamento Sponsorizzato</span>
-                                </div>
-                            @else
-                                <div>
-                                    <a href="{{ route('admin.sponsorship.show', ['apartment_id' => $apartment->id]) }}" class="btn-premium">
-                                        <svg viewBox="0 0 576 512" height="1em" class="logoIcon">
-                                            <path
-                                                d="M309 106c11.4-7 19-19.7 19-34c0-22.1-17.9-40-40-40s-40 17.9-40 40c0 14.4 7.6 27 19 34L209.7 220.6c-9.1 18.2-32.7 23.4-48.6 10.7L72 160c5-6.7 8-15 8-24c0-22.1-17.9-40-40-40S0 113.9 0 136s17.9 40 40 40c.2 0 .5 0 .7 0L86.4 427.4c5.5 30.4 32 52.6 63 52.6H426.6c30.9 0 57.4-22.1 63-52.6L535.3 176c.2 0 .5 0 .7 0c22.1 0 40-17.9 40-40s-17.9-40-40-40s-40 17.9-40 40c0 9 3 17.3 8 24l-89.1 71.3c-15.9 12.7-39.5 7.5-48.6-10.7L309 106z">
-                                            </path>
-                                        </svg>
-                                        SPONSORIZZA
-                                    </a>
-                                </div>
-                            @endif
+                                    <div>
+                                        <span class="badge bg-primary">Appartamento Sponsorizzato</span>
+                                    </div>
+                                @else
+                                    <div>
+                                        <a href="{{ route('admin.sponsorship.show', ['apartment_id' => $apartment->id]) }}"
+                                            class="btn-premium">
+                                            <svg viewBox="0 0 576 512" height="1em" class="logoIcon">
+                                                <path
+                                                    d="M309 106c11.4-7 19-19.7 19-34c0-22.1-17.9-40-40-40s-40 17.9-40 40c0 14.4 7.6 27 19 34L209.7 220.6c-9.1 18.2-32.7 23.4-48.6 10.7L72 160c5-6.7 8-15 8-24c0-22.1-17.9-40-40-40S0 113.9 0 136s17.9 40 40 40c.2 0 .5 0 .7 0L86.4 427.4c5.5 30.4 32 52.6 63 52.6H426.6c30.9 0 57.4-22.1 63-52.6L535.3 176c.2 0 .5 0 .7 0c22.1 0 40-17.9 40-40s-17.9-40-40-40s-40 17.9-40 40c0 9 3 17.3 8 24l-89.1 71.3c-15.9 12.7-39.5 7.5-48.6-10.7L309 106z">
+                                                </path>
+                                            </svg>
+                                            SPONSORIZZA
+                                        </a>
+                                    </div>
+                                @endif
                                 <div>
                                     <a href="{{ route('admin.apartments.statistics', $apartment->id) }}"
                                         class="learn-more">
@@ -143,7 +145,7 @@
 
                         </td>
 
-                        <td>
+                        <td class="dispnone-md-col">
                             <a href="{{ route('admin.messages.index', $apartment->id) }}" class="btn btn-primary messages">
                                 <svg class="svg-icon" fill="none" height="22" viewBox="0 0 20 20" width="22"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -185,13 +187,31 @@
                                             @method('DELETE')
                                             <button class="btn btn-sm btn-danger w-100" data-bs-toggle="modal"
                                                 data-bs-target="#modal">
-                                                <i class="far fa-trash-can"></i>
-                                                Elimina
+                                                <i class="far fa-trash-can"></i> Elimina
                                             </button>
                                         </form>
+                                        <div class="sponsor-buttons-box d-flex flex-column gap-2">
+                                            <a href="{{ route('admin.sponsorship.show', ['apartment_id' => $apartment->id]) }}"
+                                                class="btn btn-sm text-white btn-warning">
+                                                <i class="fa-solid fa-crown"></i>
+                                                Sonsorizza
+                                            </a>
+                                            <a href="{{ route('admin.apartments.statistics', $apartment->id) }}"
+                                                class="btn btn-sm btn-success text-white statistics-button">
+                                                <i class="fa-solid fa-chart-line"></i>
+                                                Statistiche
+                                            </a>
+                                            <a href="{{ route('admin.messages.index', $apartment->id) }}"
+                                                class="btn btn-sm btn-primary messages-button">
+                                                <i class="fa-regular fa-message"></i>
+                                                Messaggi
+                                                <span class="lable">{{ $apartment->message_count }}</span>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
 
                         </td>
                     </tr>
