@@ -45,7 +45,7 @@ class MessageController extends Controller
     public function destroy(Apartment $apartment, Message $message)
     {
         $message->delete();
-        return to_route('admin.messages.index', compact('apartment'));
+        return to_route('admin.messages.index', compact('apartment'))->with('message', 'Messaggio archiviato con successo')->with('type', 'warning');;
     }
 
     //* Rotta Visualizzato
@@ -71,7 +71,7 @@ class MessageController extends Controller
     public function restore(Message $message)
     {
         $message->restore();
-        return back();
+        return back()->with('message', 'Messaggio ripristinato con successo')->with('type', 'success');
     }
 
     // restore massivo
@@ -81,6 +81,6 @@ class MessageController extends Controller
         foreach ($messages as $message) {
             $message->restore();
         }
-        return to_route('admin.messages.index', compact('apartment'));
+        return to_route('admin.messages.index', compact('apartment'))->with('message', 'Messaggio ripristinato con successo')->with('type', 'success');
     }
 }
