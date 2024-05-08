@@ -154,7 +154,7 @@ class ApartmentController extends Controller
     public function destroy(Apartment $apartment)
     {
         $apartment->delete();
-        return to_route('admin.apartments.index');
+        return to_route('admin.apartments.index')->with('message', 'Appartamento eliminato con successo')->with('type', 'warning');
     }
 
     // * Rotte Soft Delete

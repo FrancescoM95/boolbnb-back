@@ -45,7 +45,7 @@ class MessageController extends Controller
     public function destroy(Apartment $apartment, Message $message)
     {
         $message->delete();
-        return to_route('admin.messages.index', compact('apartment'))->with('message', 'Messaggio archiviato con successo')->with('type', 'warning');;
+        return to_route('admin.messages.index', compact('apartment'))->with('message', 'Messaggio archiviato con successo')->with('type', 'warning');
     }
 
     //* Rotta Visualizzato
