@@ -37,11 +37,16 @@ class SponsorshipController extends Controller
         // Trova l'appartamento
         $apartment = Apartment::findOrFail($data['apartment']);
 
+        // Verifica se l'appartamento ha già una sponsorizzazione attiva
+        if ($apartment->sponsorships()->where('expiration', '>', now())->exists()) {
+            return back()->with('message', 'Questo appartamento ha già una sponsorizzazione attiva.');
+        }
+
         // Trova la sponsorizzazione selezionata
         $sponsorship = Sponsorship::findOrFail($data['sponsorship']);
         $durationHours = $sponsorship->duration;
 
-        // Imposta il costo della sponsorizzazione
+        // Imposta il costo della sposorizzazione
         $amount = $sponsorship->fee;
 
         // Calcola il costo della sponsorizzazione
@@ -65,25 +70,11 @@ class SponsorshipController extends Controller
 
         // Verifica se il pagamento è avvenuto con successo
         if ($result->success) {
-            // Calcola la nuova scadenza
-            $newExpiration = now()->addHours($durationHours);
+            // Calcola la scadenza 24 ore dopo la sponsorizzazione settata con orario UTC
+            $expiration = now()->addHours($durationHours)->setTimezone('Europe/Rome');
 
-            // Se l'appartamento ha già una sponsorizzazione attiva, aggiungi la durata della nuova sponsorizzazione
-            if ($apartment->sponsorships()->where('expiration', '>', now())->exists()) {
-                $existingExpiration = $apartment->sponsorships()->max('expiration');
-                $newExpiration = Carbon::parse($existingExpiration)->addHours($durationHours);
-            }
-
-            // Trova l'associazione tra appartamento e sponsorizzazione
-            $pivot = $apartment->sponsorships()->where('sponsorship_id', $data['sponsorship'])->first();
-
-            if ($pivot) {
-                // Aggiorna la scadenza dell'associazione esistente
-                $pivot->update(['expiration' => $newExpiration]);
-            } else {
-                // Se non esiste l'associazione, crea una nuova con la scadenza calcolata
-                $apartment->sponsorships()->attach($data['sponsorship'], ['expiration' => $newExpiration]);
-            }
+            // Collega l'appartamento alla sponsorship e imposta expiration nella tabella pivot
+            $apartment->sponsorships()->attach($data['sponsorship'], ['expiration' => $expiration]);
 
             return redirect()->route('admin.apartments.index')->with('message', "$apartment->title sponsorizzato con successo per $sponsorship->duration ore!");
         } else {
