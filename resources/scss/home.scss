@@ -1,7 +1,7 @@
 .home-bg {
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 15px;
-    box-shadow: 0 0 2px #172BA1;
+    img {
+        filter: drop-shadow(3px 3px 5px rgba(255, 255, 255, 0.919))
+    }
 
     p {
         font-size: 22px;
@@ -12,6 +12,9 @@
         text-align: center;
     }
 
+    .btn-donate {
+        box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.807), 0px 5px 5px -1px rgba(58, 125, 233, 0.25), inset 4px 4px 8px rgba(175, 230, 255, 0.5), inset -4px -4px 8px rgba(19, 95, 216, 0.35);
+    }
 }
 
 .btn-donate {
