@@ -7,10 +7,11 @@
         <header class="mt-3">
             <h1 class="text-center m-0">{{ $apartment->title }}</h1>
         </header>
-        {{-- immagine --}}
+        {{-- eyecatcher --}}
         <section id="eye-catcher" class="pb-3">
-            <div class="my-3 d-flex justify-content-evenly">
-                <div class="row justify-content-center img-container col-lg-8 overflow-hidden">
+            <div class="d-flex justify-content-evenly">
+                {{-- immagine --}}
+                <div class="d-flex justify-content-center img-container col-lg-8 overflow-hidden">
                     @php
                         $imageName =
                             'apartment_images/' .
@@ -21,9 +22,9 @@
                     @endphp
 
                     @if (Storage::disk('public')->exists($imageName))
-                        <img src="{{ $imageUrl }}" alt="{{ $apartment->slug }}">
+                        <img src="{{ $imageUrl }}" alt="{{ $apartment->slug }}" class="img-fluid">
                     @else
-                        <img src="{{ $apartment->cover_image }}" alt="{{ $apartment->slug }}">
+                        <img src="{{ $apartment->cover_image }}" alt="{{ $apartment->slug }}" class="img-fluid">
                     @endif
                 </div>
                 {{-- Vari link --}}
@@ -92,9 +93,9 @@
                     </div>
                 </div>
             </div>
-            {{-- bottone indietro --}}
-            {{-- # {{ url()->previous() }} --}}
-            <div class="d-flex justify-content-evenly py-3">
+            {{-- Bottoni --}}
+            <div class="d-flex justify-content-evenly mt-3">
+                {{-- bottone indietro --}}
                 <a href="@if ($apartment->deleted_at) {{ route('admin.apartments.trash') }} @else {{ route('admin.apartments.index') }} @endif"
                     class="btn btn-secondary btn-sm"><i class="fas fa-arrow-left me-2 d-none d-sm-inline"></i>Indietro</a>
                 {{-- bottone modifica / elimina --}}
@@ -109,7 +110,7 @@
                 </form>
             </div>
             {{-- Vari link --}}
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4 justify-content-evenly row-gap-2 d-lg-none"
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4 justify-content-evenly row-gap-2 d-lg-none mt-3"
                 id="cards-links">
                 {{-- Sponsorizza --}}
                 <div class="col">
@@ -200,7 +201,7 @@
             </ul>
         </section>
         {{-- descrizione --}}
-        <section id="description" class="pb-3 d-lg-none">
+        <section id="description" class="pb-3">
             <h3 class="text-center pb-1 mb-3 bottom-border">Descrizione</h3>
             <p class="m-0">{{ $apartment->description }}</p>
         </section>
