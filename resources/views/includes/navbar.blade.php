@@ -29,9 +29,15 @@
                     @endauth
                 </li>
                 @auth
-                    <a class="nav-link @if (Request::is('admin/apartments*') && !Request::is('admin/apartments/trash*')) active @endif"
-                        href="{{ route('admin.apartments.index') }}">I miei appartamenti
-                    </a>
+                    <li class="nav-item">
+                        <a class="nav-link @if (Request::is('admin/apartments*') && !Request::is('admin/apartments/trash*')) active @endif"
+                            href="{{ route('admin.apartments.index') }}">I miei appartamenti
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @if (Route::is('admin.sponsorship.show')) active @endif"
+                            href="{{ route('admin.sponsorship.show') }}">Sponsorizza
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link @if (Route::is('admin.apartments.trash')) active @endif"
