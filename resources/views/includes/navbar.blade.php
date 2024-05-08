@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-    <div class="container">
+    <div class="container-fluid">
         <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
             <div class="">
                 <img src="{{ Vite::asset('resources/img/boolbnb-logo.png') }}" alt="Logo" style="height: 50px">
