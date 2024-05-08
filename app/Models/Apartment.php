@@ -52,6 +52,18 @@ class Apartment extends Model
         return $this->messages()->count();
     }
 
+    public function getMessageToRead()
+    {
+        return $this->messages()->whereIsRead(false)->count();
+    }
+
+    public function getSponsorshipExpirationsDate()
+    {
+        return $this->sponsorships()->pluck('expiration')->map(function ($date) {
+            return Carbon::parse($date)->format('H:i d/m/Y');
+        })->implode(', ');
+    }
+
     public function views()
     {
         return $this->hasMany(View::class);

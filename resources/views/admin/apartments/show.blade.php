@@ -7,10 +7,11 @@
         <header class="mt-3">
             <h1 class="text-center m-0">{{ $apartment->title }}</h1>
         </header>
-        {{-- immagine --}}
+        {{-- eyecatcher --}}
         <section id="eye-catcher" class="pb-3">
-            <div class="mb-3 row justify-content-center">
-                <div class="row justify-content-center img-container col-lg-8 overflow-hidden">
+            <div class="d-flex justify-content-evenly">
+                {{-- immagine --}}
+                <div class="d-flex justify-content-center img-container col-lg-8 overflow-hidden">
                     @php
                         $imageName =
                             'apartment_images/' .
@@ -21,20 +22,90 @@
                     @endphp
 
                     @if (Storage::disk('public')->exists($imageName))
-                        <img src="{{ $imageUrl }}" alt="{{ $apartment->slug }}">
+                        <img src="{{ $imageUrl }}" alt="{{ $apartment->slug }}" class="img-fluid">
                     @else
-                        <img src="{{ $apartment->cover_image }}" alt="{{ $apartment->slug }}">
+                        <img src="{{ $apartment->cover_image }}" alt="{{ $apartment->slug }}" class="img-fluid">
                     @endif
                 </div>
-                {{-- descrizione a comparsa in large --}}
-                <div id="description" class="d-none d-lg-block col-lg-4 pt-1 ps-4">
-                    <h3 class="text-center pb-1 mb-2 bottom-border">Descrizione</h3>
-                    <p class="m-0">{{ $apartment->description }}</p>
+                {{-- Vari link --}}
+                <div class="d-none d-lg-flex row-cols-1 justify-content-evenly flex-column" id="cards-links">
+                    {{-- Sponsorizza --}}
+                    <div class="col">
+                        <a href="{{ route('admin.sponsorship.show') }}">
+                            <div
+                                class="d-flex justify-content-between justify-content-md-center text-md-center card align-items-center flex-row px-2">
+                                @if ($apartment->getSponsorshipExpirationsDate())
+                                    <div class="sponsor-card">
+                                        <p class="m-0">Sponsorizzato fino al:</p>
+                                        <p class="m-0">{{ $apartment->getSponsorshipExpirationsDate() }}
+                                            <i class="fa-solid fa-crown"></i>
+                                        </p>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right d-md-none"></i>
+                                @else
+                                    <div>
+                                        <p class="m-0">Vuoi aumentare la visibilità?</p>
+                                        <p class="m-0">Sponsorizza l'appartamento!
+                                            <i class="fa-solid fa-crown"></i>
+                                        </p>
+                                    </div>
+                                @endif
+                                <i class="fa-solid fa-arrow-right d-md-none"></i>
+                            </div>
+                        </a>
+                    </div>
+                    {{-- Messaggi --}}
+                    <div class="col">
+                        <a href="{{ route('admin.messages.index', $apartment->id) }}">
+                            <div
+                                class="d-flex justify-content-between justify-content-md-center card align-items-center flex-row px-2 text-md-center">
+                                <div>
+                                    <p class="m-0">Hai {{ $apartment->getMessageToRead() }}
+                                        {{ $apartment->getMessageToRead() == 1 ? 'messaggio' : 'messaggi' }} da leggere</p>
+                                    <p class="m-0">Vai all'inbox
+                                        <i
+                                            class="fa-solid {{ $apartment->getMessageToRead() > 0 ? 'fa-envelope-open-text' : 'fa-envelope-circle-check' }}"></i>
+                                    </p>
+                                </div>
+                                <i class="fa-solid fa-arrow-right d-md-none"></i>
+                            </div>
+                        </a>
+                    </div>
+                    {{-- Statistiche --}}
+                    <div class="col">
+                        <a href="{{ route('admin.apartments.statistics', $apartment->id) }}">
+                            <div
+                                class="d-flex justify-content-between justify-content-md-center card align-items-center flex-row px-2 text-md-center">
+                                <div>
+                                    <p class="m-0">Monitora l'andamento</p>
+                                    <p class="m-0">Visualizza
+                                        statistiche
+                                        <i class="fa-solid fa-chart-line"></i>
+                                    </p>
+                                </div>
+                                <i class="fa-solid fa-arrow-right d-md-none"></i>
+                            </div>
+                        </a>
+                    </div>
+                    {{-- Indirizzo --}}
+                    <div class="col">
+                        <a href="#apartment-map">
+                            <div
+                                class="d-flex justify-content-between justify-content-md-center card align-items-center flex-row px-2 text-md-center">
+                                <div>
+                                    <p class="m-0">{{ $apartment->address }}</p>
+                                    <p class="m-0">Trova su mappa <i class="fa-solid fa-map-location-dot"></i>
+                                    </p>
+                                </div>
+                                <i class="fa-solid fa-arrow-down d-md-none"></i>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
-            {{-- bottone indietro --}}
-            {{-- # {{ url()->previous() }} --}}
-            <div class="d-flex justify-content-evenly my-3 py-3">
+            {{-- Bottoni --}}
+            <div class="d-flex justify-content-evenly mt-3">
+                {{-- bottone indietro --}}
                 <a href="@if ($apartment->deleted_at) {{ route('admin.apartments.trash') }} @else {{ route('admin.apartments.index') }} @endif"
                     class="btn btn-secondary btn-sm"><i class="fas fa-arrow-left me-2 d-none d-sm-inline"></i>Indietro</a>
                 {{-- bottone modifica / elimina --}}
@@ -49,17 +120,43 @@
                 </form>
             </div>
             {{-- Vari link --}}
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4 justify-content-evenly row-gap-2"
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4 justify-content-evenly row-gap-2 d-lg-none mt-3"
                 id="cards-links">
                 {{-- Sponsorizza --}}
                 <div class="col">
                     <a href="{{ route('admin.sponsorship.show') }}">
                         <div
                             class="d-flex justify-content-between justify-content-md-center text-md-center card align-items-center flex-row px-2">
+                            @if ($apartment->getSponsorshipExpirationsDate())
+                                <div class="sponsor-card">
+                                    <p class="m-0">Sponsorizzato fino al:</p>
+                                    <p class="m-0">{{ $apartment->getSponsorshipExpirationsDate() }}
+                                        <i class="fa-solid fa-crown"></i>
+                                    </p>
+                                </div>
+                                <i class="fa-solid fa-arrow-right d-md-none"></i>
+                            @else
+                                <div>
+                                    <p class="m-0">Vuoi aumentare la visibilità?</p>
+                                    <p class="m-0">Sponsorizza l'appartamento!
+                                        <i class="fa-solid fa-crown"></i>
+                                    </p>
+                                </div>
+                            @endif
+                        </div>
+                    </a>
+                </div>
+                {{-- Messaggi --}}
+                <div class="col">
+                    <a href="{{ route('admin.messages.index', $apartment->id) }}">
+                        <div
+                            class="d-flex justify-content-between justify-content-md-center card align-items-center flex-row px-2 text-md-center">
                             <div>
-                                <p class="m-0">Vuoi aumentare la visibilità?</p>
-                                <p class="m-0">Promuovi l'appartamento!
-                                    <i class="fa-solid fa-crown"></i>
+                                <p class="m-0">Hai {{ $apartment->getMessageToRead() }}
+                                    {{ $apartment->getMessageToRead() == 1 ? 'messaggio' : 'messaggi' }} da leggere</p>
+                                <p class="m-0">Vai all'inbox
+                                    <i
+                                        class="fa-solid {{ $apartment->getMessageToRead() > 0 ? 'fa-envelope-open-text' : 'fa-envelope-circle-check' }}"></i>
                                 </p>
                             </div>
                             <i class="fa-solid fa-arrow-right d-md-none"></i>
@@ -76,23 +173,6 @@
                                 <p class="m-0">Visualizza
                                     statistiche
                                     <i class="fa-solid fa-chart-line"></i>
-                                </p>
-                            </div>
-                            <i class="fa-solid fa-arrow-right d-md-none"></i>
-                        </div>
-                    </a>
-                </div>
-                {{-- Messaggi --}}
-                <div class="col">
-                    <a href="{{ route('admin.messages.index', $apartment->id) }}">
-                        <div
-                            class="d-flex justify-content-between justify-content-md-center card align-items-center flex-row px-2 text-md-center">
-                            <div>
-                                <p class="m-0">Hai {{ $apartment->message_count }}
-                                    {{ $apartment->message_count == 1 ? 'messaggio' : 'messaggi' }} da leggere</p>
-                                <p class="m-0">Vai all'inbox
-                                    <i
-                                        class="fa-solid {{ $apartment->message_count > 0 ? 'fa-envelope-open-text' : 'fa-envelope-circle-check' }}"></i>
                                 </p>
                             </div>
                             <i class="fa-solid fa-arrow-right d-md-none"></i>
@@ -140,7 +220,7 @@
             </ul>
         </section>
         {{-- descrizione --}}
-        <section id="description" class="pb-3 d-lg-none">
+        <section id="description" class="pb-3">
             <h3 class="text-center pb-1 mb-3 bottom-border">Descrizione</h3>
             <p class="m-0">{{ $apartment->description }}</p>
         </section>
@@ -149,19 +229,6 @@
             <h3 class="text-center pb-1 mb-3 bottom-border">Posizione</h3>
             <div id="map-div"></div>
         </section>
-        {{-- messaggi --}}
-        {{-- <section id="messages" class="pb-3">
-            <h3 class="text-center pb-1 mb-3 bottom-border">Inbox messaggi
-            </h3>
-            @forelse ($apartment->messages as $message)
-                <p>{{ $message->name }}</p>
-                <p>{{ $message->surname }}</p>
-                <p>{{ $message->email }}</p>
-                <p>{{ $message->text }}</p>
-            @empty
-                <p>Non ci sono messaggi al momento...</p>
-            @endforelse
-        </section> --}}
     </div>
     {{-- coordinate NASCOSTE per recupero in js --}}
     <div class="d-none">
