@@ -151,7 +151,8 @@
                         </td>
 
                         <td class="dispnone-md-col">
-                            <a href="{{ route('admin.messages.index', $apartment->id) }}" class="btn btn-primary messages">
+                            <a href="{{ route('admin.messages.index', $apartment->id) }}"
+                                class="btn btn-sm btn-message messages">
                                 <svg class="svg-icon" fill="none" height="22" viewBox="0 0 20 20" width="22"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <g stroke="#fff" stroke-linecap="round" stroke-width="1.5">

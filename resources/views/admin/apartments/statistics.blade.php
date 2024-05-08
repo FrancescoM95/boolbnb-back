@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container my-4">
-        <h2>Statistiche relative a {{ $apartment->title }}</h2>
+        <h2>Statiche per {{ $apartment->title }}</h2>
         <div class="chart-container" style="height: 550px">
             <canvas id="myCombinedChart"></canvas>
         </div>

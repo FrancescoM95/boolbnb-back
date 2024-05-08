@@ -195,6 +195,71 @@ hr {
     transform: translateX(16px);
 }
 
+//* MESSAGE BUTTON
+.btn-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 12px;
+    gap: 8px;
+    height: 28px;
+    width: 124px;
+    border: none;
+    background: #056bfae0;
+    border-radius: 20px;
+    cursor: pointer;
+
+    .lable {
+        line-height: 20px;
+        font-size: 17px;
+        color: #fff;
+        font-family: sans-serif;
+        letter-spacing: 1px;
+    }
+}
+
+
+.btn-message:hover {
+    background: #056DFA;
+}
+
+.btn-message:hover .svg-icon {
+    animation: msg 2s linear infinite;
+}
+
+@keyframes msg {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    15% {
+        transform: translateX(1px);
+    }
+
+    30% {
+        transform: scale(1.1);
+    }
+
+    45% {
+        transform: translateY(1px);
+    }
+
+    60% {
+        transform: translateY(0px);
+    }
+
+    75% {
+        transform: scale(1);
+    }
+
+    90% {
+        transform: translateX(-px);
+    }
+
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+}
 
 //* TRASH BUTTON
 .btn-trash {
@@ -322,7 +387,7 @@ hr {
     pointer-events: none;
 }
 
-// BOTTONE SPONSORIZZAZIONI
+//* BOTTONE SPONSORIZZAZIONI
 .btn-premium {
     width: 180px;
     height: 28px;
@@ -357,7 +422,7 @@ hr {
 }
 
 
-//BOTTONE STATISTICHE
+//* BOTTONE STATISTICHE
 .learn-more {
     position: relative;
     display: inline-block;
