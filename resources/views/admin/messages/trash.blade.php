@@ -21,11 +21,11 @@
         <table class="table table-striped table-hover my-3">
             <thead>
                 <tr>
-                    <th scope="col" class="col-2">Nome e Cognome</th>
-                    <th scope="col" class="col-2">Email</th>
-                    <th scope="col" class="col-3">Messaggio</th>
                     <th scope="col" class="col-2">Data</th>
-                    <th scope="col" class="col-2"></th>
+                    <th scope="col" class="col-3 d-none d-lg-table-cell">Nome e Cognome</th>
+                    <th scope="col" class="col-2">Email</th>
+                    <th scope="col" class="col-3 d-none d-md-table-cell">Messaggio</th>
+                    <th scope="col" class="col-1"></th>
                 </tr>
             </thead>
             <tbody>
@@ -38,11 +38,14 @@
                 @else
                     @foreach ($messages as $message)
                         <tr>
-                            <td>{{ $message->name }} {{ $message->surname }}</td>
+                        <tr>
+                            <td class="d-md-none">{{ $message->created_at->format('d/m/Y') }}</td>
+                            <td class="d-none d-md-table-cell">{{ $message->created_at->format('d/m/Y H:i') }}</td>
+                            <td class="d-none d-lg-table-cell">{{ $message->name }} {{ $message->surname }}</td>
                             <td>{{ $message->email }}</td>
-                            <td>{{ $message->getAbstract($message->text) }}{{ strlen($message->text) > 20 ? ' [...]' : '' }}
+                            <td class="d-none d-md-table-cell">
+                                {{ $message->getAbstract($message->text) }}{{ strlen($message->text) > 20 ? ' [...]' : '' }}
                             </td>
-                            <td>{{ $message->created_at->format('d/m/Y H:i') }}</td>
                             <td class="text-center d-flex justify-content-center gap-2">
                                 {{-- Pulsante restore --}}
                                 <form title="Ripristina" action="{{ route('admin.messages.restore', $message->id) }}"

@@ -40,25 +40,26 @@
                                         aria-expanded="false" id="messages_button">
                                         <i class="fa-solid fa-gear"></i>
                                     </button>
-                                    <div class="dropdown-menu w-100 p-2 action-dropdown">
-                                        <div class="d-flex flex-column gap-2">
-                                            <form action="{{ route('admin.messages.read', $message->id) }}" method="POST">
+                                    <div class="dropdown-menu p-2 action-dropdown">
+                                        <div class="d-flex flex-column gap-2 align-items-stretch">
+                                            <form action="{{ route('admin.messages.read', $message->id) }}" method="POST"
+                                                class="w-100">
                                                 @csrf
                                                 @method('PATCH')
                                                 <button
-                                                    class="btn btn-sm {{ $message->is_read ? 'btn-secondary' : 'btn-success' }}">{{ $message->is_read ? 'Letto' : 'Da leggere' }}</button>
+                                                    class="btn btn-sm {{ $message->is_read ? 'btn-secondary' : 'btn-success' }} w-100">{{ $message->is_read ? 'Letto' : 'Da leggere' }}</button>
                                             </form>
                                             <a href="{{ route('admin.messages.show', [$apartment->id, $message->id]) }}"
-                                                class="btn btn-sm btn-primary d-block" title="Dettagli"><i
+                                                class="btn btn-sm btn-primary" title="Dettagli"><i
                                                     class="far fa-eye"></i></a>
-                                            <a href="mailto:{{ $message->email }}" class="btn btn-sm btn-success d-block"
+                                            <a href="mailto:{{ $message->email }}" class="btn btn-sm btn-success"
                                                 title="Rispondi via email"><i class="fas fa-reply "></i></a>
                                             <form
                                                 action="{{ route('admin.messages.destroy', [$apartment->id, $message->id]) }}"
-                                                method="POST">
+                                                method="POST" class="w-100">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn btn-sm btn-warning" title="Archivia"><i
+                                                <button class="btn btn-sm btn-warning w-100" title="Archivia"><i
                                                         class="fa-solid fa-envelopes-bulk"></i></button>
                                             </form>
                                         </div>
