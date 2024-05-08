@@ -30,15 +30,15 @@ class ServiceSeeder extends Seeder
             ['label' => 'accesso disabili', 'icon' => 'fa-solid fa-wheelchair'],
             ['label' => 'pulizia stanza', 'icon' => 'fa-solid fa-spray-can'],
             ['label' => 'TV', 'icon' => 'fa-solid fa-tv'],
-            ['label' => 'Aria condizionata', 'icon' => 'fa-solid fa-wind'],
-            ['label' => 'Riscaldamento', 'icon' => 'fa-solid fa-thermometer'],
+            ['label' => 'aria condizionata', 'icon' => 'fa-solid fa-wind'],
+            ['label' => 'riscaldamento', 'icon' => 'fa-solid fa-thermometer'],
         ];
 
         foreach ($services as $service) {
             $new_service = new Service();
             $new_service->fill($service);
             $new_service->save();
-            $service_apartments = array_filter($apartment_ids, fn ()=> rand(0,1));
+            $service_apartments = array_filter($apartment_ids, fn () => rand(0, 1));
             $new_service->apartments()->attach($service_apartments);
         }
     }

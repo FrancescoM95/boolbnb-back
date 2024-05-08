@@ -17,7 +17,7 @@
     <div class="row mb-5">
 
         {{-- * TITOLO --}}
-        <div class="col-11">
+        <div class="col-10">
             <div class="mb-3">
                 <label for="title" class="form-label">Titolo<span class="text-danger">*</span></label>
                 <input type="text"
@@ -48,7 +48,7 @@
         {{-- * CAMERE --}}
         <div class="col-3">
             <div class="mb-3">
-                <label for="rooms" class="form-label">Numero Camere<span class="text-danger">*</span></label>
+                <label for="rooms" class="form-label">N° Camere<span class="text-danger">*</span></label>
                 <input type="number" min="1"
                     class="form-control @error('rooms') is-invalid
               @elseif (old('rooms', '')) is-valid 
@@ -65,7 +65,7 @@
         {{-- * LETTI --}}
         <div class="col-3">
             <div class="mb-3">
-                <label for="beds" class="form-label">Numero letti<span class="text-danger">*</span></label>
+                <label for="beds" class="form-label">N° letti<span class="text-danger">*</span></label>
                 <input type="number" min="1"
                     class="form-control @error('beds') is-invalid
               @elseif (old('beds', '')) is-valid 
@@ -82,7 +82,7 @@
         {{-- * BAGNI --}}
         <div class="col-3">
             <div class="mb-3">
-                <label for="baths" class="form-label">Numero Bagni<span class="text-danger">*</span></label>
+                <label for="baths" class="form-label">N° Bagni<span class="text-danger">*</span></label>
                 <input type="number" min="1"
                     class="form-control @error('baths') is-invalid
               @elseif (old('baths', '')) is-valid 
@@ -155,7 +155,7 @@
                                 <div class="checkmark"></div>
                                 <label class="form-check-label" for="{{ "tech-$service->id" }}" role="button">
                                     <i class="{{ $service->icon }} mx-2"></i>
-                                    {{ $service->label }}
+                                    <span class="d-none d-lg-inline">{{ $service->label }}</span>
                                 </label>
                             </label>
                         </div>
@@ -199,7 +199,7 @@
                 <div class="form-text">Carica un file immagine</div>
             @enderror
         </div>
-        <div class="col-1 d-flex justify-content-center align-items-center">
+        <div class="col-1 d-flex justify-content-center align-items-center d-none d-lg-flex">
             <div>
                 <img src="{{ $apartment->cover_image ? $apartment->printImage() : 'https://marcolanci.it/boolean/assets/placeholder.png' }}"
                     class="img-fluid" alt="{{ $apartment->cover_image ? $apartment->title : 'preview' }}"
