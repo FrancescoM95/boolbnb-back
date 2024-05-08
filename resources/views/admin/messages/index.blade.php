@@ -5,7 +5,7 @@
         <h1 class="my-3 text-center">Messaggi per {{ $apartment->title }}</h1>
         {{-- indietro e archiviati --}}
         <div class="d-flex justify-content-between">
-            <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary"><i
+            <a href="{{ route('admin.apartments.show', $apartment->slug) }}" class="btn btn-secondary"><i
                     class="fas fa-arrow-left me-2 d-none d-sm-inline"></i>Indietro</a>
             <a href="{{ route('admin.messages.trash', $apartment->id) }}" class="btn btn-warning"><i
                     class="fa-solid fa-envelopes-bulk me-2 d-none d-sm-inline"></i>Archiviati</a>
