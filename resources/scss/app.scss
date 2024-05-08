@@ -23,3 +23,12 @@ body {
 .brand-color {
     color: #172BA1;
 }
+
+#statistics {
+    background-color: white;
+    // max-height: 300px;
+
+    #myCombinedChart {
+        max-height: 300px;
+    }
+}
