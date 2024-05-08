@@ -117,6 +117,17 @@
                         <td class="dispnone-md-col">
                             <div class="d-flex flex-column gap-3">
                                 <div>
+                                    <a href="{{ route('admin.apartments.statistics', $apartment->id) }}"
+                                        class="learn-more">
+                                        <span class="circle" aria-hidden="true">
+                                            <span class="icon arrow"></span>
+                                        </span>
+                                        <span class="button-text">
+                                            Statistiche
+                                            <i class="fa-solid fa-chart-line fa-xl"></i></span>
+                                    </a>
+                                </div>
+                                <div>
                                     <a href="{{ route('admin.sponsorship.show', ['apartment_id' => $apartment->id]) }}"
                                         class="btn-premium">
                                         <svg viewBox="0 0 576 512" height="1em" class="logoIcon">
@@ -135,17 +146,7 @@
                                         </p>
                                     @endforeach
                                 </div>
-                                <div>
-                                    <a href="{{ route('admin.apartments.statistics', $apartment->id) }}"
-                                        class="learn-more">
-                                        <span class="circle" aria-hidden="true">
-                                            <span class="icon arrow"></span>
-                                        </span>
-                                        <span class="button-text">
-                                            Statistiche
-                                            <i class="fa-solid fa-chart-line fa-xl"></i></span>
-                                    </a>
-                                </div>
+
                             </div>
 
 

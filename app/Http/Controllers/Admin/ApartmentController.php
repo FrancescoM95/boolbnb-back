@@ -214,16 +214,19 @@ class ApartmentController extends Controller
 
     public function statistics(Apartment $apartment)
     {
-        $views = View::select(DB::raw('COUNT(*) as views_count'), DB::raw('MONTH(created_at) as month'))
-            ->where('apartment_id', $apartment->id)
-            ->groupBy(DB::raw('MONTH(created_at)'))
-            ->get();
+        // Recupera il numero di visualizzazioni per maggio 2024
+        $viewsMay = View::where('apartment_id', $apartment->id)
+            ->whereYear('created_at', 2024)
+            ->whereMonth('created_at', 5) // 5 rappresenta maggio
+            ->count();
 
-        $messages = Message::select(DB::raw('COUNT(*) as messages_count'), DB::raw('MONTH(created_at) as month'))
-            ->where('apartment_id', $apartment->id)
-            ->groupBy(DB::raw('MONTH(created_at)'))
-            ->get();
+        // Recupera il numero di messaggi per maggio 2024
+        $messagesMay = Message::where('apartment_id', $apartment->id)
+            ->whereYear('created_at', 2024)
+            ->whereMonth('created_at', 5) // 5 rappresenta maggio
+            ->count();
 
-        return view('admin.apartments.statistics', compact('apartment', 'views', 'messages'));
+        // Restituisci i dati come array associativo
+        return view('admin.apartments.statistics', compact('apartment', 'viewsMay', 'messagesMay'));
     }
 }

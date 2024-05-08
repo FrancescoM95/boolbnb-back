@@ -10,38 +10,43 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <script>
-            const viewsData = {!! $views !!};
-            const messagesData = {!! $messages !!};
-            console.log('Messaggi:', {!! json_encode($messages) !!});
             const months = [
-                "Gennaio",
-                "Febbraio",
-                "Marzo",
-                "Aprile",
-                "Maggio",
-                "Giugno",
-                "Luglio",
-                "Agosto",
-                "Settembre",
-                "Ottobre",
-                "Novembre",
-                "Dicembre"
+                "Giugno 2023",
+                "Luglio 2023",
+                "Agosto 2023",
+                "Settembre 2023",
+                "Ottobre 2023",
+                "Novembre 2023",
+                "Dicembre 2023",
+                "Gennaio 2024",
+                "Febbraio 2024",
+                "Marzo 2024",
+                "Aprile 2024",
+                "Maggio 2024"
             ];
+
+            // Dati falsi per visualizzazioni e messaggi
+            const fakeViewsData = [100, 120, 130, 110, 140, 150, 170, 160, 180, 190, 200, 55];
+            const fakeMessagesData = [10, 12, 15, 8, 14, 16, 18, 20, 22, 25, 28, 11];
+
+            // Dati reali dal database
+            const realViewsDataMay = {{ $viewsMay ?? 0 }};
+            const realMessagesDataMay = {{ $messagesMay ?? 0 }};
+
+            // Somma i dati reali di maggio con i dati falsi
+            const combinedViewsDataMay = realViewsDataMay + fakeViewsData[11]; // Indice 11 per maggio
+            const combinedMessagesDataMay = realMessagesDataMay + fakeMessagesData[11]; // Indice 11 per maggio
 
             const combinedChartData = {
                 labels: months,
                 datasets: [{
                     label: 'Visualizzazioni',
-                    data: Array.from({
-                        length: 12
-                    }, (_, i) => viewsData.find(item => item.month === (i + 1))?.views_count || 0),
+                    data: [...fakeViewsData.slice(0, -1), combinedViewsDataMay],
                     backgroundColor: 'rgba(255, 99, 132, 0.5)',
                     borderWidth: 1
                 }, {
                     label: 'Messaggi',
-                    data: Array.from({
-                        length: 12
-                    }, (_, i) => messagesData.find(item => item.month === (i + 1))?.messages_count || 0),
+                    data: [...fakeMessagesData.slice(0, -1), combinedMessagesDataMay],
                     backgroundColor: 'rgba(54, 162, 235, 0.5)',
                     borderWidth: 1
                 }]
