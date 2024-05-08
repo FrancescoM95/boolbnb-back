@@ -44,22 +44,6 @@
                             </div>
                         </a>
                     </div>
-                    {{-- Statistiche --}}
-                    <div class="col">
-                        <a href="{{ route('admin.apartments.statistics', $apartment->id) }}">
-                            <div
-                                class="d-flex justify-content-between justify-content-md-center card align-items-center flex-row px-2 text-md-center">
-                                <div>
-                                    <p class="m-0">Monitora l'andamento</p>
-                                    <p class="m-0">Visualizza
-                                        statistiche
-                                        <i class="fa-solid fa-chart-line"></i>
-                                    </p>
-                                </div>
-                                <i class="fa-solid fa-arrow-right d-md-none"></i>
-                            </div>
-                        </a>
-                    </div>
                     {{-- Messaggi --}}
                     <div class="col">
                         <a href="{{ route('admin.messages.index', $apartment->id) }}">
@@ -71,6 +55,22 @@
                                     <p class="m-0">Vai all'inbox
                                         <i
                                             class="fa-solid {{ $apartment->message_count > 0 ? 'fa-envelope-open-text' : 'fa-envelope-circle-check' }}"></i>
+                                    </p>
+                                </div>
+                                <i class="fa-solid fa-arrow-right d-md-none"></i>
+                            </div>
+                        </a>
+                    </div>
+                    {{-- Statistiche --}}
+                    <div class="col">
+                        <a href="{{ route('admin.apartments.statistics', $apartment->id) }}">
+                            <div
+                                class="d-flex justify-content-between justify-content-md-center card align-items-center flex-row px-2 text-md-center">
+                                <div>
+                                    <p class="m-0">Monitora l'andamento</p>
+                                    <p class="m-0">Visualizza
+                                        statistiche
+                                        <i class="fa-solid fa-chart-line"></i>
                                     </p>
                                 </div>
                                 <i class="fa-solid fa-arrow-right d-md-none"></i>
@@ -127,22 +127,6 @@
                         </div>
                     </a>
                 </div>
-                {{-- Statistiche --}}
-                <div class="col">
-                    <a href="{{ route('admin.apartments.statistics', $apartment->id) }}">
-                        <div
-                            class="d-flex justify-content-between justify-content-md-center card align-items-center flex-row px-2 text-md-center">
-                            <div>
-                                <p class="m-0">Monitora l'andamento</p>
-                                <p class="m-0">Visualizza
-                                    statistiche
-                                    <i class="fa-solid fa-chart-line"></i>
-                                </p>
-                            </div>
-                            <i class="fa-solid fa-arrow-right d-md-none"></i>
-                        </div>
-                    </a>
-                </div>
                 {{-- Messaggi --}}
                 <div class="col">
                     <a href="{{ route('admin.messages.index', $apartment->id) }}">
@@ -154,6 +138,22 @@
                                 <p class="m-0">Vai all'inbox
                                     <i
                                         class="fa-solid {{ $apartment->message_count > 0 ? 'fa-envelope-open-text' : 'fa-envelope-circle-check' }}"></i>
+                                </p>
+                            </div>
+                            <i class="fa-solid fa-arrow-right d-md-none"></i>
+                        </div>
+                    </a>
+                </div>
+                {{-- Statistiche --}}
+                <div class="col">
+                    <a href="{{ route('admin.apartments.statistics', $apartment->id) }}">
+                        <div
+                            class="d-flex justify-content-between justify-content-md-center card align-items-center flex-row px-2 text-md-center">
+                            <div>
+                                <p class="m-0">Monitora l'andamento</p>
+                                <p class="m-0">Visualizza
+                                    statistiche
+                                    <i class="fa-solid fa-chart-line"></i>
                                 </p>
                             </div>
                             <i class="fa-solid fa-arrow-right d-md-none"></i>
