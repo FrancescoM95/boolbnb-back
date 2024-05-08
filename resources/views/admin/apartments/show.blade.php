@@ -34,12 +34,22 @@
                         <a href="{{ route('admin.sponsorship.show') }}">
                             <div
                                 class="d-flex justify-content-between justify-content-md-center text-md-center card align-items-center flex-row px-2">
-                                <div>
-                                    <p class="m-0">Vuoi aumentare la visibilità?</p>
-                                    <p class="m-0">Promuovi l'appartamento!
-                                        <i class="fa-solid fa-crown"></i>
-                                    </p>
-                                </div>
+                                @if ($apartment->getSponsorshipExpirationsDate())
+                                    <div class="sponsor-card">
+                                        <p class="m-0">Sponsorizzato fino al:</p>
+                                        <p class="m-0">{{ $apartment->getSponsorshipExpirationsDate() }}
+                                            <i class="fa-solid fa-crown"></i>
+                                        </p>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-right d-md-none"></i>
+                                @else
+                                    <div>
+                                        <p class="m-0">Vuoi aumentare la visibilità?</p>
+                                        <p class="m-0">Sponsorizza l'appartamento!
+                                            <i class="fa-solid fa-crown"></i>
+                                        </p>
+                                    </div>
+                                @endif
                                 <i class="fa-solid fa-arrow-right d-md-none"></i>
                             </div>
                         </a>
@@ -50,11 +60,11 @@
                             <div
                                 class="d-flex justify-content-between justify-content-md-center card align-items-center flex-row px-2 text-md-center">
                                 <div>
-                                    <p class="m-0">Hai {{ $apartment->message_count }}
-                                        {{ $apartment->message_count == 1 ? 'messaggio' : 'messaggi' }} da leggere</p>
+                                    <p class="m-0">Hai {{ $apartment->getMessageToRead() }}
+                                        {{ $apartment->getMessageToRead() == 1 ? 'messaggio' : 'messaggi' }} da leggere</p>
                                     <p class="m-0">Vai all'inbox
                                         <i
-                                            class="fa-solid {{ $apartment->message_count > 0 ? 'fa-envelope-open-text' : 'fa-envelope-circle-check' }}"></i>
+                                            class="fa-solid {{ $apartment->getMessageToRead() > 0 ? 'fa-envelope-open-text' : 'fa-envelope-circle-check' }}"></i>
                                     </p>
                                 </div>
                                 <i class="fa-solid fa-arrow-right d-md-none"></i>
@@ -117,13 +127,22 @@
                     <a href="{{ route('admin.sponsorship.show') }}">
                         <div
                             class="d-flex justify-content-between justify-content-md-center text-md-center card align-items-center flex-row px-2">
-                            <div>
-                                <p class="m-0">Vuoi aumentare la visibilità?</p>
-                                <p class="m-0">Promuovi l'appartamento!
-                                    <i class="fa-solid fa-crown"></i>
-                                </p>
-                            </div>
-                            <i class="fa-solid fa-arrow-right d-md-none"></i>
+                            @if ($apartment->getSponsorshipExpirationsDate())
+                                <div class="sponsor-card">
+                                    <p class="m-0">Sponsorizzato fino al:</p>
+                                    <p class="m-0">{{ $apartment->getSponsorshipExpirationsDate() }}
+                                        <i class="fa-solid fa-crown"></i>
+                                    </p>
+                                </div>
+                                <i class="fa-solid fa-arrow-right d-md-none"></i>
+                            @else
+                                <div>
+                                    <p class="m-0">Vuoi aumentare la visibilità?</p>
+                                    <p class="m-0">Sponsorizza l'appartamento!
+                                        <i class="fa-solid fa-crown"></i>
+                                    </p>
+                                </div>
+                            @endif
                         </div>
                     </a>
                 </div>
@@ -134,10 +153,10 @@
                             class="d-flex justify-content-between justify-content-md-center card align-items-center flex-row px-2 text-md-center">
                             <div>
                                 <p class="m-0">Hai {{ $apartment->getMessageToRead() }}
-                                    {{ $apartment->message_count == 1 ? 'messaggio' : 'messaggi' }} da leggere</p>
+                                    {{ $apartment->getMessageToRead() == 1 ? 'messaggio' : 'messaggi' }} da leggere</p>
                                 <p class="m-0">Vai all'inbox
                                     <i
-                                        class="fa-solid {{ $apartment->message_count > 0 ? 'fa-envelope-open-text' : 'fa-envelope-circle-check' }}"></i>
+                                        class="fa-solid {{ $apartment->getMessageToRead() > 0 ? 'fa-envelope-open-text' : 'fa-envelope-circle-check' }}"></i>
                                 </p>
                             </div>
                             <i class="fa-solid fa-arrow-right d-md-none"></i>
