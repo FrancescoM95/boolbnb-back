@@ -1,3 +1,31 @@
+// Effetto card all'active
+document.addEventListener("DOMContentLoaded", function () {
+    let sponsorCards = document.querySelectorAll('.spons');
+
+    sponsorCards.forEach(function (card) {
+        card.addEventListener('click', function () {
+            sponsorCards.forEach(function (c) {
+                c.classList.remove('active');
+            });
+            card.classList.add('active');
+
+            // Aggiorna il riepilogo dell'appartamento e della sponsorizzazione selezionati
+            let apartmentTitle = document.getElementById('apartment').options[document.getElementById('apartment').selectedIndex].text;
+            let sponsorLabel = card.querySelector('.title').innerText;
+            let sponsorPrice = card.querySelector('.price').innerText;
+            let sponsorDuration = card.querySelector('.pricing span').innerText;
+
+            let selectedInfo = document.getElementById('selected-info');
+            selectedInfo.innerHTML = `
+                    <p><strong>Appartamento:</strong> ${apartmentTitle}</p>
+                    <p><strong>Sponsorizzazione:</strong> ${sponsorLabel}</p>
+                    <p><strong>Prezzo:</strong> ${sponsorPrice}</p>
+                    <p><strong>Durata:</strong> ${sponsorDuration}</p>
+                `;
+        });
+    });
+});
+
 // Braintree
 let form = document.getElementById('payment-form');
 let dropinContainer = document.getElementById('dropin-container');
@@ -37,21 +65,6 @@ braintree.dropin.create({
     let cancelButton = document.getElementById('cancel-button');
     cancelButton.addEventListener('click', function () {
         dropinInstance.clearSelectedPaymentMethod();
-    });
-});
-
-
-// Effetto card all'active
-document.addEventListener("DOMContentLoaded", function () {
-    let sponsorCards = document.querySelectorAll('.spons');
-
-    sponsorCards.forEach(function (card) {
-        card.addEventListener('click', function () {
-            sponsorCards.forEach(function (c) {
-                c.classList.remove('active');
-            });
-            card.classList.add('active');
-        });
     });
 });
 
