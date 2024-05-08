@@ -66,5 +66,5 @@
 @endsection
 
 @section('scripts')
-    @vite('resources/js/delete_confirmation.js')
+    @vite('resources/js/messages_alert.js')
 @endsection

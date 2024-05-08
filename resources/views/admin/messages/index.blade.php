@@ -56,10 +56,11 @@
                                                 title="Rispondi via email"><i class="fas fa-reply "></i></a>
                                             <form
                                                 action="{{ route('admin.messages.destroy', [$apartment->id, $message->id]) }}"
-                                                method="POST" class="w-100">
+                                                method="POST" class="w-100 delete-form">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn btn-sm btn-warning w-100" title="Archivia"><i
+                                                <button class="btn btn-sm btn-warning w-100" title="Archivia"
+                                                    data-bs-toggle="modal" data-bs-target="#modal"><i
                                                         class="fa-solid fa-envelopes-bulk"></i></button>
                                             </form>
                                         </div>
@@ -80,11 +81,11 @@
                                 <a href="mailto:{{ $message->email }}" class="btn btn-sm btn-success"
                                     title="Rispondi via email"><i class="fas fa-reply"></i></a>
                                 <form action="{{ route('admin.messages.destroy', [$apartment->id, $message->id]) }}"
-                                    method="POST">
+                                    method="POST" class="delete-form">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-sm btn-warning" title="Archivia"><i
-                                            class="fa-solid fa-envelopes-bulk"></i></button>
+                                    <button class="btn btn-sm btn-warning" title="Archivia" data-bs-toggle="modal"
+                                        data-bs-target="#modal"><i class="fa-solid fa-envelopes-bulk"></i></button>
                                 </form>
                             </td>
                         </tr>
@@ -101,4 +102,8 @@
             </table>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    @vite('resources/js/messages_alert.js')
 @endsection
