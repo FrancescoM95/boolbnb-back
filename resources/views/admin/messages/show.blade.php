@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container mb-3">
         <div class="my-3 text-center">
             <h1>Messaggio da {{ $message->email }}</h1>
             <h3>Relativo ad "{{ $apartment->title }}"</h3>
