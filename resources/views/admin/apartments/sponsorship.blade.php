@@ -39,14 +39,15 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Procedi all'acquisto</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <div id="selected-info"></div>
                     <div id="dropin-container"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" id="submit-button" class="btn btn-primary">Paga e Sponsorizza</button>
+                    <button type="submit" id="submit-button" class="btn btn-primary">Sponsorizza</button>
                     <button type="button" id="cancel-button" class="btn btn-secondary">Annulla</button>
                 </div>
             </div>

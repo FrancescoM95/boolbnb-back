@@ -19,7 +19,7 @@ class SponsorshipController extends Controller
         $userId = auth()->id();
 
         // Ottieni solo gli appartamenti dell'utente autenticato
-        $apartments = Apartment::where('user_id', $userId)->whereDoesntHave('sponsorships')->get();
+        $apartments = Apartment::where('user_id', $userId)->get();
         $sponsorships = Sponsorship::all();
 
         return view('admin.apartments.sponsorship', compact('apartments', 'sponsorships'));
@@ -33,6 +33,7 @@ class SponsorshipController extends Controller
             'sponsorship' => 'required|in:1,2,3',
             'expiration' => 'nullable'
         ]);
+        
 
         // Trova l'appartamento
         $apartment = Apartment::findOrFail($data['apartment']);
@@ -76,7 +77,11 @@ class SponsorshipController extends Controller
             // Collega l'appartamento alla sponsorship e imposta expiration nella tabella pivot
             $apartment->sponsorships()->attach($data['sponsorship'], ['expiration' => $expiration]);
 
-            return redirect()->route('admin.apartments.index')->with('message', "$apartment->title sponsorizzato con successo per $sponsorship->duration ore!");
+            return view('admin.apartments.payment-confirmation')->with([
+                'apartment' => $apartment,
+                'sponsorship' => $sponsorship,
+            ]);
+            //return redirect()->route('admin.apartments.index')->with('message', "$apartment->title sponsorizzato con successo per $sponsorship->duration ore!");
         } else {
             // Pagamento fallito
             return back()->with('message', 'Errore durante il pagamento: ' . $result->message);
