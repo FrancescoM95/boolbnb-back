@@ -11,7 +11,7 @@
             <form action="{{ route('admin.messages.massiverestore', $apartment->id) }}" method="POST" class="restore-form">
                 @csrf
                 @method('PATCH')
-                <button class="btn btn-success">
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal">
                     <i class="fas fa-arrows-rotate "></i>
                     <span class="d-none d-md-inline ms-2">Ripristina tutto</span>
                 </button>
@@ -52,7 +52,7 @@
                                     method="POST" class="restore-form">
                                     @csrf
                                     @method('PATCH')
-                                    <button type="submit"
+                                    <button type="submit" data-bs-toggle="modal" data-bs-target="#modal"
                                         class="btn btn-md btn-success d-flex align-items-center justify-content-center">
                                         <i class="fas fa-arrows-rotate"></i>
                                     </button>
@@ -63,4 +63,8 @@
             </tbody>
         </table>
     </div>
+@endsection
+
+@section('scripts')
+    @vite('resources/js/delete_confirmation.js')
 @endsection
