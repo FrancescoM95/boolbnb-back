@@ -149,7 +149,7 @@
                         <div
                             class="d-flex justify-content-between justify-content-md-center card align-items-center flex-row px-2 text-md-center">
                             <div>
-                                <p class="m-0">Hai {{ $apartment->message_count }}
+                                <p class="m-0">Hai {{ $apartment->getMessageToRead() }}
                                     {{ $apartment->message_count == 1 ? 'messaggio' : 'messaggi' }} da leggere</p>
                                 <p class="m-0">Vai all'inbox
                                     <i
