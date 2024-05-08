@@ -12,8 +12,12 @@ body {
     visibility: visible;
     background-color: #e8e8e8;
     font-family: "Urbanist", sans-serif;
-    background: rgb(255, 255, 255);
-    background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(162, 168, 198, 1) 100%);
+    background: #f8f8f8;
+    background: -webkit-linear-gradient(0deg, #f8f8f8 0%, #5c6cc7 50%, #f8f8f8 100%);
+    background: linear-gradient(0deg, #f8f8f8 0%, #5c6cc7 50%, #f8f8f8 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
 }
 
 .brand-color {

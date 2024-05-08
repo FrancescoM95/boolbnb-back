@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <table class="table table-striped table-hover mb-5">
+        <table class="table table-striped table-hover table-borderless mb-5">
             <thead>
                 <tr>
                     <th scope="col" class="col-1 thl">Pubblico</th>

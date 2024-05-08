@@ -30,7 +30,7 @@
                 </li>
                 @auth
                     <li class="nav-item">
-                        <a class="nav-link @if (Request::is('admin/apartments*') && !Request::is('admin/apartments/trash*')) active @endif"
+                        <a class="nav-link @if (Request::is('admin/apartments*') && !Request::is('admin/apartments/trash*') && !Route::is('admin.sponsorship.show')) active @endif"
                             href="{{ route('admin.apartments.index') }}">I miei appartamenti
                         </a>
                     </li>
