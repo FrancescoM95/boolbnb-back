@@ -31,6 +31,11 @@ class MessageController extends Controller
     {
         $message = Message::whereApartmentId($apartment->id)->whereId($message->id)->first();
         if (!$apartment || !$message || $apartment->user_id != Auth::user()->id) abort(404);
+
+        // Rendo letto il messaggio
+        $message->is_read = true;
+        $message->save();
+
         return view('admin.messages.show', compact('apartment', 'message'));
     }
 
