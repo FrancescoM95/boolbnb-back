@@ -141,6 +141,14 @@
             </div>
         </div>
 
+        {{-- * DESCRIZIONE --}}
+        <div class="col-12">
+            <div class="form-group">
+                <label for="description">Descrizione</label>
+                <textarea name="description" id="description" class="form-control my-2 @error('description') is-invalid @elseif(old('description', '')) is-valid @enderror" rows="10">{{old('description', $apartment->description)}}</textarea>
+            </div>
+        </div>
+
         {{-- * SERVIZI --}}
         <div class="col-12">
             <div class="mt-3">
@@ -209,7 +217,7 @@
     </div>
 
     {{-- * BOTTONI --}}
-    <div class="d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center justify-content-between mb-3">
         <a href="@if ($apartment->deleted_at) {{ route('admin.apartments.trash') }} @else {{ route('admin.apartments.index') }} @endif"
             class="btn btn-primary"><i class="fa-solid fa-arrow-left me-2"></i>Torna
             indietro</a>

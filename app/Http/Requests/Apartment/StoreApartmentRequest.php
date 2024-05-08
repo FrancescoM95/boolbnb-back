@@ -28,6 +28,7 @@ class StoreApartmentRequest extends FormRequest
             'rooms' => 'required|numeric|min:1|',
             'square_meters' => 'required|numeric|min:5|',
             'address' => 'required|string',
+            'description' => 'nullable',
             'latitude' => 'nullable',
             'longitude' => 'nullable',
             'cover_image' => 'nullable|image|mimes:jpeg,png,jpg',
