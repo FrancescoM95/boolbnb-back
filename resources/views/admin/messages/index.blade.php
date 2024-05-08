@@ -15,24 +15,57 @@
             <table class="table table-striped table-hover my-3">
                 <thead>
                     <tr>
-                        <th scope="col" class="col-auto">Data</th>
-                        <th scope="col" class="col-2">Nome e Cognome</th>
+                        <th scope="col" class="col-2">Data</th>
+                        <th scope="col" class="col-3 d-none d-lg-table-cell">Nome e Cognome</th>
                         <th scope="col" class="col-2">Email</th>
-                        <th scope="col" class="col-4">Messaggio</th>
-                        <th scope="col" class="col-1">Visualizzato</th>
-                        <th scope="col" class="col-auto"></th>
+                        <th scope="col" class="col-3 d-none d-lg-table-cell">Messaggio</th>
+                        <th scope="col" class="col-1 d-none d-md-table-cell">Visualizzato</th>
+                        <th scope="col" class="col-1"></th>
                     </tr>
                 </thead>
                 <tbody>
                     {{-- per ogni messaggio riempi riga --}}
                     @forelse ($messages as $message)
                         <tr>
-                            <td>{{ $message->created_at->format('d/m/Y H:i') }}</td>
-                            <td>{{ $message->name }} {{ $message->surname }}</td>
+                            <td class="d-md-none">{{ $message->created_at->format('d/m/Y') }}</td>
+                            <td class="d-none d-md-table-cell">{{ $message->created_at->format('d/m/Y H:i') }}</td>
+                            <td class="d-none d-lg-table-cell">{{ $message->name }} {{ $message->surname }}</td>
                             <td>{{ $message->email }}</td>
-                            <td>{{ $message->getAbstract($message->text) }}{{ strlen($message->text) > 20 ? ' [...]' : '' }}
+                            <td class="d-none d-lg-table-cell">
+                                {{ $message->getAbstract($message->text) }}{{ strlen($message->text) > 20 ? ' [...]' : '' }}
                             </td>
-                            <td>
+                            <td class="d-md-none">
+                                <div class="dropdown-center">
+                                    <button class="btn btn-sm btn-secondary m-0" type="button" data-bs-toggle="dropdown"
+                                        aria-expanded="false" id="messages_button">
+                                        <i class="fa-solid fa-gear"></i>
+                                    </button>
+                                    <div class="dropdown-menu w-100 p-2 action-dropdown">
+                                        <div class="d-flex flex-column gap-2">
+                                            <form action="{{ route('admin.messages.read', $message->id) }}" method="POST">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button
+                                                    class="btn btn-sm {{ $message->is_read ? 'btn-secondary' : 'btn-success' }}">{{ $message->is_read ? 'Letto' : 'Da leggere' }}</button>
+                                            </form>
+                                            <a href="{{ route('admin.messages.show', [$apartment->id, $message->id]) }}"
+                                                class="btn btn-sm btn-primary d-block" title="Dettagli"><i
+                                                    class="far fa-eye"></i></a>
+                                            <a href="mailto:{{ $message->email }}" class="btn btn-sm btn-success d-block"
+                                                title="Rispondi via email"><i class="fas fa-reply "></i></a>
+                                            <form
+                                                action="{{ route('admin.messages.destroy', [$apartment->id, $message->id]) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-sm btn-warning" title="Archivia"><i
+                                                        class="fa-solid fa-envelopes-bulk"></i></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="d-none d-md-table-cell">
                                 <form action="{{ route('admin.messages.read', $message->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
@@ -40,7 +73,7 @@
                                         class="btn btn-sm {{ $message->is_read ? 'btn-secondary' : 'btn-success' }}">{{ $message->is_read ? 'Letto' : 'Da leggere' }}</button>
                                 </form>
                             </td>
-                            <td class="text-center d-flex justify-content-center gap-2">
+                            <td class="text-center d-flex justify-content-center gap-2 d-none d-md-flex">
                                 <a href="{{ route('admin.messages.show', [$apartment->id, $message->id]) }}"
                                     class="btn btn-sm btn-primary" title="Dettagli"><i class="far fa-eye"></i></a>
                                 <a href="mailto:{{ $message->email }}" class="btn btn-sm btn-success"
