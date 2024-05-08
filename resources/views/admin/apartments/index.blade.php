@@ -2,19 +2,17 @@
 
 @section('content')
     <div class="container">
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex gap-3 align-items-center">
-                <h1 class="py-3">Lista Appartamenti</h1>
-
-                <a href="{{ route('admin.apartments.create') }}" class="btn cssbuttons-io-button text-light">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="25" height="25">
-                        <path fill="none" d="M0 0h24v24H0z"></path>
-                        <path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path>
-                    </svg>
-                    <span></span>
-                </a>
-            </div>
+        <div class="w-100 d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
+                <h1 class="py-3">Lista Appartamenti</h1>
+            </div>
+            <div class="d-flex gap-2 justify-content-between align-items-center">
+                <div>
+                    <a href="{{ route('admin.apartments.create') }}" class="btn btn-create text-light">
+                        Nuovo appartamento
+                        <span class="button-border"></span>
+                    </a>
+                </div>
                 <a href="{{ route('admin.apartments.trash') }}" class="btn btn-trash">
                     <svg viewBox="0 0 448 512" class="svgIcon">
                         <path
