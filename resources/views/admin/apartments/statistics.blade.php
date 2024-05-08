@@ -1,10 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container my-4">
-        <h2>Statiche per {{ $apartment->title }}</h2>
-        <div class="chart-container" style="height: 550px">
+    <div class="container my-3 rounded p-3" id="statistics">
+        <h2 class="text-center">Statiche per {{ $apartment->title }}</h2>
+        <div class="chart-container">
             <canvas id="myCombinedChart"></canvas>
+        </div>
+        <div class="mt-3 d-flex justify-content-evenly">
+            <a href="{{ route('admin.apartments.index') }}" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> I
+                miei appartamenti</a>
+            <a href="{{ route('admin.apartments.show', $apartment->slug) }}" class="btn btn-secondary">Dettagli
+                appartamento <i class="fa-solid fa-arrow-right"></i></a>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
