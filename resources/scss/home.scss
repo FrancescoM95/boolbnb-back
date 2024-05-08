@@ -17,6 +17,11 @@
     }
 }
 
+.login .card,
+.registration .card {
+    background: #ffffffa9;
+}
+
 .btn-donate {
     --clr-font-main: hsla(0 0% 20% / 100);
     --btn-bg-1: rgb(51, 177, 215);
