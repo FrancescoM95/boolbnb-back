@@ -31,6 +31,11 @@ class MessageController extends Controller
     {
         $message = Message::whereApartmentId($apartment->id)->whereId($message->id)->first();
         if (!$apartment || !$message || $apartment->user_id != Auth::user()->id) abort(404);
+
+        // Rendo letto il messaggio
+        $message->is_read = true;
+        $message->save();
+
         return view('admin.messages.show', compact('apartment', 'message'));
     }
 
@@ -40,7 +45,7 @@ class MessageController extends Controller
     public function destroy(Apartment $apartment, Message $message)
     {
         $message->delete();
-        return to_route('admin.messages.index', compact('apartment'));
+        return to_route('admin.messages.index', compact('apartment'))->with('message', 'Messaggio archiviato con successo')->with('type', 'warning');;
     }
 
     //* Rotta Visualizzato
@@ -66,7 +71,7 @@ class MessageController extends Controller
     public function restore(Message $message)
     {
         $message->restore();
-        return back();
+        return back()->with('message', 'Messaggio ripristinato con successo')->with('type', 'success');
     }
 
     // restore massivo
@@ -76,6 +81,6 @@ class MessageController extends Controller
         foreach ($messages as $message) {
             $message->restore();
         }
-        return to_route('admin.messages.index', compact('apartment'));
+        return to_route('admin.messages.index', compact('apartment'))->with('message', 'Messaggio ripristinato con successo')->with('type', 'success');
     }
 }

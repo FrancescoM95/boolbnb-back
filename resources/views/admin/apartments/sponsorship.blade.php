@@ -1,38 +1,49 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-3">
-    <form method="POST" id="payment-form" action="{{ route('admin.sponsorship.submit') }}">
-        @csrf
-        <div class="row">
-            <div class="form-group my-3">
-                <label for="apartment">Seleziona l'appartamento da sponsorizzare:</label>
-                <select name="apartment" id="apartment" class="form-control">
-                    @foreach ($apartments as $apartment)
-                    <option value="{{ $apartment->id }}">{{ $apartment->title }}</option>
-                    @endforeach
-                </select>
-            </div>
-            @foreach ($sponsorships as $s)
-            <div class="col-12 col-md-4 d-flex justify-content-center">
-                <div class="spons" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <label for="{{ $s->id }}" role="button" class="sponsor-card card-{{ $s->label }} content">
-                            <span class="pricing">
-                                <span>
-                                    {{ $s->duration }}<small>ore</small>
-                                </span>
-                            </span>
-                            <h2 class="title">{{ $s->label }}</h2>
-                            <div class="price">{{ $s->fee }}€</div>
-                            <div class="description">
-                                Metti in evidenza il tuo appartamento con il pacchetto {{$s->label}} per <strong>{{$s->duration}}</strong> ore a soli <strong>{{$s->fee}}€</strong>
+    <div class="container mt-3">
+        <form method="POST" id="payment-form" action="{{ route('admin.sponsorship.submit') }}">
+            @csrf
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 my-5">
+                        <div class="form-group px-4">
+                            <label for="apartment">Seleziona l'appartamento da sponsorizzare:</label>
+                            <select name="apartment" id="apartment" class="form-control mt-2">
+                                @foreach ($apartments as $apartment)
+                                    <option value="{{ $apartment->id }}">{{ $apartment->title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    @foreach ($sponsorships as $s)
+                        <div class="col-12 col-md-4 d-flex justify-content-center">
+                            <div class="spons" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <label for="{{ $s->id }}" role="button"
+                                    class="sponsor-card card-{{ $s->label }} content">
+                                    <span class="pricing">
+                                        <span>
+                                            {{ $s->duration }}<small>ore</small>
+                                        </span>
+                                    </span>
+                                    <h2 class="title">{{ $s->label }}</h2>
+                                    <div class="price">{{ $s->fee }}€</div>
+                                    <div class="description">
+                                        Metti in evidenza il tuo appartamento con il pacchetto {{ $s->label }} per
+                                        <strong>{{ $s->duration }}</strong> ore a soli
+                                        <strong>{{ $s->fee }}€</strong>
+                                    </div>
+                                </label>
+                                <input type="radio" class="d-none" id="{{ $s->id }}" name="sponsorship"
+                                    value="{{ $s->id }}">
                             </div>
-                    </label>
-                        <input type="radio" class="d-none" id="{{ $s->id }}" name="sponsorship" value="{{ $s->id }}">
+                        </div>
+                    @endforeach
                 </div>
+
             </div>
-            @endforeach
-        </div>
+
     </div>
     {{-- Modale Braintree --}}
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -53,11 +64,9 @@
             </div>
         </div>
     </div>
-    </form>  
-</div>
+    </form>
+    </div>
 @endsection
 
 {{-- Braintree e Card effect --}}
 @vite('resources/js/sponsorship_page.js')
-
-
