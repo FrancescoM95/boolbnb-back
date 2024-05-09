@@ -142,6 +142,7 @@
                                         <i class="fa-solid fa-crown"></i>
                                     </p>
                                 </div>
+                                <i class="fa-solid fa-arrow-right d-md-none"></i>
                             @endif
                         </div>
                     </a>
